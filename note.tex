@@ -1,0 +1,1460 @@
+\documentclass{book}
+
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage[colorlinks=true,linkcolor=blue]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+
+\newcommand{\bra}[1]{{\langle#1|}}
+\newcommand{\ket}[1]{{|#1\rangle}}
+\newcommand{\inprod}[2]{\langle#1|#2\rangle}
+\newcommand{\average}[1]{\langle#1\rangle}
+\renewcommand{\Re}{{\rm Re}}
+\renewcommand{\Im}{{\rm Im}}
+\newcommand{\Tr}{{\rm Tr}}
+\numberwithin{equation}{section}
+
+\title{Notes}
+\date{}
+\begin{document}
+%%\maketitle
+\tableofcontents
+
+\chapter{Useful formulas}
+\section{Guassian Integrals}
+For a positive number $a$,
+\begin{equation}
+  \int_{-\infty}^\infty dx e^{-ax^2}=\sqrt{\frac{\pi}{a}},\quad
+  \int\frac{dz^*dz}{2\pi i}e^{-z^*az}=\frac{1}{a}\quad.
+\end{equation}
+
+For real multi-dimensional integrals,
+\begin{equation}
+  \int\frac{dx_1\cdots dx_n}{(2\pi)^{\frac{n}{2}}}
+  e^{-\frac{1}{2}\sum_{ij}x_iA_{ij}x_j+\sum_ix_iJ_i}=
+  [\det A]^{-\frac{1}{2}}e^{\frac{1}{2}\sum_{ij}J_iA^{-1}_{ij}J_j}\quad.
+\end{equation}
+
+For complex multi-dimensional integrals,
+\begin{equation}
+  \int\left(\prod_{i=1}^n\frac{dz_i^*dz_i}{2\pi i}\right)
+  e^{-\sum_{ij}z_i^*H_{ij}z_j+\sum_i(J^*_iz_i+z_i^*J_i)}=
+  [\det H]^{-1}e^{\sum_{ij}J_i^*H_{ij}J_j}\quad.
+\end{equation}
+
+For Grassmann variables integrals,
+\begin{equation}
+  \int\left(\prod_{i=1}^n d\eta_i^*d\eta_i\right)
+  e^{-\sum_{ij}\eta_i^*H_{ij}\eta_j+\sum_i(\xi_i^*\eta_i+\eta_i^*\xi_i)}
+  =[\det H]e^{\sum_{ij}\xi_i^*H_{ij}\xi_j}\quad.
+\end{equation}
+%%------------------------------------------------------------------------
+
+\section{Fourier Transform of Delta Function}
+The $\delta$ function can be expressed as
+\begin{equation}
+  \delta(x-\alpha)=\frac{1}{2\pi}\int_{-\infty}^\infty e^{ip(x-\alpha)}dp.
+\end{equation}
+\section{Euler Integral}
+\subsection{Euler Integral of The First Kind: Beta Function}
+Euler integral of the first kind: the Beta function:
+\begin{equation}
+  B(a,b)=\int_0^1x^{a-1}(1-x)^{b-1}dx.
+\end{equation}
+The Beta function has the following properties:
+\begin{enumerate}[(i)]
+\item Substitute $x$ with $x=1-t$ and it is easy to get
+  \begin{equation}
+    B(a,b)=B(b,a).
+  \end{equation}
+
+\item When $b>1$, integrate by parts (note that $x^a=x^{a-1}-x^{a-1}(1-x)$)
+  \begin{equation}
+    \begin{array}{rcl}
+      B(a,b) &=& \displaystyle\int_0^1(1-x)^{b-1}d\frac{x^a}{a}\\\vbox to 20pt{}
+      &=& \displaystyle\left.\frac{x^a(1-x)^{b-1}}{a}\right|_0^1
+      +\frac{b-1}{a}\int_0^1x^a(1-x)^{b-2}dx\\\vbox to 20pt{}
+      &=& \displaystyle\frac{b-1}{a}\int_0^1x^{a-1}(1-x)^{b-2}dx-
+      \frac{b-1}{a}\int_0^1x^{a-1}(1-x)^{b-1}dx\\\vbox to 20pt{}
+      &=&\displaystyle\frac{b-1}{a}B(a,b-1)-\frac{b-1}{a}B(a,b),
+    \end{array}
+  \end{equation}
+  thus
+  \begin{equation}
+    B(a,b)=\frac{b-1}{a+b-1}B(a,b-1).
+  \end{equation}
+  For $a>1$, it is similar that
+  \begin{equation}
+    B(a,b)=\frac{a-1}{a+b-1}B(a-1,b).
+  \end{equation}
+
+  Let $n$ be a positive integer, 
+  \begin{equation}
+    B(n,a)=B(a,n)=\frac{1\cdot2\cdot3\cdots(n-1)}{a\cdot(a+1)\cdot(a+2)\cdots
+      (a+n-1)}.
+  \end{equation}
+  Let $m,n$ be two positive integers,
+  \begin{equation}
+    B(m,n)=\frac{(n-1)!(m-1)!}{(m+n-1)!}.
+  \end{equation}
+
+\item Substitute $x$ with $x=\frac{y}{1+y}$, here $y$ is a new
+  variable runs from $0$ to $\infty$, then
+  \begin{equation}
+    B(a,b)=\int_0^\infty\frac{y^{a-1}}{(1+y)^{a+b}}dy.
+  \end{equation}
+
+\item If $b=1-a$ and $0<a<1$ then
+  \begin{equation}
+    B(a,1-a)=\int_0^\infty\frac{y^{a-1}}{1+y}dy,
+  \end{equation}
+  this is also a Euler integral,
+  \begin{equation}
+    B(a,1-a)=\frac{\pi}{\sin a\pi}\quad(0<a<1),
+  \end{equation}
+  especially we have
+  \begin{equation}
+    B(\frac{1}{2},\frac{1}{2})=\pi.
+  \end{equation}
+\end{enumerate}
+%%-----------------------------------------------------------------------------
+
+\subsection{Euler Integral of The Second Kind: Gamma Function}
+Euler integral of the second kind: the Gamma function is defined as
+\begin{equation}
+  \Gamma(a)=\int_0^\infty x^{a-1}e^{-x}dx.
+\end{equation}
+
+The Euler-Gauss formula:
+\begin{equation}
+  \Gamma(a)=\lim_{n\to\infty}n^a\frac{1\cdot2\cdot3\cdots(n-1)}
+  {a\cdot(a+1)\cdot(a+2)\cdots(a+n-1)}.
+\end{equation}
+
+The Gamma Function has the following properties:
+\begin{enumerate}[(i)]
+\item For $a>0$, $\Gamma(a)$ is smooth.
+\item Integrate by parts we shall get
+  \begin{equation}
+    \Gamma(a+1)=a\Gamma(a),
+  \end{equation}
+  repeat this formula
+  \begin{equation}
+    \Gamma(a+n)=(a+n-1)(a+n-1)\cdots(a+1)\Gamma(a).
+  \end{equation}
+  Let $n$ be a positive integer, then
+  \begin{equation}
+    \Gamma(n+1)=n!\quad.
+  \end{equation}
+\item If $a\to+0$ then
+  \begin{equation}
+    \Gamma(a)=\frac{\Gamma(a+1)}{a}\to+\infty.
+  \end{equation}
+  If $a>n+1$ the
+  \begin{equation}
+    \Gamma(a)>n!\quad.
+  \end{equation}
+\item Relation to Beta function:
+  \begin{equation}
+    B(a,b)=\frac{\Gamma(a)c\cdot\Gamma(b)}{\Gamma(a+b)}.
+  \end{equation}
+\item if $0<a<1$ then
+  \begin{equation}
+    \Gamma(a)\Gamma(1-a)=\frac{\pi}{\sin a\pi},
+  \end{equation}
+  and 
+  \begin{equation}
+    \Gamma(\frac{1}{2})=\sqrt{\pi}.
+  \end{equation}
+\item 
+  \begin{equation}
+    \prod_{\nu=1}^{n-1}\Gamma(\frac{\nu}{n})=
+    \frac{(2\pi)^{\frac{n-1}{2}}}{\sqrt{n}}.
+  \end{equation}
+\item Raabe's formula:
+  \begin{equation}
+    \int_a^{a+1}\ln\Gamma(t)dt=\frac{1}{2}\ln2\pi+a\ln a-a,\quad a>0,
+  \end{equation}
+  in particular, if $a=0$ then
+  \begin{equation}
+    \int_0^1\ln\Gamma(t)dt=\frac{1}{2}\ln2\pi.
+  \end{equation}
+\item Legendre formula:
+  \begin{equation}
+    \Gamma(a)\Gamma(a+\frac{1}{2})=\frac{\sqrt{\pi}}{2^{2a-1}}\Gamma(2a).
+  \end{equation}
+\end{enumerate}
+%%---------------------------------------------------------------------------
+
+\section{Baker-Campbell-Hausdorff Formula}
+Baker-Campbell-Hausdorff Formula is
+\begin{equation}
+  e^ABe^{-A}=\sum_{n=0}^\infty\frac{1}{n!}[A,B]_n=
+  B+[A,B]+\frac{1}{2}[A,[A,B]]+\frac{1}{6}[A,[A,[A,B]]]+\cdots\quad,
+\end{equation}
+this formula can be proved by defining $B(\tau)=e^{\tau A}Be^{-\tau A}$
+and formally integrating its equation of motion $dB/d\tau=[A,B(\tau)]$.
+%%------------------------------------------------------------------------
+
+\section{Feynman Result}
+The Feynman result reads
+\begin{equation}
+  e^{A+B}=e^Ae^Be^{-\frac{1}{2}[A,B]},
+\end{equation}
+which is true only if $[A,B]$ commutes with both $A$ and $B$.
+
+To prove it, recall that
+\begin{equation}
+e^{\tau(A+B)}=e^{\tau A}T_\tau\exp\left[
+  \int_0^\tau d\tau'e^{-\tau'A}Be^{\tau'A}\right]
+\end{equation}
+and evaluate the integral for $\tau=1$.
+%%---------------------------------------------------------------------------
+
+\section{Laguerre Polynomials}
+The Laguerre polynomials are solution of Laguerre's equation:
+\begin{equation}
+  xy''+(1-x)y'+ny=0,
+\end{equation}
+where $n$ is non-negative integer. The Laguerre polynomials is
+\begin{equation}
+  L_n(x)=\frac{e^x}{n!}\frac{d^n}{dx^n}(e^{-x}x^n)=
+  \sum_{k=0}^n\frac{(-x)^k}{k!}\frac{n!}{k!(n-k)!}.
+\end{equation}
+The generating function is
+\begin{equation}
+  \frac{e^{-xt/(1-t)}}{1-t}=\sum_{n=0}^\infty L_n(x)t^n\quad.
+\end{equation}
+%%-------------------------------------------------------------------------
+
+\section{Cramer's Rule}
+Consider a system of $n$ linear equations of $n$ unknowns, represented in 
+matrix multiplication form:
+\begin{equation}
+  Ax=b,
+\end{equation}
+where the $n\times n$ matrix $A$ has a nonzero determinant, and the
+vector $x=(x_1,\cdots,x_n)^T$ is the column vector of the variables.
+Then Cramer's rule states that the system has a unique solution, whose
+individual values are given by:
+\begin{equation}
+  x_i=\frac{\det A_i}{\det A},
+\end{equation}
+where $A_i$ is the matrix formed by replacing the $i$-th column of $A$
+by the column vector $b$.
+
+%%-------------------------------------------------------------------------
+
+
+\section{Simple Impurity Model at Zero Temperature}
+The Hamiltonian of simple impurity model is defined as
+\begin{equation}
+  H=\sum_k\varepsilon_kc_k^\dag c_k+\sum_kV_k(c_k^\dag d+d^\dag c_k)
+  +\varepsilon_0d^\dag d,
+\end{equation}
+let $H=H_0+V$, where
+\begin{equation}
+  H_0=\sum_k\varepsilon_kc_k^\dag c_k+\varepsilon_0d^\dag d,\quad
+  V=\sum_kV_k(c_k^\dag d+d^\dag c_k).
+\end{equation}
+
+The Green's function is
+\begin{equation}
+  G(t)=-i\bra{0}Td(t)d^\dag\ket{0}=-i\bra{0}d(t)d^\dag\ket{0},
+\end{equation}
+apply Fourier transform on it, then
+\begin{equation}
+  G(\omega)=\bra{0}d\frac{1}{\omega+i0-H}d^\dag\ket{0}.
+\end{equation}
+
+Notice that
+\begin{equation}
+  \begin{array}{rcl}
+  \displaystyle\frac{1}{\omega-H}&=&\displaystyle\frac{1}{\omega-H_0}+
+  \frac{1}{\omega-H_0}V\frac{1}{\omega-H}\\\vbox to 20pt{}
+  &=&\displaystyle\frac{1}{\omega-H_0}+
+  \frac{1}{\omega-H_0}V\frac{1}{\omega-H_0}+
+  \frac{1}{\omega-H_0}V\frac{1}{\omega-H_0}V\frac{1}{\omega-H},
+  \end{array}
+\end{equation}
+the second term produce just 0, thus 
+\begin{equation}
+  \begin{array}{rcl}
+  G(\omega)&=&\displaystyle\bra{0}d\frac{1}{\omega-H_0}d^\dag\ket{0}+
+  \bra{0}d\frac{1}{\omega-H_0}V\frac{1}{\omega-H_0}V
+  \frac{1}{\omega-H}d^\dag\ket{0}\\\vbox to 20pt{}
+  &=&\displaystyle\frac{1}{\omega-\varepsilon_0}+
+  \frac{1}{\omega-\varepsilon_0}\bra{0}dV\frac{1}{\omega-H_0}V
+  \frac{1}{\omega-H}d^\dag\ket{0}\\\vbox to 20pt{}
+  &=&\displaystyle\frac{1}{\omega-\varepsilon_0}+
+  \frac{1}{\omega-\varepsilon_0}
+  \bra{0}d\sum_kd^\dag c_k\frac{V_k^2}{\omega-H_0}c_k^\dag d
+  \frac{1}{\omega-H}d^\dag\ket{0}\\
+  &=&\displaystyle\frac{1}{\omega-\varepsilon_0}+
+  \frac{1}{\omega-\varepsilon_0}
+  \sum_k\frac{V_k^2}{\omega-\varepsilon_k}G(\omega).
+  \end{array}
+\end{equation}
+Therefore 
+\begin{equation}
+  G^{-1}(\omega)=\omega-\varepsilon_0-
+  \sum_k\frac{V_k^2}{\omega-\varepsilon_k},
+\end{equation}
+it can be written as
+\begin{equation}
+  G^{-1}(\omega)=\omega-\varepsilon_0-\int_{-\infty}^\infty d\varepsilon
+  \frac{\Delta(\varepsilon)}{\omega-\varepsilon},
+\end{equation}
+where
+\begin{equation}
+  \Delta(\varepsilon)=\sum_kV_k^2\delta(\varepsilon-\varepsilon_k).
+\end{equation}
+
+Now consider $V$ is in site representation:
+\begin{equation}
+  V=\sum_{i}(t_{io}c_i^\dag d+t_{oi}d^\dag c_i),
+\end{equation}
+then we have that
+\begin{equation}
+  \begin{array}{rcl}
+    G(\omega) &=& \displaystyle\frac{1}{\omega-\varepsilon_0}
+    +\frac{1}{\omega-\varepsilon_0}\sum_{ij}t_{oi}t_{jo}\bra{0}dd^\dag c_i
+    \frac{1}{\omega-H_0}c_j^\dag
+    d\frac{1}{\omega-H}d^\dag\ket{0}\\\vbox to 20pt{}
+    &=&\displaystyle\frac{1}{\omega-\varepsilon_0}
+    +\frac{1}{\omega-\varepsilon_0}\sum_{ij}t_{oi}t_{jo}
+    G_{ij}^{(o)}(\omega)G(\omega),\\
+  \end{array}
+\end{equation}
+thus
+\begin{equation}
+  G^{-1}(\omega)=\omega-\varepsilon_0-\sum_{ij}t_{oi}t_{jo}G^{(o)}_{ij}(\omega),
+\end{equation}
+where $G^{(o)}_{ij}$ is the Green's function with one site removed.
+%%----------------------------------------------------------------------------
+
+\section{Green's Function for Simple Cubic Lattice}
+The first Brillouin zone for the simple cubic lattice is the cube
+\begin{equation}
+  -\pi/a\le k_x<\pi/a,\quad-\pi/a\le k_x<\pi/a, \quad-\pi/a\le k_x<\pi/a,
+\end{equation}
+where $a$ is the lattice constant. The diagonal matrix element of
+Green's function is
+\begin{equation}
+  G(\omega)=\frac{a^3}{(2\pi)^3}\int_{-\pi/a}^{\pi/a}dk_x
+  \int_{-\pi/a}^{\pi/a}dk_y\int_{-\pi/a}^{\pi/a}dk_z
+  \frac{1}{\omega-2t(\cos k_xa+\cos k_ya+\cos k_za)},
+\end{equation}
+introducing the variable $x=k_xa,y=k_ya,z=k_za$ we obtain
+\begin{equation}
+  G(\omega)=\frac{1}{(2\pi)^3}\int_{-\pi}^\pi dx\int_{-\pi}^\pi dy
+  \int_{-\pi}^\pi dz
+  \frac{1}{\omega-2t(\cos x+\cos y+\cos z)}.
+  \label{simple-cubic-green-function}
+\end{equation}
+
+This function can be expressed by complete elliptic integral. The
+complete elliptic integral of the first kind $K(k)$ as complex
+function of the complex modulus $k$ is defined by
+\begin{equation}
+  K(k)=\int_0^{\frac{\pi}{2}}d\theta(1-k^2\sin^2\theta)^{-\frac{1}{2}},
+\end{equation}
+this function is an even function and $K(k^*)=K(k)^*$.
+
+After the integration over $y$ and $z$, the integral
+\eqref{simple-cubic-green-function} yields 
+\begin{equation}
+  G(\omega)=\frac{1}{2\pi^2t}\int_0^\pi kK(k)dx,
+\end{equation}
+where
+\begin{equation}
+  k=\frac{4t}{\omega-2t\cos x}.
+\end{equation}
+
+For simple cubic lattice, $\Re G$ is an odd function of $\omega$ and
+$\Im G$ is an even function:
+\begin{equation}
+  \Re\;G(\omega)=-\Re\;G(\omega),\quad \Im\;G(\omega)=\Im\;G(\omega),
+\end{equation}
+hence we have only to consider the range $0\le\omega\le6t$ in the
+following. The Green's function can calculated numerically, when $0<\omega<2t$,
+\begin{equation}
+  \begin{array}{l}
+    \displaystyle\Re\;G(\omega)=-\frac{1}{2\pi^2t}\int_0^{\cos^{-1}(\omega/2t)}
+    dxK\left(\frac{1}{|k|}\right)+\frac{1}{2\pi^2t}
+    \int_{\cos^{-1}(\omega/2t)}^{\pi}K\left(\frac{1}{k}\right),\\\vbox
+    to 20pt{} \displaystyle\Im\;G(\omega)=\frac{1}{\pi^2}\int_0^\pi
+    dxK \left(\frac{\sqrt{k^2-1}}{k}\right),\\
+  \end{array}
+\end{equation}
+when $2t\le\omega<6t$,
+\begin{equation}
+  \begin{array}{l}
+    \displaystyle\Re\;G(\omega)=\frac{1}{2\pi^2t}
+    \int_0^{\cos^{-1}[(\omega-4t)/2t]}dxK\left(\frac{1}{k}\right)
+    +\frac{1}{2\pi^2t}\int_{\cos^{-1}[(\omega-4t)/2t]}^\pi dxK(k),\\\vbox to 20pt{}
+    \displaystyle\Im\;G(\omega)=\frac{1}{2\pi^2t}
+    \int_0^{\cos^{-1}[(\omega-4t)/2t]}dx K\left(\frac{\sqrt{k^2-1}}{k}\right).\\
+  \end{array}
+\end{equation}
+
+\chapter{Coherent States}
+Coherent states is defined as the eigenstates of annihilation operator:
+\begin{equation}
+  a_\alpha\ket{\phi}=\phi_\alpha\ket{\phi}.
+\end{equation}
+
+\section{Boson Coherent States}
+Boson coherent states:
+\begin{equation}
+  \ket{\phi}=e^{\sum_\alpha\phi_\alpha a_\alpha^\dag}\ket{0},\quad
+  \bra{\phi}=\bra{0}e^{\sum_\alpha\phi_\alpha^* a_\alpha}\quad,
+\end{equation}
+where $\phi_\alpha$ is complex number.
+
+The overlap of two coherent states:
+\begin{equation}
+  \inprod{\phi}{\phi'}=e^{\sum_\alpha\phi_\alpha^*\phi'_\alpha}\quad.
+\end{equation}
+
+The overcompleteness in the Fock space:
+\begin{equation}
+  \int\left(\prod_\alpha\frac{d\phi_\alpha^*d\phi_\alpha}{2\pi i}\right)
+  e^{-\sum\phi_\alpha^*\phi_\alpha}\ket{\phi}\bra{\phi}=1,
+\end{equation}
+where
+\begin{equation}
+  \frac{d\phi_\alpha^*d\phi_\alpha}{2\pi i}=
+  \frac{d({\rm Re}\phi_\alpha)d({\rm Im}\phi_\alpha)}{\pi}\quad.
+\end{equation}
+
+The trace of an operator $A$ in Fock space can be written as
+\begin{equation}
+  {\rm Tr}A=
+  \int\left(\prod_\alpha\frac{d\phi_\alpha^*d\phi_\alpha}{2\pi i}\right)
+  e^{-\sum\phi_\alpha^*\phi_\alpha}\bra{\phi}A\ket{\phi}\quad.
+\end{equation}
+
+The average particle number of a coherent state is
+\begin{equation}
+  \bar{N}=\frac{\bra{\phi}N\ket{\phi}}{\inprod{\phi}{\phi}}
+  =\frac{\bra{\phi}\sum_\alpha a_\alpha^\dag a_\alpha\ket{\phi}}{\inprod{\phi}{\phi}}
+  =\sum_\alpha\phi_\alpha^*\phi_\alpha,
+\end{equation}
+and the variance is
+\begin{equation}
+  \sigma^2=\frac{\bra{\phi}N^2\ket{\phi}}{\inprod{\phi}{\phi}}-\bar{N}^2
+  =\bar{N}\quad.
+\end{equation}
+%%-----------------------------------------------------------------------------
+
+\section{Grassmann Algebra}
+The Grassmann numbers is defined to be anticommuting numbers:
+\begin{equation}
+  \xi_\alpha\xi_\beta+\xi_\beta\xi_\alpha=0,\quad \xi_\alpha^2=0\quad.
+\end{equation}
+
+The conjugation of a Grassmann number is defined as
+\begin{equation}
+  (\xi_\alpha)^*=\xi_\alpha^*,\quad(\xi_\alpha^*)^*=\xi_\alpha\quad.
+\end{equation}
+
+If $\lambda$ is a complex number,
+\begin{equation}
+  (\lambda\xi_\alpha)^*=\lambda^*\xi_\alpha,
+  \label{anticommuting}
+\end{equation}
+and for any product of Grassmann numbers:
+\begin{equation}
+  (\xi_1\cdots\xi_n)^*=\xi_n^*\xi_{n-1}^*\cdots\xi_1^*\quad,
+\end{equation}
+and for combinations of Grassmann variables and creation and
+annihilation operators
+\begin{equation}
+  \xi a+a\xi=0,\quad(\xi a)^\dag=a^\dag\xi^*\quad.
+\end{equation}
+
+Because of property \eqref{anticommuting}, 
+\begin{equation}
+  f(\xi)=f_0+f_1\xi,\quad 
+  A(\xi^*,\xi)=a_0+a_1\xi+\bar{a}_1\xi^*+a_{12}\xi^*\xi,
+\end{equation}
+in particular,
+\begin{equation}
+  e^{-\lambda\xi}=1-\lambda\xi\quad.
+\end{equation}
+
+A derivative can be defined for Grassmann variable function,
+\begin{equation}
+  \frac{\partial}{\partial\xi}(\xi^*\xi)=
+  \frac{\partial}{\partial\xi}(-\xi\xi^*)=-\xi^*\quad.
+\end{equation}
+
+And a integral can be defined as
+\begin{equation}
+  \int d\xi\,1=0,\quad\int d\xi\,\xi=1,
+  \quad\int d\xi^*\,1=0,\quad\int d\xi^*\,\xi^*=1,
+\end{equation}
+to remember,
+\begin{equation}
+  \int d\xi=\frac{\partial}{\partial\xi},\quad
+  \int d\xi^*=\frac{\partial}{\partial\xi^*}\quad.
+\end{equation}
+%%--------------------------------------------------------------------------
+
+
+\section{Fermion Coherent States}
+Fermion Coherent States is defined as
+\begin{equation}
+  \ket{\xi}=e^{-\sum_\alpha\xi_\alpha a_\alpha^\dag}\ket{0}
+  =\prod_\alpha(1-\xi_\alpha a_\alpha^\dag)\ket{0},
+\end{equation}
+we can verify that $a_\alpha\ket{\xi}=\xi_\alpha\ket{\xi}$ by using
+\begin{equation}
+  \xi_\alpha\ket{0}=\xi_\alpha(1-\xi_\alpha a^\dag)\ket{0}\quad.
+\end{equation}
+
+Similarly, the adjoint of the coherent states is
+\begin{equation}
+  \bra{\xi}=\bra{0}e^{-\sum_\alpha a_\alpha\xi_\alpha^*}
+  =\bra{0}e^{\sum_\alpha\xi_\alpha^*a_\alpha}\quad.
+\end{equation}
+
+The overlap of two coherent states is 
+\begin{equation}
+  \inprod{\xi}{\xi'}=\prod_\alpha(1+\xi_\alpha^*\xi'_\alpha)
+  =e^{\sum_\alpha\xi_\alpha^*\xi'_\alpha}\quad.
+\end{equation}
+
+The closure relation can be written as
+\begin{equation}
+  \int\left(\prod_\alpha d\xi_\alpha^*d\xi_\alpha\right)
+  e^{-\sum_\alpha\xi_\alpha^*\xi_\alpha}\ket{\xi}\bra{\xi}=1\quad.
+\end{equation}
+
+The trace of an operator $A$ in Fock space can be written as
+\begin{equation}
+  {\rm Tr}A=\int\left(\prod_\alpha d\xi_\alpha^*d\xi_\alpha\right)
+  e^{-\sum_\alpha\xi_\alpha^*\xi_\alpha}\bra{-\xi}A\ket{\xi},
+\end{equation}
+note the anti periodic condition here.
+%%------------------------------------------------------------------------------
+
+
+\chapter{Linear Response}
+\section{Perturbations Depending on Time}
+We now seek the solution of the perturbed equation
+\begin{equation}
+  i\hbar\frac{\partial\Psi(t)}{\partial t}=[H_0+V(t)]\Psi(t),
+\end{equation}
+in the form of a sum
+\begin{equation}
+  \Psi(t)=\sum_ka_k(t)\psi_k(t),
+\end{equation}
+where the expansion coefficients $a_k(t)$ are functions of time,
+and $\psi_k(t)$ are unperturbed stationary wave functions:
+\begin{equation}
+  i\hbar\frac{\partial\psi_k(t)}{\partial t}=H_0\psi_k(t)=E_k^{(0)}\psi_k(t).
+\end{equation}
+Therefore we obtain that
+\begin{equation}
+  i\hbar\sum_k\psi_k(t)\frac{da_k(t)}{dt}=\sum_ka_k(t)V(t)\psi_k(t),
+\end{equation}
+multiplying both sides of this equation on the left by $\psi_m(t)$ and
+integrating then
+\begin{equation}
+  i\hbar\frac{da_m(t)}{dt}=\sum_kV_{mk}(t)a_k(t),
+\end{equation}
+where
+\begin{equation}
+  V_{mk}(t)=\bra{m}V\ket{k}e^{i\omega_{mk}t}=V_{mk}e^{i\omega_{mk}t},\quad
+  \omega_{mk}=\frac{E_{m}^{(0)}-E_k^{(0)}}{\hbar}.
+\end{equation}
+
+Let the unperturbed wave function be $\psi_n(t)$, i.e. $a_n^{(0)}=1$
+and $a_k^{(0)}=0$ for $k\ne n$. To find the first approximation, we
+seek $a_k=a_k^{0}+a_k^{(1)}$, substituting $a_k=a_k(0)$ we find
+\begin{equation}
+  i\hbar \frac{da_k^{(1)}(t)}{dt}=V_{kn}(t),
+\end{equation}
+integrating it gives
+\begin{equation}
+  a_{kn}^{(0)}(t)=-\frac{i}{\hbar}\int V_{kn}e^{i\omega_{kn}t}dt.
+\end{equation}
+%%----------------------------------------------------------------------------
+
+\section{Fermi Golden Rule}
+Let the perturbation be
+\begin{equation}
+  V(t)=Ve^{-i\omega t},
+\end{equation}
+then
+\begin{equation}
+  a_{fi}=-\frac{i}{\hbar}\int_0^tV_{fi}(t)dt=
+  -V_{fi}\frac{e^{i(\omega_{fi}-\omega)t}-1}{\hbar(\omega_{fi}-\omega)}.
+\end{equation}
+Therefore the squared modulus of $a_{fi}$ is
+\begin{equation}
+  |a_{fi}|^2=|V_{fi}|^2\frac{4\sin^2[\frac{1}{2}(\omega_{fi}-\omega)t]}
+{\hbar^2(\omega_{fi}-\omega)^2},
+\end{equation}
+noticing that $\lim_{t\to\infty}\frac{\sin^a\alpha t}{\pi t\alpha^2}=\delta(\alpha)$ we have
+\begin{equation}
+  |a_{fi}|^2=\frac{2\pi}{\hbar}|V_{fi}|^2\delta(E_f-E_i-\hbar\omega)t.
+\end{equation}
+Thus the probability $dw_{fi}$ of the transition rate per unit time is
+\begin{equation}
+  dw_{fi}=\frac{2\pi}{\hbar}|V_{fi}|^2\delta(E_f-E_i-\hbar\omega).
+\end{equation}
+
+Another method to derive the above formula is that let 
+\begin{equation}
+  V(t)=Ve^{-i\omega t+\eta t},
+\end{equation}
+and integrating from $t=-\infty$ to $t=0$, then
+\begin{equation}
+  |a_{fi}|^2=\frac{1}{\hbar^2}|V_{fi}|^2\frac{e^{2\eta t}}
+{(\omega_{fi}-\omega)^2+\eta^2}
+\end{equation}
+Then the transition rate is [note that
+$\lim_{\eta\to0}\frac{\eta}{\pi(\alpha^2+\eta^2)}=\delta(\alpha)$]
+\begin{equation}
+  \frac{d}{dt}|a_{fi}|^2=\frac{2\pi}{\hbar}|V_{fi}|^2\delta(E_f-E_i-\hbar\omega).
+\end{equation}
+%%----------------------------------------------------------------------------
+
+
+\section{The Generalized Susceptibility}
+When there exists an external interaction, the perturbing operator can
+be written as
+\begin{equation}
+  V=-xf(t),  
+\end{equation}
+where $x$ is the operator of the physical quantity concerned, and the
+perturbing generalized force $f$ is a given function of time.
+
+The quantum mean value $\bar{x}(t)$ is given by a formula of the type
+\begin{equation}
+  \bar{x}(t)=\int_0^\infty\alpha(\tau)f(t-\tau)d\tau,
+\end{equation}
+where $\alpha(\tau)$ being a function of time which depends on the
+properties of the body.
+
+Applying fourier transform on both sides of this formula
+\begin{equation}
+  \int_0^\infty\bar{x}(t)e^{i\omega t}dt=
+  \int_0^\infty\alpha(\tau)f(t-\tau)e^{i\omega t}d\tau dt,
+\end{equation}
+we obtain that
+\begin{equation}
+  \bar{x}(\omega)=\alpha(\omega)f(\omega).
+\end{equation}
+
+If the function $f$ is purely monochromatic and is given by the real
+expression
+\begin{equation}
+  f(t)=\frac{1}{2}(f_0e^{-i\omega t}+f_0^*e^{i\omega t}),
+  \label{generalized-force}
+\end{equation}
+then we shall have 
+\begin{equation}
+  \bar{x}(t)=\frac{1}{2}[\alpha(\omega)f_0e^{-i\omega t}
+    +\alpha(-\omega)f_0^*e^{i\omega t}]
+  \label{generalized-x}
+\end{equation}
+
+The function $\alpha(\omega)$ has the similar properties as retarded
+Green's function:
+\begin{equation}
+  \alpha(-\omega)=\alpha^*(\omega),
+\end{equation}
+i.e.,
+\begin{equation}
+  \Re\,\alpha(-\omega)=\Re\,\alpha(\omega),\quad
+  \Im\,\alpha(-\omega)=-\Im\,\alpha(\omega).
+\end{equation}
+And the Kramers-Kronig relations:
+\begin{equation}
+  \Re\,\alpha(\omega)=-\frac{1}{\pi}P\int_{-\infty}^\infty
+  \frac{\Im\,\alpha(\varepsilon)}{\omega-\varepsilon}d\varepsilon,\quad
+  \Im\,\alpha(\omega)=\frac{1}{\pi}P\int_{-\infty}^\infty
+  \frac{\Re\,\alpha(\varepsilon)}{\omega-\varepsilon}d\varepsilon.
+\end{equation}
+
+The energy change per unit time of the system is just
+$dE/dt=\overline{\partial H/\partial t}$, since only the perturbation
+$V$ in Hamiltonian depends on explicitly on time, we have
+\begin{equation}
+  \frac{dE}{dt}=-\bar{x}\frac{df}{dt}.
+\end{equation}
+Substituting $\bar{x}$ and $f$ from \eqref{generalized-force} and
+\eqref{generalized-x} and averaging over time, the terms containing 
+$e^{2i\omega t}$ vanish, and we obtain 
+\begin{equation}
+  Q=\frac{1}{4}i\omega(\alpha^*-\alpha)|f_0|^2=
+  \frac{1}{2}\omega\Im\,\alpha(\omega)|f_0|^2,
+\end{equation}
+where $Q$ is the mean energy dissipated per unit time.
+
+\section{The Fluctuation Dissipation Theorem}
+Let us now assume that the system is at state $\ket{n}$ and is subject to a
+periodic perturbation, described by the operator
+\begin{equation}
+  V=-xf=-\frac{1}{2}x(f_0e^{-i\omega t}+f_0^*e^{i\omega t}).
+\end{equation}
+Using Fermi Golden Rule, the transition rate from state $n$ to state
+$m$ per unit time is given by
+\begin{equation}
+  w_{mn}=\frac{\pi|f_0|^2}{2\hbar^2}|x_{mn}|^2
+  [\delta(\omega+\omega_{mn})+\delta(\omega+\omega_{nm})].
+\end{equation}
+The dissipation per unit time is given by
+\begin{equation}
+  Q=\sum_{m}w_{mn}\hbar\omega_{mn}=\frac{\pi}{2\hbar}|f_0|^2
+  \sum_m|x_{mn}|^2[\delta(\omega+\omega_{mn})+\delta(\omega+\omega_{nm})]
+  \omega_{mn},
+\end{equation}
+or, since the delta function zero except when their argument is zero,
+\begin{equation}
+  Q=\frac{\pi}{2\hbar}\omega|f_0|^2
+  \sum_m|x_{mn}|^2[\delta(\omega+\omega_{nm})-\delta(\omega+\omega_{mn})],
+\end{equation}
+thus
+\begin{equation}
+  \Im\,\alpha(\omega)=\frac{\pi}{\hbar}\sum_m|x_{mn}|^2
+  [\delta(\omega+\omega_{nm})-\delta(\omega+\omega_{mn})].
+\end{equation}
+
+Now define 
+\begin{equation}
+  (x^2)_\omega=\int_{-\infty}^\infty\frac{1}{2}
+  \average{x(t)x(0)+x(0)x(t)}e^{i\omega t}dt,
+\end{equation}
+in canonical ensemble it is
+\begin{equation}
+  (x^2)_\omega=\pi\sum_{nm}\rho_n|x_{mn}|^2
+  [\delta(\omega+\omega_{nm})+\delta(\omega+\omega_{mn})],
+\end{equation}
+where $\rho_n=e^{(F-E_n)/T}$, $E_n$ denotes the energy levels and $F$
+is free energy. Since the summation is now over both $m$ and $n$,
+these can be interchanged:
+\begin{equation}
+  \begin{array}{rcl}
+    (x^2)_\omega&=&\displaystyle\pi\sum_{mn}(\rho_n+\rho_m)|x_{mn}|^2
+    \delta(\omega+\omega_{nm})\\\vbox to 18pt{}
+    &=&\displaystyle\pi\sum_{mn}\rho_n(1+e^{-\hbar\omega_{mn}/T})|x_{mn}|^2
+    \delta(\omega+\omega_{nm})\\\vbox to 18pt{}
+    &=&\displaystyle\pi(1+e^{-\hbar\omega/T})\sum_{mn}\rho_n|x_{mn}|^2
+    \delta(\omega+\omega_{nm}).
+  \end{array}
+\end{equation}
+Similarly, in canonical ensemble
+\begin{equation}
+  \Im\,\alpha(\omega)=\frac{\pi}{\hbar}(1-e^{-\hbar\omega/T})
+  \sum_{mn}\rho_n|x_{nm}|^2\delta(\omega+\omega_{nm}),
+\end{equation}
+a comparison of these two expressions gives
+\begin{equation}
+  (x^2)_\omega=\hbar\Im\,\alpha(\omega)\coth\frac{\hbar\omega}{2T}.
+\end{equation}
+The mean square of the fluctuating quantity is given by the
+integration
+\begin{equation}
+  \average{x^2}=\frac{\hbar}{\pi}\int_0^\infty\Im\,\alpha(\omega)
+  \coth\frac{\hbar\omega}{2T}d\omega.
+\end{equation}
+
+\section{Kubo Greenwood Formula}
+Now write the perturbing operator as
+\begin{equation}
+  V=-\int\vec{j}\cdot\vec{A}dx,
+\end{equation}
+let $\alpha(\omega)$ denotes the corresponding generalized
+susceptibility then the mean energy dissipated per unit time and per
+unit volume is
+\begin{equation}
+  Q=\frac{1}{2}\omega\Im\,\alpha(\omega)|\vec{A}|^2.
+\end{equation}
+However, this generalized susceptibility is not the conductivity, to
+get the conductivity, recall that
+\begin{equation}
+  \vec{E}(t)=-\frac{\partial\vec{A}}{\partial t},
+\end{equation}
+therefore
+\begin{equation}
+  \vec{E}(\omega)=i\omega\vec{A},
+\end{equation}
+which means
+\begin{equation}
+  j(\omega)=\alpha(\omega)A(\omega)=\frac{\alpha(\omega)}{i\omega}E(\omega),
+\end{equation}
+or
+\begin{equation}
+  \sigma(\omega)=\frac{\alpha(\omega)}{i\omega}.
+\end{equation}
+
+Thus the dissipated term written in conductivity is just
+\begin{equation}
+  Q=\frac{1}{2}\Im\,\alpha(\omega)|A|^2=\frac{1}{2}\Re\,\sigma(\omega)\;|E|^2,
+\end{equation}
+and
+\begin{equation}
+  \Re\,\sigma=\frac{\Im\,\alpha}{\omega}=
+  \frac{\pi}{\hbar\omega}\sum_{mn}(\rho_n-\rho_m)
+  |j_{mn}|^2\delta(\omega+\omega_{nm}).
+\end{equation}
+
+Now there comes an assumption which is called ``independent particle
+approximation'': we replace $\rho$ by single electron distribution
+function $f$ and recall that $j=-ev$ then
+\begin{equation}
+  \Re\,\sigma=\frac{\hbar\pi e^2}{V}\sum_{mn}
+  \frac{f_n-f_m}{\hbar\omega_{mn}}|v_{mn}|^2\delta(E_n+\hbar\omega-E_m),
+\end{equation}
+where $V$ is the volume which acts as normalized factor.
+Notice that 
+\begin{equation}
+  \frac{f_n-f_m}{\hbar\omega_{mn}}\delta(E_n+\hbar\omega-E_m)=
+  \int dE\frac{f(E)-f(E+\hbar\omega)}{\hbar\omega}
+  \delta(E-E_n)\delta(E_n+\hbar\omega-E_m),
+\end{equation}
+then the formula of $\Re\,\sigma$ become
+\begin{equation}
+  \begin{array}{rcl}
+    \Re\,\sigma(\omega)&=&\displaystyle\frac{\hbar\pi e^2}{V} \int
+    dE\frac{f(E)-f(E+\hbar\omega)}{\hbar\omega}\sum_{nm}
+    v_{nm}\delta(E_n+\hbar\omega-E_m)v_{mn}\delta(E-E_n)\\\vbox to
+    20pt{} &=&\displaystyle\frac{\hbar e^2}{\pi V}\int dE
+    \frac{f(E)-f(E+\hbar\omega)}{\hbar\omega}
+    \Tr[v\Im\,G^R(E+\hbar\omega)v\Im\,G^R(E)].
+  \end{array}
+\end{equation}
+For static conductivity, we have
+\begin{equation}
+  \lim_{\omega\to0}\Re\,\sigma(\omega)=
+  \frac{\hbar e^2}{\pi V}\int dE
+  \left(-\frac{\partial f}{\partial E}\right)
+  \sum_k|\bra{k}v\ket{k}|^2|\Im\,G^R(E,k)|^2,
+\end{equation}
+or in three dimension
+\begin{equation}
+  \lim_{\omega\to0}\Re\,\sigma(\omega)=
+  \frac{\hbar e^2}{\pi V}\int dE
+  \left(-\frac{\partial f}{\partial E}\right)
+  \frac{a^3}{(2\pi)^3}\int d^3k\; v^2(k)|\Im\,G^R(E,k)|^2.
+\end{equation}
+
+\section{Green Kubo Formula}
+Let $\Psi^{(0)}_n$ be the wave function of the unperturbed system,
+then applying equations of perturbations depending on time in first
+approximation we have
+\begin{equation}
+  \Psi_n=\Psi^{(0)}_n+\sum_ma_{m}\Psi^{(0)}_m,
+\end{equation}
+where $a_m$ satisfy the equation
+\begin{equation}
+  i\hbar\frac{da_m}{dt}=V_{mn}e^{i\omega_{mn}t}=-\frac{1}{2}
+  x_{mn}e^{i\omega_{mn}t}(f_0e^{-i\omega t}+f_0^*e^{i\omega t}).
+\end{equation}
+In solving this, we must assume that the perturbation is ``adiabatically''
+applied until the time $t$ from $t=-\infty$, this means that we must put
+$\omega\to\omega\mp i0$ in factors $e^{\pm i\omega t}$. Then
+\begin{equation}
+  a_m=\frac{1}{2\hbar}x_{mn}e^{i\omega_{mn}t}\left[
+    \frac{f_0e^{-i\omega t}}{\omega_{mn}-\omega-i0}+
+    \frac{f_0^*e^{i\omega t}}{\omega_{mn}+\omega+i0}\right].
+\end{equation}
+
+Accordingly,
+\begin{equation}
+  \begin{array}{rcl}
+    \bar{x}&=&\displaystyle\int \Psi_n^*x\Psi_ndq\\\vbox to 20pt{}
+    &=&\displaystyle\sum_m(a_mx_{nm}e^{i\omega_{nm}t}+
+    a^*_{m}x_{mn}e^{i\omega_{mn}t})\\\vbox to 20pt{}
+    &=&\displaystyle\frac{1}{2\hbar}\sum_mx_{mn}x_{nm}\left[
+      \frac{1}{\omega_{mn}-\omega-i0}+\frac{1}{\omega_{mn}+\omega+i0}
+      \right]f_0e^{-i\omega t}+\hbox{c.c},
+  \end{array}
+\end{equation}
+it can be seen that
+\begin{equation}
+  \alpha(\omega)=\frac{1}{\hbar}\sum_m|x_{mn}|^2\left[
+  \frac{1}{\omega_{mn}-\omega-i0}+\frac{1}{\omega_{mn}+\omega+i0}
+      \right].
+\end{equation}
+This expression is the Fourier transform of the function
+\begin{equation}
+  \alpha(t)=\frac{i}{\hbar}\theta(t)\average{x(t)x(0)-x(0)x(t)}=-G^R(t),
+\end{equation}
+thus the we have the final result
+\begin{equation}
+  \alpha(\omega)=\frac{i}{\hbar}\int_0^\infty e^{i\omega t}
+  \average{x(t)x(0)-x(0)x(t)}dt.
+\end{equation}
+\chapter{Small Polaron}
+\section{Holstein Model}
+The Hamiltonian of Holstein Model is
+\begin{equation}
+  H=-\sum_{\langle{i,j}\rangle}t_{ij}c_i^\dag c_j+g\sum_ic_i^\dag c_i(a_i+a_i^\dag)
+  +\omega_0\sum_ia_i^\dag a_i,
+  \label{Holstein}
+\end{equation}
+where $c_i^\dag$ ($c_i$) is creation (annihilation) operator for electron, and
+$a_i^\dag$ ($a_i$) is creation (annihilation) operator for phonon.
+
+The model possesses two independent control parameters:
+\begin{equation}
+  \lambda =g^2/\omega_0t,
+\end{equation}
+\begin{equation}
+  \gamma=\omega_0/t.
+\end{equation}
+A third parameter can be conveniently introduced as a combination of
+the above ones:
+\begin{equation}
+  \alpha=\lambda/\gamma=g/\omega_0.
+\end{equation}
+
+It is worth defining the following regimes and limits, which are relevant 
+to the Holstein model:
+
+\begin{enumerate}[(i)]
+\item weak (strong) couplings $\lambda<1$ ($\lambda>1$);
+\item small (large) phonon frequency $\gamma<1$ ($\gamma>1$);
+\item multiphonon regime $\alpha^2>1$;
+\item adiabatic limit $\omega_0=0$, finite $\lambda$.
+\end{enumerate}
+%%----------------------------------------------------------------------
+
+\section{Weak Coupling Limit}
+Consider zero density ($n=0$) and zero temperature ($T=0$) limits,
+Green's function for a single electron can be defined as
+\begin{equation}
+  G_{ij}(t)=-i\bra{0}Tc_i(t)c_j^\dag(0)\ket{0},
+\end{equation}
+where $\ket{0}$ is the vacuum for phonons and electrons. There is only
+one possible ordering ($t>0$), so the function is purely retarded.
+
+Let $g\sum_ic_i^\dag c_i(a_i+a_i^\dag)$ acts as perturbation, we have
+that
+\begin{equation}
+  G_{ij}(t)=-i\bra{0}Tc_i(t)c_j(0)^\dag S\ket{0},
+\end{equation}
+where
+\begin{equation}
+  S=Te^{-i\int dt [g\sum_ic_i^\dag c_i(a_i+a_i^\dag)]}\quad.
+\end{equation}
+The expansion of $S$ to second order of $g$ gives
+\begin{equation}
+  \begin{array}{rcl}
+  G_{ij}(t)&=&-i\bra{0}Tc_i(t)c_j^\dag\ket{0}\\\vbox to 18pt{}
+  & &-i\displaystyle\frac{g^2}{2}\int dt'dt''\sum_{kl}
+  \bra{0}Tc_i(t)c_j^\dag c_k^\dag(t')c_k(t')c_l^\dag(t'')c_l(t'')
+  [a_k(t')a_l^\dag(t'')+a_k^\dag(t')a_l(t'')]\ket{0},\\
+  \end{array}
+\end{equation}
+apply Wick's theorem and recall that ($D$ is the Green's function for phonon)
+\begin{equation}
+  \begin{array}{l}
+    \bra{0}a_k^\dag(t')a_l(t'')\ket{0}=0,\\\vbox to 18pt{}
+    \bra{0}a_k(t')a_l^\dag(t'')\ket{0}=D_{kl}(t'-t'')=\delta_{kl}D_{kk}(t'-t''),\\
+  \end{array}
+\end{equation}
+we can obtain that
+\begin{equation}
+  G_{ij}(t)=G^{(0)}_{ij}(t)+ig^2\sum_k\int dt'dt''G^{(0)}_{ik}(t-t')
+  G^{(0)}_{kk}(t'-t'')D_{kk}(t'-t'')G_{kj}(t''),
+\end{equation}
+in frequency space, (note that $D_{kk}(t'-t'')=-ie^{-i\omega_0(t'-t'')}$)
+\begin{equation}
+  G_{ij}(\omega)=G^{(0)}_{ij}(\omega)+
+  g^2\sum_{k}G^{(0)}_{ik}(\omega)G_{kk}^{(0)}(\omega-\omega_0)G^{0}_{kj}(\omega).
+\end{equation}
+Compare with the Dyson equation
+\begin{equation}
+  G_{ij}=G^{(0)}_{ij}+\sum_{kl}G^{(0)}_{ik}\Sigma_{kl}G_{lj}
+  =G^{(0)}_{ij}+\sum_{kl}G^{(0)}_{ik}\Sigma_{kl}G^{(0)}_{lj}+\cdots\quad,
+\end{equation}
+it is clear to see that second order perturbation gives a local
+($k$-independent) self energy:
+\begin{equation}
+  \Sigma_2(\omega)=g^2G^{(0)}(\omega-\omega_0).
+\end{equation}
+
+The electron effective mass, in the case of a local self-energy, is
+easily calculated via
+\begin{equation}
+  \frac{m^*}{m}=\left.\frac{d(\omega-\Re\Sigma(\omega))}{d\omega}\right|_{E_0}
+  =1-\left.\frac{d\Re\Sigma(\omega)}{d\omega}\right|_{E_0},
+\end{equation}
+where $E_0$ is the ground-state energy.
+%%----------------------------------------------------------------------------
+
+\section{Atomic Limit (Zero Temperature)}
+The atomic limit is defined as the zero hopping case ($t=0$).
+In this case, Hamiltonian \eqref{Holstein} can be diagonalized by 
+the unitary Lang-Firsov transformation
+\begin{equation}
+  U=e^{-S},\quad S=-\alpha\sum_{i}c_i^\dag c_i(a_i-a_i^\dag).
+\end{equation}
+With the aid of Baker-Campbell-Hausdorff formula we have
+\begin{equation}
+  \begin{array}{l}
+    \bar{c}_i=e^Sc_ie^{-S}=c_iX_i,\quad X_i=e^{\alpha(a_i-a_i^\dag)};\\\vbox to 18pt{}
+    \bar{c}_i^\dag=e^Sc_i^\dag e^{-S}=c_i^\dag X_i^\dag, \quad
+    X_i^\dag=e^{\alpha(a_i^\dag-a_i)};\\\vbox to 18pt{}
+    \bar{a}_i=e^Sa_ie^{-S}=a_i-\alpha c_i^\dag c_i;\\\vbox to 18pt{}
+    \bar{a}_i^\dag=e^Sa_i^\dag e^{-S}=a_i^\dag-\alpha c_i^\dag c_i;\\\vbox to 18pt{}
+    \bar{H}=e^SHe^{-S}=-\frac{g^2}{\omega_0}\sum_ic_i^\dag c_i+
+    \omega_0\sum_ia_i^\dag a_i.\\
+  \end{array}
+\end{equation}
+After the transformation, we can see that the ground energy is
+$\varepsilon_p=-g^2/\omega_0$, the excited state energy is 
+$\varepsilon_p+n\omega_0$.
+
+The static electron-displacement correlation function is defined as
+$C_0=\langle n_i(a_i+a_i^\dag)\rangle$, apply Lang-Firsov
+transformation it reads
+\begin{equation}
+  C_0=\langle n_i(a_i+a_i^\dag)\rangle-2\alpha\langle n_i\rangle
+  =-2\alpha\langle n_i\rangle,
+\end{equation}
+at the ground state $n_i=1$, thus $C_0=-2\alpha$. Meanwhile, 
+\begin{equation}
+  \langle e^Sa^\dag ae^{-S}\rangle=\langle a^\dag a\rangle+
+  \alpha^2\langle c^\dag c\rangle=\alpha^2.
+\end{equation}
+
+The electron Green's function can also be calculated after the
+Lang-Firsov transformation\footnote{Mahan's Many-Particle Physics, page 221}:
+\begin{equation}
+  \begin{array}{rcl}
+  G(t)&=&-i\bra{0}c(t)c^\dag\ket{0}\\\vbox to 18pt{}
+  &=&-i\bra{0}cXe^{-i\bar{H}t}c^\dag X^\dag\ket{0}\\\vbox to 18pt{}
+  &=&-i\displaystyle\sum_{mn}\bra{0}cX\ket{m}\bra{m}e^{-i\bar{H}t}\ket{n}\bra{n}
+  c^\dag X^\dag\ket{0},\\
+  \end{array}
+\end{equation}
+where $\ket{m}$ is the phonon state corresponding to $m$ phonons.
+
+Using the Feynman result ($e^{A+B}=e^Ae^Be^{-\frac{1}{2}[A,B]}$), we have that
+\begin{equation}
+  X^\dag=e^{-\alpha^2/2}e^{\alpha a^\dag}e^{-\alpha a},\quad
+  X=e^{-\alpha^2/2}e^{-\alpha a^\dag}e^{\alpha a},
+\end{equation}
+accordingly,
+\begin{equation}
+  \begin{array}{l}
+  \displaystyle\bra{m}X^\dag\ket{0}=e^{-\alpha^2/2}\bra{m}e^{\alpha a^\dag}\ket{0}
+  =e^{-\alpha^2/2}\sum_n\bra{m}\frac{\alpha^n}{\sqrt{n!}}\ket{n}
+  =e^{-\alpha^2/2}\frac{\alpha^m}{\sqrt{m!}},\\\vbox to 18pt{}
+  \displaystyle\bra{0}X\ket{m}=e^{-\alpha^2/2}\frac{\alpha^m}{\sqrt{m!}}.
+  \end{array}
+\end{equation}
+Finally the electron Green's function is
+\begin{equation}
+  G(\omega)=\sum_{n}^\infty \frac{\alpha^{2n}e^{-\alpha^2}}{n!}
+  \frac{1}{\omega-n\omega_0-\varepsilon_p}.
+\end{equation}
+
+Let us now consider the action of the hopping. After the Lang-Firsov
+transformation, the hopping term becomes
+\begin{equation}
+  t_{ij}c_i^\dag c_j\quad\to\quad t_{ij}X_i^\dag X_jc_i^\dag c_j,
+\end{equation}
+consider Holstein approximation, which neglect phonon emission and
+absorption during the hopping process, we have
+\begin{equation}
+  t_{ij}\bra{0}X_i^\dag X_j\ket{0}=t_{ij}\bra{0}X^\dag\ket{0}\bra{0}X\ket{0}
+  =t_{ij}e^{-\alpha^2}.
+\end{equation}
+%%---------------------------------------------------------------------------
+
+\section{Atomic Limit (Finite Temperature)}
+The Lang-Firsov transformation is the same as zero temperature
+case. Here we need to calculate $\bra{n}X^\dag\ket{n}$. We have that
+\begin{equation}
+  \begin{array}{rcl}
+  e^{-\alpha a}\ket{n}&=&\displaystyle\sum_{m=0}^\infty
+  \frac{(-\alpha)^m}{m!}a^m\ket{n}\\\vbox to 20pt{}
+  &=&\displaystyle\sum_{m=0}^n\frac{(-\alpha)^m}{m!}\left[
+  \frac{n!}{(n-m)!}\right]^{\frac{1}{2}}\ket{n-m},
+  \end{array}
+\end{equation}
+and
+\begin{equation}
+  \bra{n}e^{\alpha a^\dag}=\sum_{m=0}^n\frac{\alpha^m}{m!}\left[
+  \frac{n!}{(n-m)!}\right]^{\frac{1}{2}}\bra{n-m},
+\end{equation}
+therefore
+\begin{equation}
+  \bra{n}e^{\alpha a^\dag}e^{-\alpha a}\ket{n}=
+  \sum_{m=0}^n\frac{(-\alpha^2)^m}{m!}\frac{n!}{m!(n-m)!}=L_n(\alpha^2),
+\end{equation}
+where $L_n(x)$ is Laguerre polynomial. Thus
+\begin{equation}
+  \bra{n}X^\dag\ket{n}=\bra{n}X\ket{n}=e^{-\alpha^2/2}L_n(\alpha^2).
+\end{equation}
+
+At finite temperature, the assumption is that we only average on
+phonon according to temperature. (``cold'' electron in a thermalized
+phonon bath). So at finite temperature the effective hopping amplitude is
+\begin{equation}
+  \begin{array}{rcl}
+    &&\displaystyle t_{ij}(1-e^{-\beta\omega_0})^2\sum_{mn}e^{-\beta m\omega_0}
+    \bra{m}X_i^\dag\ket{m}e^{-\beta n\omega_0}\bra{n}X_j\ket{n}
+    \\\vbox to 20pt{}
+    &=&\displaystyle t_{ij}e^{-\alpha^2}\left[(1-e^{-\beta\omega_0})
+      \sum_{n=0}^\infty e^{-n\beta\omega_0}L_n(\alpha^2)\right]^2.\\
+  \end{array}
+\end{equation}
+Recall that the generating function of Laguerre polynomials:
+\begin{equation}
+  \frac{e^{-xt/(1-t)}}{1-t}=\sum_{n=0}^\infty L_n(x)t^n,
+\end{equation}
+let $t=e^{-\beta\omega_0}$ and $x=\alpha^2$ we find that the effective
+hopping amplitude is
+\begin{equation}
+t_{ij}e^{-S_T}, \quad  S_T=\alpha^2(1+2\average{n}_T).
+\end{equation}
+
+Now let us turn to electron Green's function, now defined as
+\begin{equation}
+  \begin{array}{rcl}
+      G(t)&=&\displaystyle-i(1-e^{-\beta\omega_0})\sum_ne^{-\beta n\omega_0}
+      \bra{n}c(t)c^\dag\ket{n}\\\vbox to 18pt{}
+      &=&\displaystyle-i(1-e^{-\beta\omega_0})\sum_ne^{-\beta n\omega_0}
+      \bra{0}c(t)X(t)c^\dag X^\dag\ket{0}\\\vbox to 18pt{}
+      &=&\displaystyle-i(1-e^{-\beta\omega_0})\bra{0}c(t)c^\dag\ket{0}
+      \sum_ne^{-\beta n\omega_0}\bra{n}X(t)X^\dag\ket{n}.\\\vbox to 18pt{}
+  \end{array}
+\end{equation}
+According to Heisenberg equation of motion (with Hamiltonian
+$\bar{H}$), we have that
+\begin{equation}
+  \begin{array}{l}
+    c(t)=ce^{-i\varepsilon_pt},\quad c^\dag(t)=c^\dag e^{i\varepsilon_pt};\\
+    a(t)=ae^{-i\omega_0t},\quad a^\dag(t)=a^\dag e^{i\omega_0t},\\
+  \end{array}
+\end{equation}
+thus
+\begin{equation}
+  X(t)=e^{-\alpha^2}e^{-\alpha a^\dag e^{i\omega_0t}}e^{\alpha ae^{-i\omega_0t}}=
+  e^{-\alpha^2}e^{-\alpha a^\dag(t)}e^{\alpha a(t)}
+\end{equation}
+and
+\begin{equation}
+  X(t)X^\dag=e^{-\alpha^2}e^{-\alpha a^\dag(t)}e^{\alpha a(t)}
+  e^{\alpha a^\dag}e^{-\alpha a}.
+\end{equation}
+Now we write $e^{\alpha a(t)}e^{\alpha a^\dag}$ as\footnote{see Mahan's
+  Many-Particle Physics, page 222}
+\begin{equation}
+  e^{\alpha a(t)}e^{\alpha a^\dag}=e^{\alpha a^\dag}[e^{-\alpha
+      a^\dag}e^{\alpha a(t)}e^{\alpha a^\dag}],
+\end{equation}
+using Baker-Campbell-Hausdorff formula we get
+\begin{equation}
+  e^{-\alpha a^\dag}e^{\alpha a(t)}e^{\alpha a^\dag}=
+  e^{\alpha^2e^{-i\omega_0t}}e^{\alpha a(t)}.
+\end{equation}
+Finally the electron Green's function is arranged into the desired form:
+\begin{equation}
+  G(t)=-i(1-e^{-\beta\omega_0})e^{-\alpha^2(1-e^{-i\omega_0t})}
+  \bra{0}c(t)c^\dag\ket{0}\sum_ne^{-\beta n\omega_0}
+  \bra{n}e^{\alpha a^\dag(1-e^{i\omega_0t})}e^{-\alpha a(1-e^{-i\omega_0t})}\ket{n},
+\end{equation}
+again using Laguerre polynomials we can prove that
+\begin{equation}
+  (1-e^{-\beta\omega_0})\sum_ne^{-\beta n\omega_0}
+  \bra{n}e^{u^*a^\dag}e^{-u a}\ket{n}=e^{-|u|^2/(e^{\beta\omega_0}-1)},
+\end{equation}
+thus
+\begin{equation}
+  G(t)=-ie^{-i\varepsilon_pt}
+    \exp\Bigl[-\alpha^2[(N+1)(1-e^{-i\omega_0t})+N(1-e^{i\omega_0t})]\Bigr],
+\end{equation}
+where
+\begin{equation}
+  N=\frac{1}{e^{\beta\omega_0}-1}.
+\end{equation}
+Recall the generating function of Bessel functions of complex argument,
+\begin{equation}
+  e^{z\cos\theta}=\sum_{n=-\infty}^\infty I_n(z)e^{in\theta},
+\end{equation}
+let [note $(N+1)/N=e^{\beta\omega_0},\sqrt{(N+1)/N}=e^{\beta\omega_0/2}$]
+\begin{equation}
+  z=2\alpha^2\sqrt{N(N+1)},\quad \theta=\omega_0(t+i\beta/2)
+\end{equation}
+then (note that $I_{n}=I_{-n}$)
+\begin{equation}
+  G(t)=-ie^{-(2N+1)\alpha^2}e^{-i\varepsilon_pt}\sum_{n=-\infty}^\infty
+  e^{-in\omega_0t}e^{\beta n\omega_0/2}I_n\{2\alpha^2\sqrt{N(N+1)}\},
+\end{equation}
+in frequency space
+\begin{equation}
+  G(\omega)=e^{-(2N+1)\alpha^2}\sum_{n=-\infty}^{\infty}
+  e^{\beta n\omega_0/2}I_n\{2\alpha^2\sqrt{N(N+1)}\}
+  \frac{1}{\omega-n\omega_0-\varepsilon_p}.
+\end{equation}
+
+%%---------------------------------------------------------------------
+
+\section{The Impurity Analogy for A Single Electron}
+The Hamiltonian for impurity model is
+\begin{equation}
+  H_{\rm imp}=\sum_k\varepsilon_kc_k^\dag c_k+\sum_kV_k(c_k^\dag d+d^\dag c_k)
+  +\omega_0a^\dag a+gd^\dag d(a+a^\dag),
+\end{equation}
+here $V_k$ and $E_k$ is related to $G_0$ by
+\begin{equation}
+  G_0^{-1}(\omega)=\omega-\int_{-\infty}^\infty d\varepsilon
+  \frac{\Delta(\varepsilon)}{\omega-\varepsilon},
+\end{equation}
+where
+\begin{equation}
+  \Delta(\varepsilon)=\sum_kV_k^2\delta(\varepsilon-\varepsilon_k).
+\end{equation}
+
+Let us separate the Hamiltonian into two parts $H_0$ and $V$, where
+\begin{equation}
+  H_0=\sum_k\varepsilon_kc_k^\dag c_k+\sum_kV_k(c_k^\dag d+d^\dag c_k)
+  +\omega_0a^\dag a,\quad V=gd^\dag d(a+a^\dag).
+\end{equation}
+
+%%----------------------------------------------------------------------
+\subsection{The Zero Temperature Formalism}
+The Green's function for one electron at zero temperature is
+\begin{equation}
+  G(t)=-i\theta(t)\bra{0}d(t)d^\dag\ket{0},
+\end{equation}
+after Fourier transformation:
+\begin{equation}
+  G(\omega)=\bra{0}d\frac{1}{\omega+i0-H}d^\dag\ket{0}.
+\end{equation}
+  
+An operator identity holds:
+\begin{equation}
+  \frac{1}{\omega-H}=\frac{1}{\omega-H_0}+
+  \frac{1}{\omega-H_0}V\frac{1}{\omega-H}.
+\end{equation}
+
+To proceed further one needs to introduce the generalized matrix
+elements:
+\begin{equation}
+  G_{nm}=\bra{0}\frac{a^n}{\sqrt{n!}}d\frac{1}{\omega-H}
+  d^\dag\frac{(a^\dag)^m}{\sqrt{m!}}\ket{0},
+\end{equation}
+now introduce a set of zero electron $p$-phonon states and a set of
+one electron $p$-phonon states
+\begin{equation}
+  \ket{0,p}=\frac{(a^\dag)^p}{\sqrt{p!}}\ket{0},
+  \quad\ket{1,p}=\frac{(a^\dag)^p}{\sqrt{p!}}d^\dag\ket{0},
+\end{equation}
+one can write
+\begin{equation}
+  \begin{array}{rcl}
+    G_{nm}&=&\displaystyle\bra{0}\frac{a^n}{\sqrt{n!}}d
+    \frac{1}{\omega-H_0}d^\dag\frac{(a^\dag)^m}{\sqrt{m!}}\ket{0}+
+    \bra{0}\frac{a^n}{\sqrt{n!}}d\frac{1}{\omega-H_0}V
+    \frac{1}{\omega-H}d^\dag\frac{(a^\dag)^m}{\sqrt{m!}}\ket{0}\\\vbox to 20pt{}
+    &=&\displaystyle G^{(0)}_{nm}+
+    g\sum_{p_1,p_2}\bra{0}\frac{a^n}{\sqrt{n!}}d\frac{1}{\omega-H_0}d^\dag
+    \ket{0,p_1}\bra{0,p_1}d(a+a^\dag)\ket{1,p_2}\bra{0,p_2}d
+    \frac{1}{\omega-H}d^\dag\frac{(a^\dag)^m}{\sqrt{m!}}\ket{0}\\\vbox to 20pt{}
+    &=&\displaystyle G^{(0)}_{nm}+
+    g\sum_{p_1,p_2}G^{(0)}_{n,p_1}X_{p_1,p_2}G_{p_2,m}\\\vbox to 20pt{}
+    &=&\displaystyle G^{(0)}_{nn}\delta_{nm}+
+    g\sum_{p}G^{(0)}_{nn}X_{np}G_{pm}\quad,
+  \end{array}
+  \label{Polaron-Zero-Temperature-Element}
+\end{equation}
+where $G^{(0)}_{nn}(\omega)=G^{(0)}_{00}(\omega-n\omega_0)$ is the diagonal
+element of the free Green's function, $X_{np}$ are the phonon
+displacement matrix elements:
+\begin{equation}
+  X_{np}=\sqrt{p+1}\delta_{n,p+1}+\sqrt{p}\delta_{n,p-1}.
+\end{equation}
+
+Equation \eqref{Polaron-Zero-Temperature-Element} can be solved in
+matrix notation:
+\begin{equation}
+  G^{-1}=G_0^{-1}-gX,
+\end{equation}
+it is easy to that $G^{-1}$ is a tridiagonal matrix.
+
+Now define $T_k$ as the determinant of $G^{-1}$ with first $k$ rows
+and columns removed, using Cramer's rule we find that
+\begin{equation}
+  G_{00}=\frac{T_1}{T_0},
+\end{equation}
+and define $D_k$ as the determinant comprising the first $k+1$ rows and
+columns of $G^{-1}$ and $D_{-1}=1, D_{-2}=0$, then
+\begin{equation}
+  \begin{array}{l}
+    D_0=[G^{(0)}]^{-1}_{00},\\
+    D_1=[G^{(0)}]^{-1}_{11}[G^{(0)}]^{-1}_{00}-g^2
+    =[G^{(0)}]^{-1}_{11}D_0-g^2,\\
+    D_2=\cdots=[G^{(0)}]^{-1}_{2}D_1-2g^2D_0,\\
+  \end{array}
+\end{equation}
+and, for the general case, the recurrence relations
+\begin{equation}
+  D_{k}=[G^{(0)}]^{-1}_{k,k}D_{k-1}-kg^2D_{k-2}.
+\end{equation}
+What's more, we have that
+\begin{equation}
+  T_k=[G^{(0)}]^{-1}_{kk}T_{k+1}-(k+1)g^2T_{k+2},\quad{\rm or}\quad
+  \frac{T_k}{T_{k+1}}=[G^{(0)}]^{-1}_{kk}-(k+1)g^2\frac{T_{k+2}}{T_{k+1}},
+\end{equation}
+therefore
+\begin{equation}
+  \frac{T_1}{T_0}=\frac{1}{[G^{(0)}]^{-1}_{00}-g^2\frac{T_2}{T_1}}=\cdots,
+\end{equation}
+or
+\begin{equation}
+  G(\omega)=\frac{1}{\displaystyle G_0^{-1}(\omega)-
+    \frac{g^2}{\displaystyle G_0^{-1}(\omega-\omega_0)-
+      \frac{2g^2}{\displaystyle G_0^{-1}(\omega-2\omega_0)-
+        \frac{3g^2}{\displaystyle G_0^{-1}(\omega-3\omega_0)-\cdots.}}}}
+\end{equation}
+Now use Dyson equation $\Sigma=G_0^{-1}-G^{-1}$ and we shall get
+\begin{equation}
+  \Sigma(\omega)=\frac{g^2}{\displaystyle G_0^{-1}(\omega-\omega_0)-
+      \frac{2g^2}{\displaystyle G_0^{-1}(\omega-2\omega_0)-
+        \frac{3g^2}{\displaystyle G_0^{-1}(\omega-3\omega_0)-\cdots.}}}
+\end{equation}
+The self-energy can be defined recursively,
+\begin{equation}
+  \Sigma^{(p)}(\omega)=\frac{pg^2}{G_0^{-1}(\omega-p\omega_0)-
+    \Sigma^{(p+1)}}\quad.
+\end{equation}
+
+%%-----------------------------------------------------------------------
+\subsection{The Finite Temperature Formalism}
+At finite temperature, the trace performed over free phonon states gives
+\begin{equation}
+  G(\omega)=(1-e^{\beta\omega_0})\sum_ne^{-\beta n\omega_0}G_{nn}(\omega).
+\end{equation}
+Now we need to calculate $G_{nn}(\omega)$, according to $G^{-1}G=I$ we
+have such a recurrence relation (recall that $G^{-1}$ is a tridiagonal
+matrix):
+\begin{equation}
+  G_{nn}=G^{(0)}_n+gG^{(0)}_n(\sqrt{n}G_{n-1,n}+\sqrt{n+1}G_{n+1,n}),
+\end{equation}
+which we seek to write in a form as
+\begin{equation}
+    G_{nn}=G^{(0)}_n+G^{(0)}_n(AG_{nn}+BG_{nn}).
+\end{equation}
+
+Again according to Cramer's rule, 
+\begin{equation}
+  G_{n-1,n}=\sqrt{n}g\frac{D_{n-2}T_{n+1}}{T_0},\quad
+  G_{nn}=\frac{D_{n-1}T_{n+1}}{T_0},
+\end{equation}
+recall the recurrence relation for $D$:
+\begin{equation}
+  D_k=[G^{(0)}_k]^{-1}D_{k-1}-kg^2D_{k-2},
+\end{equation}
+or
+\begin{equation}
+  \frac{D_{k-1}}{D_k}=\frac{1}{\displaystyle[G^{(0)}_k]^{-1}-kg^2
+    \frac{D_{k-2}}{D_{k-1}}}\quad.
+\end{equation}
+Therefore 
+\begin{equation}
+  G_{n-1,n}=\sqrt{n}g\frac{D_{n-2}}{D_{n-1}}\frac{D_{n-1}T_{n+1}}{T_0}=
+  \sqrt{n}g\frac{D_{n-2}}{D_{n-1}}G_{nn},
+\end{equation}
+i.e.,
+\begin{equation}
+  A=ng^2\frac{D_{n-2}}{D_{n-1}}=
+  \frac{ng^2}{\displaystyle
+    [G^{(0)}_n(\omega+\omega_0)]^{-1}-\frac{(n-1)g^2}{\displaystyle
+      [G^{(0)}_n(\omega+2\omega_0)]^{-1}-\frac{(n-2)g^2}{\displaystyle
+        \ddots-\frac{g^2}{[G^{(0)}_n(\omega+n\omega_0)]^{-1}}}}}
+\end{equation}
+
+Similarly, 
+\begin{equation}
+  G_{n+1,n}=\sqrt{n+1}g\frac{D_{n-1}T_{n+2}}{T_0}
+  =\sqrt{n+1}g\frac{T_{n+2}}{T_{n+1}}G_{nn},
+\end{equation}
+recall the recurrence relation for $T$:
+\begin{equation}
+  T_k=[G^{(0)}_k]^{-1}T_{k+1}-(k+1)g^2T_{k+2},
+\end{equation}
+or
+\begin{equation}
+  \frac{T_{k+1}}{T_k}=\frac{1}{\displaystyle
+    [G^{(0)}_k]^{-1}-(k+1)g^2\frac{T_{k+2}}{T_{k+1}}}.
+\end{equation}
+Therefore 
+\begin{equation}
+  B=(n+1)g^2\frac{T_{n+2}}{T_{n+1}}=
+  \frac{(n+1)g^2}{\displaystyle
+    [G^{(0)}_n(\omega-\omega_0)]^{-1}-\frac{(n+2)g^2}{\displaystyle
+      [G^{(0)}_n(\omega-2\omega_0)]^{-1}-\frac{(n+3)g^2}{\displaystyle
+        [G^{(0)}_n(\omega-3\omega_0)]^{-1}-\cdots,}}}
+\end{equation}
+finally 
+\begin{equation}
+  G_{nn}=\frac{1}{[G^{(0)}_n]^{-1}-A-B}.
+\end{equation}
+%%------------------------------------------------------------------------
+
+\subsection{Dynamical Mean Field}
+If we want to apply dynamical mean field theory, then a self
+consistent condition is needed. Basically it is (see the solution for
+simple impurity model)
+\begin{equation}
+  G^{-1}(\omega)=\omega-\sum_{ij}t_{oi}t_{jo}G^{(o)}_{ij}(\omega),
+  \label{DMFT-self-consistent}
+\end{equation}
+where $G^{(o)}_{ij}$ is the Green's function with one site removed.
+For Bethe lattice, it is very simple, in this case it is restricted
+$i=j$, and in limit of infinite connectivity
+$G^{(o)}_{ii}=G_{ii}$. Therefore for Bethe lattice
+\begin{equation}
+  G^{-1}(\omega)=\omega-t^2G(\omega).
+\end{equation}
+For a general lattice, the relation between the cavity and full
+Green's functions reads
+\begin{equation}
+  G^{(o)}_{ij}=G_{ij}-\frac{G_{io}G_{oj}}{G_{oo}}.
+\end{equation}
+
+Therefore equation \eqref{DMFT-self-consistent} become
+\begin{equation}
+  G^{-1}=\omega-\sum_{ij}t_{oi}t_{jo}G_{ij}+
+  \frac{\left(\sum_iG_{oi}\right)^2}{G_{oo}},
+\end{equation}
+recall that 
+\begin{equation}
+  G(\omega,k)=\frac{1}{\omega-\varepsilon_k-\Sigma(\omega)},
+\end{equation}
+we have that
+\begin{equation}
+  G^{-1}=\omega-\int d\varepsilon
+  \frac{\rho(\varepsilon)\varepsilon^2}{\zeta-\varepsilon}
+  -\left.\left(\int d\varepsilon
+  \frac{\rho(\varepsilon)\varepsilon}{\zeta-\varepsilon}\right)^2\right/
+  \int d\varepsilon\frac{\rho(\varepsilon)}{\zeta-\varepsilon},
+\end{equation}
+where $\zeta=\omega-\Sigma(\omega)$. This can be simplified further
+using the following relations:
+\begin{equation}
+  \int d\varepsilon\frac{\rho(\varepsilon)\varepsilon^2}{\zeta-\varepsilon}
+  =\zeta\int d\varepsilon
+  \frac{\rho(\varepsilon)\varepsilon}{\zeta-\varepsilon},\quad
+  \int d\varepsilon\frac{\rho(\varepsilon)}{\zeta-\varepsilon}=
+  -1+\zeta\int d\varepsilon\frac{\rho(\varepsilon)}{\zeta-\varepsilon}.
+\end{equation}
+We have used $t_{oo}=\sum_kt_k=\int\rho(\varepsilon)\varepsilon=0$, finally
+\begin{equation}
+  G_0^{-1}=\Sigma+G^{-1}.
+\end{equation}
+\end{document}

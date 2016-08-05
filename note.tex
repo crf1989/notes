@@ -248,6 +248,14 @@ by the column vector $b$.
 %%-------------------------------------------------------------------------
 
 
+\section{Sherman-Morrison Formula}
+Suppose $A$ is an invertible square matrix and $u,v$ are column
+vectors. Suppose that $1+v^TA^{-1}u\ne0$, then the Sherman-Morrison formula
+states that
+\begin{equation}
+  (A+uv^T)^{-1}=A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}.
+\end{equation}
+Here $uv^T$ is the outer product of two vectors $u$ and $v$.
 \section{Simple Impurity Model at Zero Temperature}
 The Hamiltonian of simple impurity model is defined as
 \begin{equation}

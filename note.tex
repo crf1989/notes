@@ -872,7 +872,7 @@ $\omega\to\omega\mp i0$ in factors $e^{\pm i\omega t}$. Then
 \begin{equation}
   a_m=\frac{1}{2\hbar}x_{mn}e^{i\omega_{mn}t}\left[
     \frac{f_0e^{-i\omega t}}{\omega_{mn}-\omega-i0}+
-    \frac{f_0^*e^{i\omega t}}{\omega_{mn}+\omega+i0}\right].
+    \frac{f_0^*e^{i\omega t}}{\omega_{mn}+\omega-i0}\right].
 \end{equation}
 
 Accordingly,
@@ -888,9 +888,14 @@ Accordingly,
 \end{equation}
 it can be seen that
 \begin{equation}
-  \alpha(\omega)=\frac{1}{\hbar}\sum_m|x_{mn}|^2\left[
-  \frac{1}{\omega_{mn}-\omega-i0}+\frac{1}{\omega_{mn}+\omega+i0}
+  \begin{array}{rcl}
+    \alpha(\omega)&=&\displaystyle\frac{1}{\hbar}\sum_m|x_{mn}|^2\left[
+      \frac{1}{\omega_{mn}-\omega-i0}+\frac{1}{\omega_{mn}+\omega+i0}
+      \right]\\\vbox to 20pt{}
+    &=&\displaystyle\frac{1}{\hbar}\sum_m|x_{mn}|^2\left[
+      -\frac{1}{\omega_{nm}+\omega+i0}+\frac{1}{\omega_{mn}+\omega+i0}
       \right].
+  \end{array}
 \end{equation}
 This expression is the Fourier transform of the function
 \begin{equation}
@@ -901,6 +906,43 @@ thus the we have the final result
   \alpha(\omega)=\frac{i}{\hbar}\int_0^\infty e^{i\omega t}
   \average{x(t)x(0)-x(0)x(t)}dt.
 \end{equation}
+
+Similarly, if the generalized susceptibility of another physical
+quantity $y$ is needed, we can write
+\begin{equation}
+  \begin{array}{rcl}
+    \bar{y}&=&\displaystyle\int \Psi_n^*y\Psi_ndq\\\vbox to 20pt{}
+    &=&\displaystyle \sum_m(a_my_{nm}e^{i\omega_{nm}t}+
+    a^*_{m}y_{mn}e^{i\omega_{mn}t})\\\vbox to 20pt{}
+    &=&\displaystyle\frac{1}{2\hbar}\sum_m\left[
+      \frac{x_{mn}y_{nm}}{\omega_{mn}-\omega-i0}+
+      \frac{x_{nm}y_{mn}}{\omega_{mn}+\omega+i0}
+      \right]f_0e^{-i\omega t}+\hbox{c.c},
+  \end{array}
+\end{equation}
+therefore
+\begin{equation}
+  \begin{array}{rcl}
+    \alpha(\omega)&=&\displaystyle\frac{1}{\hbar}\sum_m\left[
+      \frac{x_{mn}y_{nm}}{\omega_{mn}-\omega-i0}+
+      \frac{x_{nm}y_{mn}}{\omega_{mn}+\omega+i0}
+      \right]\\\vbox to 20pt{}
+    &=&\displaystyle\frac{1}{\hbar}\sum_m\left[
+      -\frac{x_{mn}y_{nm}}{\omega_{nm}+\omega+i0}+
+      \frac{x_{nm}y_{mn}}{\omega_{mn}+\omega+i0}
+      \right].
+  \end{array}
+\end{equation}
+This expression is the Fourier transform of the function
+\begin{equation}
+  \alpha(t)=\frac{i}{\hbar}\theta(t)\average{y(t)x(0)-x(0)y(t)},
+\end{equation}
+i.e.,
+\begin{equation}
+  \alpha(\omega)=\frac{i}{\hbar}\int_0^\infty e^{i\omega
+    t}\average{y(t)x(0)-x(0)y(t)}dt.
+\end{equation}
+
 \chapter{Small Polaron}
 \section{Holstein Model}
 The Hamiltonian of Holstein Model is

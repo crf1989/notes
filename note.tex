@@ -23,7 +23,7 @@
 \tableofcontents
 
 \chapter{Useful formulas}
-\section{Guassian Integrals}
+\section{Gaussian Integrals}
 For a positive number $a$,
 \begin{equation}
   \int_{-\infty}^\infty dx e^{-ax^2}=\sqrt{\frac{\pi}{a}},\quad
@@ -51,6 +51,106 @@ For Grassmann variables integrals,
   =[\det H]e^{\sum_{ij}\xi_i^*H_{ij}\xi_j}\quad.
 \end{equation}
 %%------------------------------------------------------------------------
+
+\section{Gaussian Distribution}
+\subsection{Gaussian Distribution for One Variable}
+The Gaussian distribution for one variable can be written as
+\begin{equation}
+  w(x)=Ae^{-\frac{1}{2}\beta x^2}.
+\end{equation}
+The normalization constant $A$ is given by the condition $\int
+w(x)dx=1$, thus
+\begin{equation}
+  w(x)=\sqrt{\frac{\beta}{2\pi}}e^{-\frac{1}{2}\beta x^2}.
+\end{equation}
+The mean square fluctuation is
+\begin{equation}
+  \average{x^2}=\int_{-\infty}^\infty x^2w(x)dx=\frac{1}{\beta},
+\end{equation}
+thus we can write the Gaussian distribution in the form
+\begin{equation}
+  w(x)=\frac{1}{\sqrt{2\pi\average{x^2}}}\exp
+  \left(-\frac{x^2}{2\average{x^2}}\right).
+\end{equation}
+
+\subsection{Gaussian Distribution for More Than One Variable}
+The Gaussian distribution for more than one variable is
+\begin{equation}
+  w(x_1,\cdots,x_n)=Ae^{-\frac{1}{2}\beta_{ik}x_ix_k},
+\end{equation}
+where $\beta_{ik}=\beta_{ki}$ and normalization condition for $A$ is
+\begin{equation}
+  \int w\;dx_1\cdots dx_n=1.
+\end{equation}
+
+The linear transformation 
+\begin{equation}
+  x_i=a_{ik}x'_k
+\end{equation}
+of $x_1,\cdots,x_n$ converts the quadratic form $\beta_{ik}$ into a sum
+of squares $x'_ix'_i$. In order that
+\begin{equation}
+  \beta_{ik}x_ix_k=x'_ix'_i=x'_ix'_k\delta_{ik}
+\end{equation}
+should be valid, the transformation coefficients must satisfy the
+relations
+\begin{equation}
+  \beta_{ik}a_{il}a_{km}=\delta_{lm}.
+\end{equation}
+The determinant of the matrix on the left of this equation is the
+product of the determinant $\beta=|\beta_{ik}|$ and two determinants
+$a=|a_{ik}|$. The determinant $\delta_{ik}=1$. The above relation
+therefore shows that
+\begin{equation}
+  \beta a^2=1.
+\end{equation}
+
+The Jacobian of the linear transformation from the variables $x_i$ to
+$x'_i$ is the determinant $a$. After the transformation, therefore,
+the normalization integral separates into a product of $n$ identical
+integrals
+\begin{equation}
+  Aa\left[\int_{-\infty}^\infty\exp\left(-\frac{1}{2}x'^2\right)dx'\right]^n
+  =\frac{A}{\sqrt{\beta}}(2\pi)^{\frac{n}{2}}=1.
+\end{equation}
+Thus we obtain finally the Gaussian distribution for more than one
+variables in the form
+\begin{equation}
+  w=\frac{\sqrt{\beta}}{(2\pi)^{\frac{n}{2}}}\exp\left(
+  -\frac{1}{2}\beta_{ik}x_ix_k\right).
+\end{equation}
+
+Now let $S=-\frac{1}{2}\beta_{ik}x_ix_k$ and define the quantities
+\begin{equation}
+  X_i=-\frac{\partial S}{\partial x_i}=\beta_{ik}x_k,
+\end{equation}
+which we refer to as conjugate\footnote{when apply to thermodynamics
+  we call it thermodynamically conjugate.} to the $x_i$. From the definition 
+the mean value $\bar{x}_i$ is
+\begin{equation}
+  \bar{x}_i=\frac{\beta}{(2\pi)^{\frac{n}{2}}}\int\cdots\int
+  x_i\exp\left(-\frac{1}{2}\beta_{ik}(x_i-\bar{x}_i)
+  (x_k-\bar{x}_k)\right)dx_1\cdots dx_n,
+\end{equation}
+differentiating this equation with respect to $\bar{x}_k$ and then
+putting all $\bar{x}_i$ to zero, we have
+\begin{equation}
+  \average{x_iX_k}=\delta_{ik}.
+\end{equation}
+Since $X_k=\beta_{kl}x_l=x_l\beta_{lk}$, the above equation can be written as 
+$\average{x_ix_l}\beta_{lk}=\delta_{ik}$, whence 
+\begin{equation}
+  \average{x_ix_k}=\beta^{-1}_{ik}.
+\end{equation}
+Similarly,
+\begin{equation}
+  \average{X_iX_k}=\beta_{il}\average{x_lX_k}=\beta_{il}\delta_{lk},
+\end{equation}
+i.e.
+\begin{equation}
+  \average{X_iX_k}=\beta_{ik}.
+\end{equation}
+
 
 \section{Fourier Transform of Delta Function}
 The $\delta$ function can be expressed as

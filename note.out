@@ -25,13 +25,16 @@
 \BOOKMARK [1][-]{section.3.4}{The Fluctuation Dissipation Theorem}{chapter.3}% 25
 \BOOKMARK [1][-]{section.3.5}{Kubo Greenwood Formula}{chapter.3}% 26
 \BOOKMARK [1][-]{section.3.6}{Green Kubo Formula}{chapter.3}% 27
-\BOOKMARK [0][-]{chapter.4}{Small Polaron}{}% 28
-\BOOKMARK [1][-]{section.4.1}{Holstein Model}{chapter.4}% 29
-\BOOKMARK [1][-]{section.4.2}{Weak Coupling Limit}{chapter.4}% 30
-\BOOKMARK [1][-]{section.4.3}{Atomic Limit \(Zero Temperature\)}{chapter.4}% 31
-\BOOKMARK [1][-]{section.4.4}{Atomic Limit \(Finite Temperature\)}{chapter.4}% 32
-\BOOKMARK [1][-]{section.4.5}{The Impurity Analogy for A Single Electron}{chapter.4}% 33
-\BOOKMARK [2][-]{subsection.4.5.1}{The Zero Temperature Formalism}{section.4.5}% 34
-\BOOKMARK [2][-]{subsection.4.5.2}{The Finite Temperature Formalism}{section.4.5}% 35
-\BOOKMARK [2][-]{subsection.4.5.3}{Dynamical Mean Field}{section.4.5}% 36
-\BOOKMARK [0][-]{chapter.5}{Physical Constants}{}% 37
+\BOOKMARK [0][-]{chapter.4}{Fluctuations}{}% 28
+\BOOKMARK [1][-]{section.4.1}{Gaussian Distribution}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.2}{Fluctuations of The Fundamental Thermodynamic quantities}{chapter.4}% 30
+\BOOKMARK [0][-]{chapter.5}{Small Polaron}{}% 31
+\BOOKMARK [1][-]{section.5.1}{Holstein Model}{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.2}{Weak Coupling Limit}{chapter.5}% 33
+\BOOKMARK [1][-]{section.5.3}{Atomic Limit \(Zero Temperature\)}{chapter.5}% 34
+\BOOKMARK [1][-]{section.5.4}{Atomic Limit \(Finite Temperature\)}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.5}{The Impurity Analogy for A Single Electron}{chapter.5}% 36
+\BOOKMARK [2][-]{subsection.5.5.1}{The Zero Temperature Formalism}{section.5.5}% 37
+\BOOKMARK [2][-]{subsection.5.5.2}{The Finite Temperature Formalism}{section.5.5}% 38
+\BOOKMARK [2][-]{subsection.5.5.3}{Dynamical Mean Field}{section.5.5}% 39
+\BOOKMARK [0][-]{chapter.6}{Physical Constants}{}% 40

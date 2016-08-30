@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{enumerate}
+\usepackage{bm}
 
 \newcommand{\bra}[1]{{\langle#1|}}
 \newcommand{\ket}[1]{{|#1\rangle}}
@@ -1042,6 +1043,215 @@ i.e.,
   \alpha(\omega)=\frac{i}{\hbar}\int_0^\infty e^{i\omega
     t}\average{y(t)x(0)-x(0)y(t)}dt.
 \end{equation}
+
+
+
+\chapter{Fluctuations}
+\section{Gaussian Distribution}
+The probability for a quantity $x$ to have a value in the interval
+from $x$ to $x+dx$ is proportional to $e^{S(x)}$, where $S(x)$ is the
+entropy formally regarded as a function of the exact value of $x$, namely
+\begin{equation}
+  w(x)={\rm constant}\times e^{S(x)}.
+\end{equation}
+
+The entropy $S$ has a maximum for $x=\bar{x}=0$. Hence 
+$\partial S/\partial x=0$ and $\partial^2S/\partial x^2<0$ for $x=0$.
+Expanding $S(x)$ in powers of $x$ and retaining only terms of up to the 
+second order, we obtain
+\begin{equation}
+  S(x)=S(0)-\frac{1}{2}\beta x^2,
+\end{equation}
+where $\beta$ is a positive constant. Thus the probability distribution can be
+written in the form
+\begin{equation}
+  w(x)=Ae^{-\frac{1}{2}\beta x^2}=\sqrt{\frac{\beta}{2\pi}}
+  e^{-\frac{1}{2}\beta x^2}.
+\end{equation}
+The mean square fluctuation is 
+\begin{equation}
+  \average{x^2}=\int_{-\infty}^\infty x^2w(x)dx=\frac{1}{\beta}.
+\end{equation}
+
+In similar manner we can determine the probability of a simultaneous
+deviation of several thermodynamic quantities from their mean values.
+Let these deviations be denoted by $x_1,x_2,\cdots,x_n$. We define the
+entropy $S(x_1,\cdots,x_n)$ as a function of the quantities
+$x_1,\cdots,x_n$. Let $S$ be expanded in powers of the $x_i$, as far
+as the second order terms, the difference $S-S_0$ is a
+negative-definite quadratic form:
+\begin{equation}
+  S-S_0=-\frac{1}{2}\beta_{ik}x_ix_k,
+\end{equation}
+where $\beta_{ik}=\beta{ki}$. Thus the probability distribution can be
+written as
+\begin{equation}
+  w=Ae^{-\frac{1}{2}\beta_{ik}x_ix_k}=\frac{\sqrt{\beta}}{(2\pi)^{\frac{n}{2}}}
+    e^{-\frac{1}{2}\beta_{ik}x_ix_k},
+\end{equation}
+where $\beta$ is the determinant of $\beta_{ik}$.
+
+Let us define the quantities
+\begin{equation}
+  X_i=-\frac{\partial S}{\partial x_i}=\beta_{ik}x_k,
+\end{equation}
+which we refer as thermodynamically conjugate to the $x_i$. According to 
+Gaussian distribution properties, we find that
+\begin{equation}
+  \average{x_iX_k}=\delta_{ik},\quad\average{x_ix_k}=\beta^{-1}_{ik},\quad
+  \average{X_iX_k}=\beta_{ik}.
+\end{equation}
+
+\section{Fluctuations of The Fundamental Thermodynamic quantities}
+The probability $w$ of a fluctuations is proportional to $e^{S_t}$,
+where $S_t$ is the total entropy of a closed system. We can equally
+say that $w$ is proportional to $e^{\Delta S_t}$, where $\Delta S_t$
+is the change in entropy in the fluctuation. Thus
+\begin{equation}
+  w\propto\exp\left(-\frac{\Delta E-T\Delta S+P\Delta V}{T}\right),
+\end{equation}
+where $\Delta E,\Delta S, \Delta V$ are the changes in the energy,
+entropy and volume of the small part of the body in the fluctuation,
+and $T,P$ the temperature and pressure of the medium.
+
+Expanding $\Delta E$ in series, we obtain
+\begin{equation}
+  \Delta E-T\Delta S+P\Delta V=\frac{1}{2}\left[
+    \frac{\partial^2E}{\partial S^2}(\Delta S)^2+
+    2\frac{\partial^2E}{\partial S\partial V}\Delta S\Delta V+
+    \frac{\partial^2E}{\partial V^2}(\Delta V)^2\right].
+\end{equation}
+It is easily seen that this expression may be written as
+\begin{equation}
+  \frac{1}{2}\left[
+    \Delta S\Delta\left(\frac{\partial E}{\partial S}\right)_V+
+    \Delta V\Delta\left(\frac{\partial E}{\partial V}\right)_S\right]
+  =\frac{1}{2}(\Delta S\Delta T-\Delta P\Delta V).
+\end{equation}
+Thus we obtain the fluctuation probability in the form
+\begin{equation}
+  w\propto\exp\left(\frac{\Delta P\Delta V-\Delta T\Delta S}{2T}\right).
+\end{equation}
+From this general formula we can find the fluctuation of various
+thermodynamic quantities. Let us take $V$ and $T$ as independent
+variables, then
+\begin{equation}
+  \begin{array}{rcl}
+    \Delta S&=&\displaystyle\left(\frac{\partial S}{\partial T}\right)_V\Delta T
+    +\left(\frac{\partial S}{\partial V}\right)_T\Delta V=
+    \frac{C_V}{T}\Delta T+\left(\frac{\partial P}{\partial T}\right)_V\Delta V,
+    \\\vbox to 20pt{}
+    \Delta P&=&\displaystyle\left(\frac{\partial P}{\partial T}\right)_V
+    \Delta T+\left(\frac{\partial P}{\partial V}\right)_T\Delta V;
+  \end{array}
+\end{equation}
+therefore the distribution function becomes
+\begin{equation}
+  w\propto\exp\left[-\frac{C_V}{2T^2}(\Delta T)^2+\frac{1}{2T}
+    \left(\frac{\partial P}{\partial V}\right)_T(\Delta V)^2\right].
+\end{equation}
+Applying the general formula for the Gaussian distribution, we find
+the following expressions for the mean square fluctuations of temperature
+and volume:
+\begin{equation}
+  \average{\Delta T\Delta V}=0,\quad
+  \average{(\Delta T)^2}=\frac{T^2}{C_V},\quad
+  \average{(\Delta V)^2}=-T\left(\frac{\partial V}{\partial P}\right)_T.
+\end{equation}
+These quantities are positive by virtue of the thermodynamic inequalities 
+$C_V>0$ and $(\partial P/\partial V)_T<0$.
+
+Let us now take $P$ and $S$ as the independent variables, then
+\begin{equation}
+  \begin{array}{rcl}
+    \Delta V&=&\displaystyle\left(\frac{\partial V}{\partial P}\right)_S
+    \Delta P+\left(\frac{\partial V}{\partial S}\right)_P\Delta S=
+    \left(\frac{\partial V}{\partial P}\right)_S\Delta P+
+    \left(\frac{\partial T}{\partial P}\right)_S\Delta S;
+    \\\vbox to 20pt{}
+    \Delta T&=&\displaystyle\left(\frac{\partial T}{\partial S}\right)_P
+    \Delta S+\left(\frac{\partial T}{\partial P}\right)_S\Delta P=
+    \frac{T}{C_P}\Delta S+\left(\frac{\partial T}{\partial P}\right)_S
+    \Delta P.
+  \end{array}
+\end{equation}
+Therefore the distribution function becomes
+\begin{equation}
+  w\propto\exp\left[
+    \frac{1}{2T}\left(\frac{\partial V}{\partial P}\right)_S(\Delta P)^2-
+    \frac{1}{2C_P}(\Delta S)^2\right],
+\end{equation}
+and the mean square fluctuations are
+\begin{equation}
+  \average{\Delta S\Delta P}=0,\quad
+  \average{(\Delta S)^2}=C_P,\quad
+  \average{(\Delta P)^2}=-T\left(\frac{\partial P}{\partial V}\right)_S.
+\end{equation}
+
+Since $\average{(\Delta V)^2}=-T(\partial V/\partial P)_T$, dividing
+both sides by $N^2$ we find the volume fluctuation per particle:
+\begin{equation}
+  \average{(\Delta (V/N))^2}=-\frac{T}{N^2}\left(\frac{\partial
+    V}{\partial P}\right)_T.
+\end{equation}
+We can find the fluctuation of the number of particles in a fixed
+volume. Since $V$ is then constant, we must put
+$\Delta(V/N)=V\Delta(1/N)=-(V/N^2)\Delta N$, then
+\begin{equation}
+  \average{(\Delta N)^2}=-T\frac{N^2}{V^2}\left(\frac{\partial V}{\partial P}
+  \right)_T.
+\end{equation}
+Since $(\partial V\partial P)_T$ is regarded as taken with $N$ constant, we
+write
+\begin{equation}
+  -\frac{N^2}{V^2}\left(\frac{\partial V}{\partial P}\right)_{T,N}=
+  N\left(\frac{\partial}{\partial P}\frac{N}{V}\right).
+\end{equation}
+The function $N/V$ is a function of $P$ and $T$ only, and therefore does not
+matter whether $N/V$ is differentiated at constant $N$ or constant $V$, hence
+we can write
+\begin{equation}
+  N\left(\frac{\partial}{\partial P}\frac{N}{V}\right)_{T,N}=
+  \frac{N}{V}\left(\frac{\partial N}{\partial P}\right)_{T,V}=
+  \left(\frac{\partial N}{\partial P}\right)_{T,V}
+  \left(\frac{\partial P}{\partial\mu}\right)_{T,V}=
+  \left(\frac{\partial N}{\partial\mu}\right)_{T,V},
+\end{equation}
+where we have used the equation $N/V=(\partial P/\partial\mu)_{T,V}$,
+which follows from formula $d\Omega=-VdP=-SdT-Nd\mu$. Thus we have for
+the fluctuation of the number of particles the formula
+\begin{equation}
+  \average{(\Delta N)^2}=T\left(\frac{\partial N}{\partial \mu}\right)_{T,V}.
+\end{equation}
+For ideal gas, substituting $PV=NT$ gives
+\begin{equation}
+  \average{(\Delta N)^2}=N.
+\end{equation}
+
+Let us consider an assembly of $n_k$ particles in the $k$th quantum state, 
+then
+\begin{equation}
+  \average{(\Delta n_k)^2}=T\frac{\partial\bar{n}_k}{\partial\mu}.
+\end{equation}
+For a Fermi gas we must substitute
+\begin{equation}
+  \bar{n}_k=\frac{1}{e^{(\varepsilon_k-\mu)/T}+1},
+\end{equation}
+the differentiation gives
+\begin{equation}
+  \average{(\Delta n_k)^2}=\bar{n}_k(1-\bar{n}_k).
+\end{equation}
+Similarly, for a Bose gas
+\begin{equation}
+  \average{(\Delta n_k)^2}=\bar{n}_k(1+\bar{n}_k).
+\end{equation}
+For a Boltzmann gas the substitution $\bar{n}_k=e^{(\mu-\varepsilon_k)/T}$ gives
+\begin{equation}
+  \average{(\Delta n_k)^2}=\bar{n}_k,
+\end{equation}
+where $\bar{n}_k\ll1$.
+
+
 
 \chapter{Small Polaron}
 \section{Holstein Model}

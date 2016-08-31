@@ -28,6 +28,7 @@
 \contentsline {chapter}{\numberline {4}Fluctuations}{21}{chapter.4}
 \contentsline {section}{\numberline {4.1}Gaussian Distribution}{21}{section.4.1}
 \contentsline {section}{\numberline {4.2}Fluctuations of The Fundamental Thermodynamic quantities}{22}{section.4.2}
+\contentsline {section}{\numberline {4.3}Correlations of Fluctuations in Time}{23}{section.4.3}
 \contentsline {chapter}{\numberline {5}Small Polaron}{25}{chapter.5}
 \contentsline {section}{\numberline {5.1}Holstein Model}{25}{section.5.1}
 \contentsline {section}{\numberline {5.2}Weak Coupling Limit}{25}{section.5.2}

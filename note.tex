@@ -153,11 +153,25 @@ i.e.
 \end{equation}
 
 
-\section{Fourier Transform of Delta Function}
+\section{Delta Function}
+The $\delta$ function satisfies the following properties.
+\begin{equation}
+  \int\delta(x-a) f(x)=f(a).
+\end{equation}
+And $\delta$ function is an even function:
+\begin{equation}
+  \delta(-x)=\delta(x).
+\end{equation}
+For a non-zero scalar $\alpha$
+\begin{equation}
+  \delta(\alpha x)=\frac{\delta(x)}{|\alpha|}
+\end{equation}
 The $\delta$ function can be expressed as
 \begin{equation}
-  \delta(x-\alpha)=\frac{1}{2\pi}\int_{-\infty}^\infty e^{ip(x-\alpha)}dp.
+  \delta(x-\alpha)=\frac{1}{2\pi}\int_{-\infty}^\infty e^{ip(x-\alpha)}dp=
+  \frac{1}{2\pi}\int_{-\infty}^\infty e^{-ip(x-\alpha)}dp.
 \end{equation}
+
 \section{Euler Integral}
 \subsection{Euler Integral of The First Kind: Beta Function}
 Euler integral of the first kind: the Beta function:
@@ -1290,6 +1304,218 @@ $x$, keeping only the linear term:
   \frac{dx}{dt}=-\lambda x.
 \end{equation}
 
+Returning to fluctuations in an equilibrium system, let us define a
+quantity $\xi_x(t)$ as the mean value of $x$ at an instant $t>0$ with
+the condition that it had some given value $x$ at the prior instant
+$t=0$. Evidently the correlation function $\phi(t)$ may be written in 
+terms of $\xi_x(t)$ as
+\begin{equation}
+  \phi(t)=\average{x\xi_x(t)},
+\end{equation}
+where the averaging is only over the probabilities of the various
+values of $x$ at the initial instant $t=0$. For $\xi_x(t)$ is an
+averaged quantity, we must expect that
+\begin{equation}
+\frac{d\xi_x(t)}{dt}=-\lambda\xi_x(t),\quad t > 0
+\end{equation}
+is true even when $\xi_x(t)$ is not large. Since $\xi_x(0)=x$ by
+definition, we have that
+\begin{equation}
+  \xi_x(t)=xe^{-\lambda t},
+\end{equation}
+and finally we obtain a formula for the time correlation function
+\begin{equation}
+  \phi(t)=\average{x^2}e^{-\lambda t}.
+\end{equation}
+On the other hand, since $\phi(t)$ is an even function, we can write
+the final formula as
+\begin{equation}
+  \phi(t)=\average{x^2}e^{-\lambda |t|}=\frac{1}{\beta}e^{-\lambda|t|}.
+\end{equation}
+
+The above theory can be also be formulated in another way that may
+have certain advantages. The equation $\dot{x}=-\lambda x$ is valid
+only when $x$ is large compared with the mean fluctuation of $x$.  For
+arbitrary values of $x$, we write
+\begin{equation}
+  \label{eq:random-force}
+  \dot{x}=-\lambda x+y,
+\end{equation}
+where $y$ is the random force. The magnitude of the oscillations of
+$y$ does not change with time, when $x$ is large $y$ is relatively
+small and may be neglected. The correlation function of the random
+force, $\average{y(t)y(0)}$, must be specified in such a way as to
+lead the correct result for $\average{x(t)x(0)}$. To do so, we must 
+put 
+\begin{equation}
+  \average{y(t)y(0)}=2\lambda\average{x^2}\delta(t)=
+  \frac{2\lambda}{\beta}\delta(t).
+\end{equation}
+This is easily seen by writing the solution of equation
+\eqref{eq:random-force}
+\begin{equation}
+  x(t)=e^{-\lambda t}\int_{-\infty}^{t}y(\tau)e^{\lambda\tau}d\tau,
+\end{equation}
+and averaging the product $x(t)x(0)$ after expressing it as a
+double integral.
+
+If there are several quantities $x_1,\cdots,x_n$ simultaneously
+deviate from their equilibrium values. The correlation functions for
+the fluctuations of these quantities are defined (in the classical
+theory) as
+\begin{equation}
+  \phi_{ik}(t-t')=\average{x_i(t)x_k(t')}.
+\end{equation}
+By virtue of this definition, they have the obvious symmetry property
+\begin{equation}
+  \phi_{ik}(t)=\phi_{ki}(-t).
+\end{equation}
+Since there is also time reversal symmetry, there is
+\begin{equation}
+  \phi_{ik}(t)=\phi_{ik}(-t),
+\end{equation}
+combining these two symmetries we obtain that
+\begin{equation}
+  \phi_{ik}(t)=\phi_{ki}(t).
+\end{equation}
+
+The equations for $\dot{x}_i$ now become
+\begin{equation}
+  \dot{x}_i=-\lambda_{ik}x_k
+\end{equation}
+with constant coefficients $\lambda_{ik}$. We define the mean values
+$\xi_i(t)$ of the quantities $x_i$ at a time $t>0$ for given values of
+all the $x_1,\cdots,x_n$ at the earlier time $t=0$. These quantities
+satisfy the equation
+\begin{equation}
+  \dot{\xi_i}=-\lambda_{ik}\xi_k.
+\end{equation}
+Now the equation for correlation functions can be written as
+\begin{equation}
+  \frac{d\phi_{il}(t)}{dt}=\frac{d\average{\xi_l(t)x_i}}{dt}=
+    -\lambda_{ik}\phi_{kl}(t),
+\end{equation}
+with the initial conditions
+\begin{equation}
+  \phi_{ik}(0)=\average{x_ix_k}=\beta^{-1}_{ik}.
+\end{equation}
+
+\section{Onsager's Principle}
+Let us return to the macroscopic equations
+\begin{equation}
+  \dot{x}_i=-\lambda_{ik}x_k.
+\end{equation}
+These equations have a deep-lying internal symmetry, which becomes
+explicit only when the right-hand sides are expressed in terms of the 
+thermodynamically conjugate quantities
+\begin{equation}
+  X_i=-\frac{\partial S}{\partial x_i}=\beta_{ik}x_k,
+\end{equation}
+with $\beta_{ik}=\beta_{ki}$. 
+
+If we express the quantities $\dot{x}_i$ in terms of $X_i$, we obtain
+the relaxation equations in the form
+\begin{equation}
+  \dot{x}_i=-\gamma_{ik}X_k,
+\end{equation}
+where
+\begin{equation}
+  \gamma_{ik}=\lambda_{il}\beta^{-1}_{lk}
+\end{equation}
+are new constants called {\it kinetic coefficients}. We shall prove
+the {\it principle of the symmetry of the kinetic coefficients} or
+{\it Onsager's principle}, according to which 
+\begin{equation}
+  \gamma_{ik}=\gamma_{ki}.
+\end{equation}
+
+We define mean values $\xi_i(t)$ of the fluctuations quantities $x_i$,
+and mean values $\varXi_i(t)$ of the $X_i$, then
+\begin{equation}
+  \dot{\xi_i}=-\gamma_{ik}\varXi_k.\quad (t>0)
+\end{equation}
+We now make use of the symmetry $\phi_{ik}(t)=\phi_{ik}(-t)$, which
+may be written 
+\begin{equation}
+  \average{x_i(t)x_k(0)}=\average{x_i(0)x_k(t)},
+\end{equation}
+or, with $\xi_i(t)$
+\begin{equation}
+  \average{\xi_i(t)x_k}=\average{x_i\xi_k(t)}.
+\end{equation}
+Differentiate this equation with respect to $t$ and we obtain that
+\begin{equation}
+  \gamma_{il}\average{\varXi_l x_k}=\gamma_{kl}\average{x_i\varXi_l}.
+\end{equation}
+Putting $t=0$ in the above equation, we get
+\begin{equation}
+  \gamma_{il}\average{X_lx_k}=\gamma_{kl}\average{x_iX_l},
+\end{equation}
+since $\average{x_iX_k}=\average{X_kx_i}=\delta_{ik}$ the final result
+is arrived.
+
+It has been assumed in the derivation that the quantities $x_i$ and
+$x_k$ are unaffected by time reversal. The relation remains valid if
+both quantities change sign under time reversal. But if one of $x_i$
+and $x_k$ changes sign and the other remains unchanged\footnote{For instance, 
+one is the velocity $v=\dot{x}$ and the other is $x$.}, the principle
+of the symmetry of the kinetic coefficients is formulated as
+\begin{equation}
+  \gamma_{ik}=-\gamma_{ki}.
+\end{equation}
+
+Exactly similar results are valid for kinetic coefficients
+$\zeta_{ik}=\zeta_{ki}$ which appear in the relaxation equations when these are
+put in the form thermodynamically conjugate to equations:
+\begin{equation}
+  \dot{X}_i=-\zeta_{ik}x_k,\quad \zeta_{ik}=\beta_{ik}\lambda_{kl}.
+\end{equation}
+
+\section{Spectral Resolution of Fluctuations}
+The spectral resolution of a fluctuating quantity $x(t)$ is defined by
+the usual Fourier expansion formula:
+\begin{equation}
+  x_\omega=\int_{-\infty}^{\infty} x(t)e^{i\omega t}dt,
+\end{equation}
+and conversely 
+\begin{equation}
+  x(t)=\int_{-\infty}^{\infty}x_\omega e^{-i\omega t}\frac{d\omega}{2\pi}.
+\end{equation}
+And the spectral resolution of correlation function $\phi(t)$ is
+defined as
+\begin{equation}
+  \phi(t)=\int_{-\infty}^{\infty}(x^2)_\omega\frac{\omega}{2\pi},\quad
+  (x^2)_\omega=\int_{-\infty}^{\infty} \phi(t)e^{i\omega t}dt,
+\end{equation}
+and the spectral resolution of $\phi(t-t')$ is
+\begin{equation}
+  \phi(t-t')=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\average{x_{\omega}x_{\omega'}}
+  e^{-i(\omega t+\omega't')}\frac{d\omega d\omega'}{(2\pi)^2},
+\end{equation}
+comparing the above two equations we obtain that
+\begin{equation}
+  \average{x_{\omega}x_{\omega'}}=2\pi(x^2)_\omega\delta(\omega+\omega').
+\end{equation}
+For a quantum variable, the spectral density $(x^2)_\omega$ is defined by
+\begin{equation}
+  \frac{1}{2}\average{x_\omega x_{\omega'}+x_{\omega'}x_\omega}=
+  2\pi(x^2)_\omega\delta(\omega+\omega').
+\end{equation}
+
+Since $\phi(t)=(1/\beta)e^{-\lambda|t|}$, an integration of it would gives
+\begin{equation}
+  (x^2)_\omega=\frac{1}{\beta}\left[\frac{1}{\lambda-i\omega}+
+    \frac{1}{\lambda+i\omega}\right]=\frac{2\lambda}{\beta(\omega^2+\lambda^2)}.
+\end{equation}
+In terms of the random force $y(t)$, the equation is $\dot{x}=-\lambda
+x+y$. Multiplying by $e^{i\omega t}$ and integrating with respect to
+$t$ from $-\infty$ to $\infty$ (the term $\dot{x}e^{i\omega t}$ being
+integrated by parts), we obtain
+$(\lambda-i\omega)x_\omega=y_\omega$. Therefore
+\begin{equation}
+  2\pi(y^2)_\omega\delta(\omega+\omega')
+\end{equation}
+
 \chapter{Small Polaron}
 \section{Holstein Model}
 The Hamiltonian of Holstein Model is
@@ -1875,3 +2101,4 @@ We have used $t_{oo}=\sum_kt_k=\int\rho(\varepsilon)\varepsilon=0$, finally
   =\frac{J}{s\cdot A^2}$.
 \end{itemize}
 \end{document}
+

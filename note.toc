@@ -3,7 +3,7 @@
 \contentsline {section}{\numberline {1.2}Gaussian Distribution}{3}{section.1.2}
 \contentsline {subsection}{\numberline {1.2.1}Gaussian Distribution for One Variable}{3}{subsection.1.2.1}
 \contentsline {subsection}{\numberline {1.2.2}Gaussian Distribution for More Than One Variable}{4}{subsection.1.2.2}
-\contentsline {section}{\numberline {1.3}Fourier Transform of Delta Function}{5}{section.1.3}
+\contentsline {section}{\numberline {1.3}Delta Function}{5}{section.1.3}
 \contentsline {section}{\numberline {1.4}Euler Integral}{5}{section.1.4}
 \contentsline {subsection}{\numberline {1.4.1}Euler Integral of The First Kind: Beta Function}{5}{subsection.1.4.1}
 \contentsline {subsection}{\numberline {1.4.2}Euler Integral of The Second Kind: Gamma Function}{6}{subsection.1.4.2}
@@ -29,13 +29,15 @@
 \contentsline {section}{\numberline {4.1}Gaussian Distribution}{21}{section.4.1}
 \contentsline {section}{\numberline {4.2}Fluctuations of The Fundamental Thermodynamic quantities}{22}{section.4.2}
 \contentsline {section}{\numberline {4.3}Correlations of Fluctuations in Time}{23}{section.4.3}
-\contentsline {chapter}{\numberline {5}Small Polaron}{25}{chapter.5}
-\contentsline {section}{\numberline {5.1}Holstein Model}{25}{section.5.1}
-\contentsline {section}{\numberline {5.2}Weak Coupling Limit}{25}{section.5.2}
-\contentsline {section}{\numberline {5.3}Atomic Limit (Zero Temperature)}{26}{section.5.3}
-\contentsline {section}{\numberline {5.4}Atomic Limit (Finite Temperature)}{27}{section.5.4}
-\contentsline {section}{\numberline {5.5}The Impurity Analogy for A Single Electron}{29}{section.5.5}
-\contentsline {subsection}{\numberline {5.5.1}The Zero Temperature Formalism}{30}{subsection.5.5.1}
-\contentsline {subsection}{\numberline {5.5.2}The Finite Temperature Formalism}{31}{subsection.5.5.2}
-\contentsline {subsection}{\numberline {5.5.3}Dynamical Mean Field}{32}{subsection.5.5.3}
-\contentsline {chapter}{\numberline {6}Physical Constants}{35}{chapter.6}
+\contentsline {section}{\numberline {4.4}Onsager's Principle}{25}{section.4.4}
+\contentsline {section}{\numberline {4.5}Spectral Resolution of Fluctuations}{26}{section.4.5}
+\contentsline {chapter}{\numberline {5}Small Polaron}{29}{chapter.5}
+\contentsline {section}{\numberline {5.1}Holstein Model}{29}{section.5.1}
+\contentsline {section}{\numberline {5.2}Weak Coupling Limit}{29}{section.5.2}
+\contentsline {section}{\numberline {5.3}Atomic Limit (Zero Temperature)}{30}{section.5.3}
+\contentsline {section}{\numberline {5.4}Atomic Limit (Finite Temperature)}{31}{section.5.4}
+\contentsline {section}{\numberline {5.5}The Impurity Analogy for A Single Electron}{33}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}The Zero Temperature Formalism}{34}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}The Finite Temperature Formalism}{35}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.3}Dynamical Mean Field}{36}{subsection.5.5.3}
+\contentsline {chapter}{\numberline {6}Physical Constants}{39}{chapter.6}

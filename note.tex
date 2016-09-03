@@ -1501,6 +1501,8 @@ For a quantum variable, the spectral density $(x^2)_\omega$ is defined by
   \frac{1}{2}\average{x_\omega x_{\omega'}+x_{\omega'}x_\omega}=
   2\pi(x^2)_\omega\delta(\omega+\omega').
 \end{equation}
+The expression of $(x^2)_\omega$ of quantum variables can be found in
+fluctuation dissipation theorem.
 
 Since $\phi(t)=(1/\beta)e^{-\lambda|t|}$, an integration of it would gives
 \begin{equation}
@@ -1513,7 +1515,121 @@ $t$ from $-\infty$ to $\infty$ (the term $\dot{x}e^{i\omega t}$ being
 integrated by parts), we obtain
 $(\lambda-i\omega)x_\omega=y_\omega$. Therefore
 \begin{equation}
-  2\pi(y^2)_\omega\delta(\omega+\omega')
+  2\pi(y^2)_\omega\delta(\omega+\omega')=\average{y_\omega y_{\omega'}}=
+  (\lambda-i\omega)(\lambda-i\omega')\average{x_\omega x_{\omega'}}=
+  2\pi(\omega^2+\lambda^2)(x^2)_\omega\delta(\omega+\omega'),
+\end{equation}
+i.e.,
+\begin{equation}
+  (y^2)_\omega=(\omega^2+\lambda^2)(x^2)_\omega=\frac{2\lambda}{\beta}.
+\end{equation}
+
+The above expression can also be generalized to the simultaneous
+fluctuations of several thermodynamic variables. The components of
+their spectral resolution are
+\begin{equation}
+  (x_ix_k)_\omega=\int_{-\infty}^{\infty}\phi_{ik}(t)e^{i\omega t}dt\equiv
+  \int_{-\infty}^{\infty}\average{x_i(t)x_k(0)}e^{i\omega t}dt,
+\end{equation}
+and we have 
+\begin{equation}
+  \average{x_{i\omega}x_{k\omega'}}=2\pi(x_ix_k)_\omega\delta(\omega+\omega').
+\end{equation}
+A change in the sign of the time is equivalent to the change
+$\omega\to-\omega$ in the spectral resolution, which in tern implies
+taking the complex conjugate of $(x_ix_k)_\omega$. The symmetry
+$\phi_{ik}(t)=\phi_{ki}(-t)$ shows that
+\begin{equation}
+  (x_ix_k)_\omega=(x_kx_i)_{-\omega}=(x_kx_i)_\omega^*.
+\end{equation}
+The time reversal symmetry, $\phi_{ik}(t)=\phi_{ik}(-t)$ or
+$\phi_{ik}(t)=-\phi_{ik}(-t)$, is written in terms of the spectral
+resolution as
+\begin{equation}
+  (x_ix_k)_\omega=\pm(x_ix_k)_{-\omega}=\pm(x_ix_k)_\omega^*,
+\end{equation}
+where the $+$ and $-$ signs respectively relate to cases where $x_i$
+and $x_k$ behave similarly or differently under time reversal; in the
+former case, $(x_ix_k)_\omega$ is real and symmetrical in the suffixes
+$i$ and $k$, while in the latter case it is imaginary and
+antisymmetrical.
+
+The equation for $\phi_{ik}$ is 
+\begin{equation}
+  \frac{d\phi_{il}(t)}{dt}=-\lambda_{ik}\phi_{kl}(t),
+\end{equation}
+after the Fourier transform (integrate respect to $t$ from $0$ to
+$\infty$) it becomes
+\begin{equation}
+  -\phi_{il}(0)-i\omega(x_ix_l)^{(+)}_\omega=-\lambda_{ik}(x_kx_l)^{(+)}_\omega,
+\end{equation}
+with the notation
+\begin{equation}
+  (x_kx_l)^{(+)}_\omega=\int_0^\infty\phi_{il}(t)e^{i\omega t}dt.
+\end{equation}
+Since $\phi_{ik}(0)=\beta^{-1}_{ik}$, we obtain that
+\begin{equation}
+  (x_ix_k)_\omega=(x_ix_k)^{(+)}_\omega+(x_kx_i)_\omega^{(+)*}=
+  (\zeta-i\omega\beta)^{-1}_{ik}+(\zeta+i\omega\beta)^{-1}_{ki},
+\end{equation}
+where $\zeta_{ik}=\beta_{il}\lambda_{lk}$.
+
+If we use random force to formulate the theory, then 
+\begin{equation}
+  \dot{x}_i=-\lambda_{ik}x_k+y_i,
+\end{equation}
+after the Fourier transform, it becomes
+\begin{equation}
+  (\lambda_{ik}-i\omega\delta_{ik})x_{k\omega}=y_{i\omega}.
+\end{equation}
+Then finally we get the formula
+\begin{equation}
+  \begin{array}{rcl}
+  (y_iy_k)_\omega&=&(\lambda_{il}-i\omega\delta_{il})(x_lx_m)_\omega
+  (\lambda_{km}-i\omega\delta_{km})\\\vbox to 20pt{}
+  &=&\gamma_{ik}+\gamma_{ki},
+  \end{array}
+\end{equation}
+where $\gamma_{ik}=\lambda_{il}\beta^{-1}_{lk}.$
+\subsection{Fluctuation of a One Dimensional oscillator}
+As an example of the use of the above formula, let us consider
+fluctuations of a one dimensional oscillator. We write its Hamiltonian
+in the form $H=\frac{P^2}{2m}+\frac{1}{2}m\omega_0Q^2$. Then the distribution
+function for $Q$ is
+\begin{equation}
+  \sqrt{\frac{\beta}{2\pi}}e^{-\frac{1}{2}\beta x^2}=
+  \sqrt{\frac{m\omega_0^2}{2\pi T}}e^{-\frac{1}{2}\frac{m\omega_0^2Q^2}{T}},
+\end{equation}
+and the mean square fluctuation is
+\begin{equation}
+  \average{Q^2}=\frac{T}{m\omega_0^2}.
+\end{equation}
+
+The equation of motion of an oscillator with friction and random force are
+\begin{equation}
+  \dot{Q}=\frac{P}{m},\quad \dot{P}=-m\omega_0^2Q-\gamma\frac{P}{m}+y,
+\end{equation}
+represent the relations $\dot{x}_i=-\gamma_{ik}X_k$, so that
+\begin{equation}
+  \gamma_{11}=0,\quad \gamma_{12}=-\gamma_{21}=-T,\quad\gamma_{22}=\gamma T,
+\end{equation}
+note that $P$ is antisymmetrical under time reversal.  Therefore we
+can write the spectral density of the fluctuations of the random force
+\begin{equation}
+  (y^2)_\omega=\gamma_{22}+\gamma_{22}=2\gamma T.
+\end{equation}
+
+Because $P=m\dot{Q}$, we have that
+\begin{equation}
+  m\ddot{Q}+\gamma\dot{Q}+m\omega_0^2Q=y,
+\end{equation}
+after Fourier transform it becomes
+\begin{equation}
+  (-m\omega^2-i\omega\gamma+m\omega_0^2)Q_\omega=y_\omega,
+\end{equation}
+and hence finally 
+\begin{equation}
+  (Q^2)_\omega=\frac{2\gamma T}{m^2(\omega^2-\omega_0^2)+\omega^2\gamma^2}.
 \end{equation}
 
 \chapter{Small Polaron}

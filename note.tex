@@ -328,6 +328,32 @@ e^{\tau(A+B)}=e^{\tau A}T_\tau\exp\left[
 and evaluate the integral for $\tau=1$.
 %%---------------------------------------------------------------------------
 
+\section{Kubo Identity}
+The Kubo Identity states that
+\begin{equation}
+  [e^{-\beta H},A]=e^{-\beta H}\int_0^\beta 
+  e^{\lambda H}[A,H]e^{-\lambda H}d\lambda.
+\end{equation}
+To derive this relation, let us consider a quantity 
+\begin{equation}
+  S=e^{\lambda H}[A,e^{-\lambda H}]=e^{\lambda H}Ae^{-\lambda H}-A,
+\end{equation}
+differentiating it with respect to $\lambda$ yields
+\begin{equation}
+  \frac{dS}{d\lambda}=e^{\lambda H}[H,A]e^{-\lambda}.
+\end{equation}
+Therefore
+\begin{equation}
+  S(\beta)=S(0)+\int_0^\beta\frac{dS}{d\lambda}d\lambda=
+  \int_0^\beta e^{\lambda H}[H,A]e^{-\lambda H}d\lambda,
+\end{equation}
+and accordingly
+\begin{equation}
+  [e^{-\beta H},A]=-e^{-\beta H}S(\beta)=e^{-\beta H}\int_0^\beta 
+  e^{\lambda H}[A,H]e^{-\lambda H}d\lambda.
+\end{equation}
+
+
 \section{Laguerre Polynomials}
 The Laguerre polynomials are solution of Laguerre's equation:
 \begin{equation}
@@ -1050,15 +1076,51 @@ therefore
 \end{equation}
 This expression is the Fourier transform of the function
 \begin{equation}
-  \alpha(t)=\frac{i}{\hbar}\theta(t)\average{y(t)x(0)-x(0)y(t)},
+  \alpha(t)=\frac{i}{\hbar}\theta(t)\sum_m[y_{nm}(t)x_{mn}-x_{nm}y_{mn}(t)].
 \end{equation}
-i.e.,
+If the system in canonical distribution, then 
+\begin{equation}
+  \alpha(t)=\frac{i}{\hbar}\theta(t)\sum_{nm}\rho_n[y_{nm}(t)x_{mn}-x_{nm}y_{mn}(t)],
+\end{equation}
+or we can write in a more compact way
+\begin{equation}
+  \alpha(t)=\frac{i}{\hbar}\theta(t)\average{y(t)x(0)-x(0)y(t)}.
+\end{equation}
+Therefore
 \begin{equation}
   \alpha(\omega)=\frac{i}{\hbar}\int_0^\infty e^{i\omega
     t}\average{y(t)x(0)-x(0)y(t)}dt.
 \end{equation}
 
-
+With the aid of Kubo identity $\alpha(t)$ can be written in another
+form. Let $\rho=e^{-\beta H}/Z$, where $\beta=1/T$ and $Z$ is the
+partition function, then
+\begin{equation}
+  \begin{array}{rcl}
+    \alpha(t)&=&\displaystyle\frac{i}{\hbar}\theta(t)
+    \average{y(t)x(0)-x(0)y(t)}\\\vbox to 20pt{}
+    &=&\displaystyle\frac{i}{\hbar}\theta(t)
+    \Tr[\rho\,y(t)x(0)-\rho\,x(0)y(t)]\\\vbox to 20pt{}
+    &=&\displaystyle\frac{i}{\hbar}\theta(t)
+    \Tr \Bigl[y(t)[x(0)\,\rho-\rho\,x(0)]\Bigr].
+  \end{array}
+\end{equation}
+Substituting Kubo identity $[e^{-\beta H},x]=e^{-\beta H}\int_0^\beta
+e^{\lambda H}[x,H]e^{-\lambda H}d\lambda$ into the above formula we
+shall obtain that
+\begin{equation}
+  \begin{array}{rcl}
+    \alpha(t)&=&\displaystyle\frac{i}{\hbar}\theta(t)\Tr\Bigl[y(t)\rho
+    \int_0^\beta e^{\lambda H}[H,x(0)]e^{-\lambda H}d\lambda\Bigr]\\\vbox to 20pt{}
+    &=&\displaystyle\frac{i}{\hbar}\theta(t)\Tr\Bigl[\rho
+    \int_0^\beta e^{\lambda H}\dot{x}(0)e^{-\lambda H}y(t)d\lambda\Bigr]
+    \\\vbox to 20pt{}
+    &=&\displaystyle\frac{i}{\hbar}\theta(t)
+    \int_0^\beta\left\langle e^{\lambda H}\dot{x}(0)e^{-\lambda H}
+      y(t)\right\rangle d\lambda.
+  \end{array}
+\end{equation}
+  
 
 \chapter{Fluctuations}
 \section{Gaussian Distribution}

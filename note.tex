@@ -980,17 +980,19 @@ then the formula of $\Re\,\sigma$ become
     \Tr[v\Im\,G^R(E+\hbar\omega)v\Im\,G^R(E)].
   \end{array}
 \end{equation}
-For static conductivity, we have
+For static conductivity, we have (it must be emphasized that there is
+a extra factor 2 since there is no oscillation during the time
+average)
 \begin{equation}
   \lim_{\omega\to0}\Re\,\sigma(\omega)=
-  \frac{\hbar e^2}{\pi V}\int dE
+  \frac{2e^2\hbar}{\pi V}\int dE
   \left(-\frac{\partial f}{\partial E}\right)
   \sum_k|\bra{k}v\ket{k}|^2|\Im\,G^R(E,k)|^2,
 \end{equation}
 or in three dimension
 \begin{equation}
   \lim_{\omega\to0}\Re\,\sigma(\omega)=
-  \frac{\hbar e^2}{\pi}\int dE
+  \frac{2e^2\hbar}{\pi}\int dE
   \left(-\frac{\partial f}{\partial E}\right)
   \int \frac{d^3k}{(2\pi)^3}\; v^2(k)|\Im\,G^R(E,k)|^2.
 \end{equation}
@@ -1693,6 +1695,8 @@ and hence finally
 \begin{equation}
   (Q^2)_\omega=\frac{2\gamma T}{m^2(\omega^2-\omega_0^2)+\omega^2\gamma^2}.
 \end{equation}
+
+\section{Hydrodynamic Fluctuations}
 
 \chapter{Small Polaron}
 \section{Holstein Model}

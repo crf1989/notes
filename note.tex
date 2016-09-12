@@ -946,7 +946,7 @@ or
 
 Thus the dissipated term written in conductivity is just
 \begin{equation}
-  Q=\frac{1}{2}\Im\,\alpha(\omega)|A|^2=\frac{1}{2}\Re\,\sigma(\omega)\;|E|^2,
+  Q=\frac{1}{2}\omega\Im\,\alpha(\omega)|A|^2=\frac{1}{2}\Re\,\sigma(\omega)\;|E|^2,
 \end{equation}
 and
 \begin{equation}
@@ -969,7 +969,8 @@ Notice that
   \int dE\frac{f(E)-f(E+\hbar\omega)}{\hbar\omega}
   \delta(E-E_n)\delta(E_n+\hbar\omega-E_m),
 \end{equation}
-then the formula of $\Re\,\sigma$ become
+then the formula of $\Re\,\sigma$ become (recall that
+$\frac{1}{\pi}\Im G$ is the density of states)
 \begin{equation}
   \begin{array}{rcl}
     \Re\,\sigma(\omega)&=&\displaystyle\frac{\hbar\pi e^2}{V} \int
@@ -980,19 +981,17 @@ then the formula of $\Re\,\sigma$ become
     \Tr[v\Im\,G^R(E+\hbar\omega)v\Im\,G^R(E)].
   \end{array}
 \end{equation}
-For static conductivity, we have (it must be emphasized that there is
-a extra factor 2 since there is no oscillation during the time
-average)
+For static conductivity, we have 
 \begin{equation}
   \lim_{\omega\to0}\Re\,\sigma(\omega)=
-  \frac{2e^2\hbar}{\pi V}\int dE
+  \frac{e^2\hbar}{\pi V}\int dE
   \left(-\frac{\partial f}{\partial E}\right)
   \sum_k|\bra{k}v\ket{k}|^2|\Im\,G^R(E,k)|^2,
 \end{equation}
 or in three dimension
 \begin{equation}
   \lim_{\omega\to0}\Re\,\sigma(\omega)=
-  \frac{2e^2\hbar}{\pi}\int dE
+  \frac{e^2\hbar}{\pi}\int dE
   \left(-\frac{\partial f}{\partial E}\right)
   \int \frac{d^3k}{(2\pi)^3}\; v^2(k)|\Im\,G^R(E,k)|^2.
 \end{equation}
@@ -1560,13 +1559,6 @@ comparing the above two equations we obtain that
 \begin{equation}
   \average{x_{\omega}x_{\omega'}}=2\pi(x^2)_\omega\delta(\omega+\omega').
 \end{equation}
-For a quantum variable, the spectral density $(x^2)_\omega$ is defined by
-\begin{equation}
-  \frac{1}{2}\average{x_\omega x_{\omega'}+x_{\omega'}x_\omega}=
-  2\pi(x^2)_\omega\delta(\omega+\omega').
-\end{equation}
-The expression of $(x^2)_\omega$ of quantum variables can be found in
-fluctuation dissipation theorem.
 
 Since $\phi(t)=(1/\beta)e^{-\lambda|t|}$, an integration of it would gives
 \begin{equation}
@@ -1655,6 +1647,68 @@ Then finally we get the formula
   \end{array}
 \end{equation}
 where $\gamma_{ik}=\lambda_{il}\beta^{-1}_{lk}.$
+
+For a quantum variable, the spectral density $(x^2)_\omega$ is defined by
+\begin{equation}
+  \frac{1}{2}\average{x_\omega x_{\omega'}+x_{\omega'}x_\omega}=
+  2\pi(x^2)_\omega\delta(\omega+\omega').
+\end{equation}
+According to fluctuation dissipation theorem, 
+\begin{equation}
+  (x^2)_\omega=\hbar\Im\,\alpha(\omega)\coth\frac{\hbar\omega}{2T},
+\end{equation}
+and the mean square of the fluctuating quantity is given by the
+integration
+\begin{equation}
+  \average{x^2}=\frac{\hbar}{\pi}\int_0^\infty\Im\,\alpha(\omega)
+  \coth\frac{\hbar\omega}{2T}d\omega.
+\end{equation}
+
+At temperature $T\gg\hbar\omega$, we have
+$\coth(\hbar\omega/2T)\approx2T/\hbar\omega$, then
+\begin{equation}
+  (x^2)_\omega=(2T/\omega)\Im\alpha(\omega),
+\end{equation}
+and (using Kramers-Kronig relation here)
+\begin{equation}
+  \average{x^2}=\frac{2T}{\pi}\int_0^\infty
+  \frac{\Im\alpha(\omega)}{\omega}d\omega=
+  T\alpha(0).
+\end{equation}
+If the body is subject to the action of a static force $f$, there
+would be a displacement $\alpha(0)f=f/\beta T$ of $\hbar{x}$. The
+macroscopic equation of the relaxation then have the form 
+\begin{equation}
+  \dot{x}=-\lambda(x-f/\beta T).
+\end{equation}
+
+Now let $f$ is a time-dependent perturbation $f(t)$, then we obtain that
+\begin{equation}
+  -i\omega\alpha(\omega)f_0=\lambda\alpha(\omega)f_0+(\lambda/\beta T)f_0,
+\end{equation}
+whence 
+\begin{equation}
+  \alpha(\omega)=\frac{\lambda}{\beta T(\lambda-i\omega)}.
+\end{equation}
+Therefore $(x^2)_\omega$ becomes
+\begin{equation}
+  (x^2)_\omega=\frac{2\lambda}{\beta(\lambda^2+\omega^2)}
+  \frac{\hbar\omega}{2T}\coth\frac{\hbar\omega}{2T},
+\end{equation}
+this expression differs from the classical one by a extra factor
+$\frac{\hbar\omega}{2T}\coth\frac{\hbar\omega}{2T}$. 
+We can also formulate it with the random force $y=\lambda f/\beta T$, then 
+\begin{equation}
+  (y^2)_\omega=\frac{2\lambda}{\beta}\frac{\hbar\omega}{2T}
+  \coth\frac{\hbar\omega}{2T},
+\end{equation}
+which differs from the classical one by the same factor. For several
+thermodynamic quantities
+\begin{equation}
+  (y_iy_k)_\omega=(\gamma_{ik}+\gamma_{ki})\frac{\hbar\omega}{2T}
+  \coth\frac{\hbar\omega}{2T}.
+\end{equation}
+
 \subsection{Fluctuation of a One Dimensional oscillator}
 As an example of the use of the above formula, let us consider
 fluctuations of a one dimensional oscillator. We write its Hamiltonian
@@ -1696,7 +1750,67 @@ and hence finally
   (Q^2)_\omega=\frac{2\gamma T}{m^2(\omega^2-\omega_0^2)^2+\omega^2\gamma^2}.
 \end{equation}
 
-\section{Hydrodynamic Fluctuations}
+\section{Thermoelectric Fluctuations}
+A particle current can be induced by external electric field and
+temperature gradient, the formula is
+\begin{equation}
+  j=\sigma E-S\nabla T,
+\end{equation}
+where $S$ is the Seebeck coefficient (also known as the thermopower).
+
+Similarly, the formula for heat current is
+\begin{equation}
+  q-\mu j=\beta E-k\nabla T.
+\end{equation}
+
+An electric field does mechanical work on the current-carrying
+particles, the work done per unit time and volume is equal to the
+scalar product $j\cdot E$. This is ``Joule's law''. The evolution of
+heat results in an increase in the entropy of the body. When an amount
+of heat $dQ=j\cdot EdV$ is involved, the entropy increases by $dQ/T$.
+The rate of change of the total entropy is therefore
+\begin{equation}
+  \frac{ds}{dt}=\int\frac{j\cdot E}{T}dV.
+\end{equation}
+And the entropy change due to heat current is
+\begin{equation}
+  \frac{ds}{dt}=-\int\frac{\nabla(q-\mu j)}{T}dV=
+  -\int\frac{(q-\mu j)\cdot\nabla T}{T^2}dV.
+\end{equation}
+Therefore the total entropy change is
+\begin{equation}
+  \frac{ds}{dt}=\int\frac{j\cdot E}{T}dV-\int\frac{(q-\mu j)\nabla T}{T^2}dV.
+\end{equation}
+
+This formula can be derived in another way, writing the entropy change as
+$ds/dt=-\int\nabla q/TdV$ and put $\nabla j=0$ then we have
+\begin{equation}
+  \frac{\nabla q}{T}=\frac{1}{T}[\nabla(q-\mu j)+j\nabla\mu]=
+  \frac{1}{T}\nabla(q-\mu j)-\frac{j\cdot E}{T},
+\end{equation}
+finally the same formula is obtained.
+
+Let $\dot{x}_i$ be $j$ and $q-\mu j$, we find that $X_i$ are $-E/T$
+and $\nabla T/T^2$. Accordingly in the relations
+\begin{equation}
+  j=\sigma T\frac{E}{T}-ST^2\frac{\nabla T}{T^2},\quad
+  q-\mu j=\beta T\frac{E}{T}-kT^2\frac{\nabla T}{T^2}.
+\end{equation}
+Let us label $j$ as 1 and $q-\mu j$ as 2, then
+\begin{equation}
+  \gamma_{11}=\sigma T,\quad \gamma_{12}=-ST^2,\quad
+  \gamma_{21}=\beta T,\quad \gamma_{22}=-kT^2.
+\end{equation}
+According to Onsager's principle, $\gamma_{12}=\gamma_{21}$.  If we
+write the equation of motion in form of random force, 
+\begin{equation}
+  \dot{x}_a=-\sum_b\gamma_{ab}X_b+y_a,
+\end{equation}
+the coefficients $\gamma_{ab}$ is immediately given by
+\begin{equation}
+  \average{y_a(t_a)y_b(t_b)}=(\gamma_{ab}+\gamma_{ba})\delta(t_a-t_b),\quad
+  {\rm or}\quad(y_ay_b)_\omega=\gamma_{ab}+\gamma_{ba}.
+\end{equation}
 
 \chapter{Small Polaron}
 \section{Holstein Model}

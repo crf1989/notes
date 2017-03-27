@@ -1812,6 +1812,942 @@ the coefficients $\gamma_{ab}$ is immediately given by
   {\rm or}\quad(y_ay_b)_\omega=\gamma_{ab}+\gamma_{ba}.
 \end{equation}
 
+\chapter{Coherent Potential Approximation}
+Perfect lattice have been studied intensively by physicist since the
+beginning of quantum mechanics. The periodicity of the lattice allows
+us to use Bloch waves to describe the wave function of electrons in
+lattice. However, in real world the perfect lattice does not exist and
+there are always some kinds of disorders in lattice. Usually weak
+disorder limit is described by the scattering of Bloch waves by
+impurities, and Boltzmann transport equation is enough to handle
+it. But in strong disorder limit, the situation becomes much more
+complicated. In this chapter we shall briefly review methods to deal
+with disordered electronic systems in lattice.
+
+\section{The Hamiltonian for Disordered Electronic Systems}
+In lattice, we use an unified tight-binding Hamiltonian to describe
+the disorders:
+\begin{equation}
+  \label{eq:disordered-hamiltonian}
+  \hat{H}=\sum_{ij}W_{ij}\hat{c}^\dag_i\hat{c}_j
+  +\sum_{i}V_i\hat{c}^\dagger_i\hat{c}_i,
+\end{equation}
+where $\hat{c}_i^\dagger$ ($\hat{c}_i$) are creation (annihilation)
+operators of electron at site $i$, and $V_i$ is the on-site energy
+when there is an electron at site $i$. The quantity $W_{ij}$ describe
+the hopping energy for transition of an electron from site $j$ to site
+$i$, and hence $W_{ij}=0$ when $i=j$. It is clear that $V_i$ are
+diagonal elements of the Hamiltonian, while $W_{ij}$ are off diagonal
+elements. If the diagonal elements $V_i$ are random variables, then we
+call the system diagonal disorder system and the off diagonal elements
+$W_{ij}$ is still transitional invariance. On the contrary, if $V_i$
+is a position independent constant while $W_{ij}$ are random
+variables, such a system is called off diagonal disorder system.
+
+In this chapter we shall focus on the diagonal disorder systems. First
+we split the Hamiltonian as
+\begin{equation}
+  \hat{H}=\hat{H}_0+\hat{H}_1,
+\end{equation}
+where the off diagonal elements
+\begin{equation}
+  \hat{H}_0=\sum_{ij}W_{ij}\hat{c}^\dagger_i\hat{c}_j
+\end{equation}
+are the ordered terms in the Hamiltonian, while the diagonal elements
+\begin{equation}
+  \hat{H}_1=\sum_{i}V_{i}\hat{c}_i^\dagger\hat{c}_i
+\end{equation}
+are disordered terms. This corresponds to the random potential. Since
+the hopping terms $W_{ij}$ are ordered terms, $\hat{H}_0$ is just the
+usual Hamiltonian of tight binding model which can be diagonalized by
+Fourier transformation to $\bm{k}$-representation. Therefore sometimes
+$\hat{H}_0$ is also written as
+\begin{equation}
+  \hat{H}_0=\sum_{\bm{k}}\varepsilon_{\bm{k}}\hat{c}^\dagger_{\bm{k}}\hat{c}_{\bm{k}},
+\end{equation}
+where $\varepsilon_{\bm{k}}$ is dispersion relation of the energy
+band. 
+
+\subsection*{The Green's Function}
+The single particle Green's function in disordered system is defined
+as the retarded Green's function with respect to vacuum state 
+\begin{equation}
+  G_{ij}(t)=-\frac{i}{\hbar}\theta(t)
+  \bra{0}\hat{c}_i(t)\hat{c}^\dagger_j(0)+\hat{c}^\dagger_j(0)\hat{c}_i(t)\ket{0},
+\end{equation}
+where $\ket{0}$ is the vacuum state. Because the Green's function is
+defined with respect to vacuum state, it is clear that
+\begin{equation}
+  \bra{0}\hat{c}_j^\dagger(0)\hat{c}_i(t)\ket{0}=0.
+\end{equation}
+Therefore the Green's function reduces to
+\begin{equation}
+  G_{ij}(t)=-\frac{i}{\hbar}\bra{0}\hat{c}_i(t)\hat{c}^\dagger_j(0)\ket{0},
+  \quad t \ge 0.
+\end{equation}
+
+The physical meaning of the Green's function $G_{ij}(t)$ is clear: it
+creates an electron at site $j$ then annihilates an electron after
+time $t$ at site $i$, and gives the coefficient amplitude of an
+electron at site $i$. Thus the square modulus $|G_{ij}(t)|^2$ gives
+the probability of finding the electron at site $i$ at time $t$ with
+its initial position at site $j$ at time $0$. In other words, the
+Green's function acts as a propagator. 
+
+Now we move to the equation of motion of the Green's
+function. According to Heisenberg equation we have
+\begin{equation}
+  i\hbar\frac{d\hat{c}_i(t)}{dt}=[\hat{c}_i(t),\hat{H}],
+\end{equation}
+and substituting \eqref{eq:disordered-hamiltonian} in it and
+collaborating the commutation rule for fermions
+$\hat{c}_i\hat{c}_j^\dagger+\hat{c}_j^\dagger\hat{c}_i=\delta_{ij}$ we
+obtain
+\begin{equation}
+  i\hbar\frac{d\hat{c}_i(t)}{dt}=V_i\hat{c}_i(t)+\sum_{k}W_{ik}\hat{c}_k(t).
+\end{equation}
+Therefore the equation of motion of the Green's function is
+\begin{equation}
+  \begin{array}{rcl}
+    \displaystyle\frac{dG_{ij}(t)}{dt}&=&\displaystyle(-i/\hbar)^2
+    \bra{0}[\hat{c}_i(t),\hat{H}]\hat{c}_j^\dagger(0)\ket{0}
+    -\frac{i}{\hbar}\delta_{ij}(t)\\\vbox to 18pt{}
+    &=&\displaystyle(-i/\hbar)^2[\bra{0}V_i\hat{c}_i(t)\hat{c}_j^\dagger(0)\ket{0}
+    +\sum_{k}\bra{0}W_{ik}\hat{c}_k(t)c^\dagger_j(0)\ket{0}]-
+    \frac{i}{\hbar}\delta_{ij}(t),
+  \end{array}
+\end{equation}
+where the delta function $\delta_{ij}(t)$ comes from the discontinuity
+of the Green's function at time $t=0$, thus we have for $t\ge0$
+\begin{equation}
+  i\hbar\frac{dG_{ij}(t)}{dt}=V_iG_{ij}(t)+\sum_{k}W_{ik}G_{kj}(t)+\delta_{ij}(t).
+\end{equation}
+Apply Fourier transform on both sides we have the equation in energy
+representation as
+\begin{equation}
+  \label{eq:equation-motion}
+  EG_{ij}(E)=V_iG_{ij}(E)+\sum_kW_{ik}G_{kj}(E)+\delta_{ij},
+\end{equation}
+where, since $G_{ij}(t)=0$ when $t<0$,
+\begin{equation}
+  G_{ij}(E)=\int_{-\infty}^\infty G_{ij}(t)e^{\frac{i}{\hbar}Et}dt=
+  \int_0^\infty G_{ij}(t)e^{\frac{i}{\hbar}Et}dt,
+\end{equation}
+and the inverse Fourier transform is
+\begin{equation}
+  G_{ij}(t)=\int_{-\infty}^\infty G_{ij}(E)e^{-\frac{i}{\hbar}Et}\frac{dE}{2\pi\hbar}.
+\end{equation}
+The equation \eqref{eq:equation-motion} can be arranged as
+\begin{equation}
+  \label{eq:equation-motion-1}
+  \sum_k[(E-V_i)\delta_{ik}-W_{ik}]G_{kj}(E)=\delta_{ij}.
+\end{equation}
+Now use notation $\hat{G}$ to denote the matrix $G_{ij}(E)$, $\hat{W}$
+to denote the matrix $W_{ij}$ and $\hat{V}$ to denote the matrix
+$V_i\delta_{ij}$. And write the identity matrix as $\hat{I}$. Thus the
+Hamiltonian can be written as $\hat{H}=\hat{W}+\hat{V}$ and the
+equation \eqref{eq:equation-motion-1} can be written as
+\begin{equation}
+  \label{eq:equation-motion-2}
+  (E\hat{I}-\hat{V}-\hat{W})\hat{G}(E)=\hat{I}.
+\end{equation}
+Hence the formal solution for the Green's function is written as
+\begin{equation}
+  \label{eq:equation-motion-solution}
+  \hat{G}(E)=(E\hat{I}-\hat{H})^{-1}=(E\hat{I}-\hat{V}-\hat{W})^{-1}.
+\end{equation}
+Now define the unperturbed Green's function as
+\begin{equation}
+  \hat{G}_0(E)=(E\hat{I}-\hat{H}_0)^{-1}=(E\hat{I}-\hat{W})^{-1}, 
+\end{equation}
+then \eqref{eq:equation-motion-2} may be written 
+\begin{equation}
+  (\hat{G}_0^{-1}-\hat{V})\hat{G}=\hat{I},
+\end{equation}
+or
+\begin{equation}
+  \label{eq:disordered-dyson}
+  \hat{G}=\hat{G}_0+\hat{G}_0\hat{V}\hat{G}.
+\end{equation}
+This is the required equation of motion of the Green's function in
+energy representation and it is just the Dyson equation.
+
+\section{Average $T$-Matrix Approximation}
+Since the system is disordered, it is impossible to obtain the exact
+Green's function. However, the statistical properties of the system
+are related to the average of the disorders, thus the studies of the
+disordered system mainly focus on the average of the Green's function
+with respect to all possible realization of disorders. In this section
+we shall introduce a method called the average $T$-matrix
+approximation to calculate the average Green's function.
+
+Substituting \eqref{eq:disordered-dyson} into the right side of itself
+iteratively we obtain an infinite series expression for $\hat{G}$ that
+\begin{equation}
+  \label{eq:disordered-dyson-1}
+  \hat{G}=\hat{G}_0+\hat{G}_0\hat{V}\hat{G}_0+
+  \hat{G}_0\hat{V}\hat{G}_0\hat{V}\hat{G}_0+\cdots.
+\end{equation}
+Now define $T$-matrix as
+\begin{equation}
+  \hat{G}=\hat{G}_0+\hat{G}_0\hat{T}\hat{G}_0,
+\end{equation}
+and a comparison of this definition with \eqref{eq:disordered-dyson-1}
+just gives
+\begin{equation}
+  \label{eq:T-matrix}
+  \hat{T}=\hat{T}(E)=\hat{V}+\hat{V}\hat{G}_0\hat{V}+
+  \hat{V}\hat{G}_0\hat{V}\hat{G}_0\hat{V}+\cdots.
+\end{equation}
+This $T$-matrix is an infinite series and contains all the scattering
+of $\hat{G}_0$ caused by the off diagonal disorders $\hat{V}$.
+
+Since there is no disorder in $\hat{G}_0$, the average of $\hat{G}$
+can be expressed in terms of $T$-matrix as
+\begin{equation}
+  \label{eq:average-G-T}
+  \average{\hat{G}}=\hat{G}_0+\hat{G}_0\average{\hat{T}}\hat{G}_0.
+\end{equation}
+We can also define a matrix of self-energy for the average Green's
+function in the usual way as
+\begin{equation}
+  \hat{\Sigma}(E)=\hat{G}_0^{-1}-\average{\hat{G}}^{-1},
+\end{equation}
+or, in Dyson equation form, 
+\begin{equation}
+  \label{eq:average-G-Sigma}
+  \average{\hat{G}}=\hat{G}_0+\hat{G}_0\hat{\Sigma}\average{\hat{G}}=
+  \hat{G}_0+\average{\hat{G}}\hat{\Sigma}\hat{G}_0.
+\end{equation}
+A comparison of \eqref{eq:average-G-T} and \eqref{eq:average-G-Sigma}
+immediately gives the relation between the self-energy and $T$-matrix
+as
+\begin{equation}
+  \label{eq:average-sigma-T}
+  \hat{\Sigma}=\average{\hat{T}}(1+\hat{G}_0\average{\hat{T}})^{-1}=
+  (1+\average{\hat{T}}\hat{G}_0)^{-1}\average{\hat{T}}.
+\end{equation}
+This expression states that the self-energy of the average Green's
+function can be determined by the average $T$-matrix
+$\average{\hat{T}}$. However, single impurity scattering problem can
+be solved exactly, so here we shall introduce the single site
+$t$-matrix.
+
+To introduce $t$-matrix, we first split the random potential matrix
+$\hat{V}$ into
+\begin{equation}
+  \hat{V}=\sum_i\hat{V}_i,
+\end{equation}
+where $\hat{V}$ is a diagonal matrix while $\hat{V}_i$ is also a
+diagonal matrix but only at site $i$ it has value $V_i$. Explicitly,
+\begin{equation}
+  \hat{V}=\begin{pmatrix}
+    V_1&0&0&0&\cdots\\
+    0&V_2&0&0&\cdots\\
+    \vdots&0&\ddots&0&\vdots\\
+    \cdots&0&0&V_{n-1}&0\\
+    \cdots&0&0&0&V_{n}\\
+  \end{pmatrix},\qquad
+  \hat{V}_i=\begin{pmatrix}
+    0&0&0&0&\cdots\\
+    0&\ddots&0&0&\cdots\\
+    \vdots&0&V_i&0&\vdots\\
+    \cdots&0&0&\ddots&0\\
+    \cdots&0&0&0&0\\
+  \end{pmatrix}.
+\end{equation}
+The infinite series expression \eqref{eq:T-matrix} can be treated as
+the power expansions of
+\begin{equation}
+  \hat{T}=\hat{V}(1-\hat{G}_0\hat{V})^{-1},
+\end{equation}
+or we write this expression as
+\begin{equation}
+  \hat{T}(1-\hat{G}_0\hat{V})=\hat{V}.
+\end{equation}
+Therefore we obtain a self-consistently formula for $\hat{T}$ as
+\begin{equation}
+  \hat{T}=(1+\hat{T}\hat{G}_0)\hat{V}.
+\end{equation}
+Now write $\hat{T}=\sum_{i}\hat{T}_i$, where the matrix $\hat{T}_i$
+represents the contribution of site $i$ to $T$-matrix, and we have
+\begin{equation}
+  \sum_{i}\hat{T}_i=[1+(\sum_{i}\hat{T}_i)\hat{G}_0]\hat{V}=
+  \sum_{i}[1+(\sum_{j}\hat{T}_j)\hat{G}_0]\hat{V}_i,
+\end{equation}
+or, comparing the both sides the expression,
+\begin{equation}
+  \label{eq:T-matrix-i}
+  \hat{T}_i=[1+(\sum_j\hat{T}_j)\hat{G}_0]\hat{V}_i=
+  (\hat{V}_i+\hat{T}_i\hat{G}_0\hat{V}_i)+\sum_{j\ne i}\hat{T}_j\hat{G}_0\hat{V}_i.
+\end{equation}
+
+Now define the single site $t$-matrix at site $i$ as
+\begin{equation}
+  \hat{t}_i=\hat{V}_i(1-\hat{G}_0\hat{V}_i)^{-1}=
+  \hat{V}_i+\hat{V}_i\hat{G}_0\hat{V}_i+\hat{V}_i\hat{G}_0\hat{V}_i\hat{G}_0\hat{V}_i+\cdots.
+\end{equation}
+This $\hat{t}_i$ includes all the scattering processes caused by site
+$i$. If we are dealing with the single impurity scattering problem
+where the system has only one impurity, then this $\hat{t}_i$ is also
+the full $T$-matrix. This $\hat{t}_i$ is clear solvable, thus the
+single impurity scattering problem is also solvable. Write
+\eqref{eq:T-matrix-i} as
+\begin{equation}
+  \hat{T}_i(1-\hat{G}_0\hat{V}_i)=\hat{V}_i+\sum_{j\ne i}\hat{T}_j\hat{G}_0\hat{V}_i,
+\end{equation}
+and then we have
+\begin{equation}
+  \label{eq:T-matrix-Tt}
+  \begin{array}{rcl}
+    \hat{T}_i&=&\displaystyle\hat{V}_i(1-\hat{G}_0\hat{V}_i)
+    +\sum_{j\ne i}\hat{T}_j\hat{G}_0\hat{V}_i(1-\hat{G}_0\hat{V}_i)\\\vbox to 14pt{}
+    &=&\displaystyle\hat{t}_i+\sum_{j\ne i}\hat{T}_j\hat{G}_0\hat{t}_i.
+  \end{array}
+\end{equation}
+This is the formal solution of $\hat{T}_i$, and it not only includes
+the contribution from the scattering at site $i$ but also but the
+scattering effects from other sites. We also obtain an infinite series
+expression for $\hat{T}$ as
+\begin{equation}
+  \label{eq:T-matrix-t}
+  \hat{T}=\sum_{i}\hat{T}_i=\sum_i\hat{t}_i+\sum_i\sum_{j\ne i}\hat{t}_j\hat{G}_0\hat{t}_i
+  +\sum_i\sum_{j\ne i}\sum_{k\ne i,j}\hat{t}_k\hat{G}_0\hat{t}_j\hat{G}_0\hat{t}_i+\cdots.
+\end{equation}
+When calculating $\average{\hat{T}}$, infinite correlation terms of
+$t$-matrix, such as $\average{\hat{t}_j\hat{G}_0\hat{t}_i}$ and
+$\hat{t}_k\hat{G}_0\hat{t}_j\hat{G}_0\hat{t}_i$, are involved. In
+principle it is impossible to calculate all these terms, so we need
+some approximation. 
+
+The most common approximation is called the \textit{single site
+  approximation} which neglect the correlations between different
+site. Under such an approximation the average of \eqref{eq:T-matrix-t}
+can be written as
+\begin{equation}
+  \average{\hat{T}}=\sum_i\average{\hat{t}_i}+
+  \sum_i\sum_{j\ne i}\average{\hat{t}_j}\hat{G}_0\average{\hat{t}_i}
+  +\sum_i\sum_{j\ne i}\sum_{k\ne i,j}\average{\hat{t}_k}
+  \hat{G}_0\average{\hat{t}_j}\hat{G}_0\average{\hat{t}_i}+\cdots,
+\end{equation}
+and the average of \eqref{eq:T-matrix-Tt} can be written as
+\begin{equation}
+  \begin{array}{rcl}
+    \average{\hat{T}_i}&=&\displaystyle\average{\hat{t}_i}+\sum_{j\ne i}
+    \average{\hat{T}_j}\hat{G}_0\average{\hat{t}_i}\\\vbox to 14pt{}
+    &=&(1+\average{\hat{T}}\hat{G}_0)\average{\hat{t}_i}-
+    \average{\hat{T}_i}\hat{G}_0\average{\hat{t}_i},
+  \end{array}
+\end{equation} 
+or, moving the last term to the left side of the equation and then
+multiplying the inverse on both sides,
+\begin{equation}
+  \average{\hat{T}_i}=(1+\average{\hat{T}}\hat{G}_0)
+  \average{\hat{t}_i}(1+\hat{G}_0\average{\hat{t}_i})^{-1}.
+\end{equation}
+According to the above expression, we can also write 
+\begin{equation}
+  \label{eq:T-matrix-average}
+  \average{\hat{T}}=\sum_i\average{\hat{T}_i}=
+  (1+\average{\hat{T}}\hat{G}_0)\sum_i\average{\hat{t}_i}
+  (1+\hat{G}_0\average{\hat{t}_i})^{-1},
+\end{equation}
+and substituting in \eqref{eq:average-sigma-T} just gives the formula
+for self-energy under single site approximation as
+\begin{equation}
+  \label{eq:average-sigma-t}
+  \hat{\Sigma}=\sum_{i}\average{\hat{t}_i}(1+\hat{G}_0\average{\hat{t}_i})^{-1},
+\end{equation}
+and the corresponding average Green's function matrix
+\begin{equation}
+  \average{\hat{G}}=(\hat{G}_0^{-1}-\hat{\Sigma})^{-1}.
+\end{equation}
+
+\section{Average $T$-Matrix Approximation for Binary Alloy}
+Let us apply the average $T$-matrix approximation to a binary alloy
+$A_xB_{1-x}$, where $A$ and $B$ are two types of atoms in the alloy
+and $x$ is the concentration of atom $A$. In such a system, the random
+potential $V_i$ can only have two values $V_A$ and $V_B$, or
+explicitly, $V_i=V_A$ when site $i$ is occupied by atom $A$ while
+$V_i=V_B$ when site $i$ is occupied by atom $B$.
+
+It is clear that the only non zero element in $\hat{t}_i$ is
+\begin{equation}
+    \bra{i}\hat{t}_i\ket{i}=\bra{i}\hat{V}_i
+    (1-\hat{G}_0\hat{V}_i)^{-1}\ket{i}
+    =\frac{V_i}{1-\bra{i}\hat{G}_0\ket{i}V_i},
+\end{equation}
+where $V_i$ can be $V_A$ and $V_B$ depending on the atom at site
+$i$. Since the ordered Green's function $\bra{i}\hat{G}_0\ket{i}$ has
+transitional invariance, it is also the unperturbed Green's averaging
+over sites:
+\begin{equation}
+  \bra{i}\hat{G}_0\ket{i}=\frac{1}{N}\sum_i\bra{i}\hat{G}_0\ket{i},
+\end{equation}
+where $N$ is the number of sites.  Now denote this average by $F(E)$
+that $F(E)=\frac{1}{N}\sum_i\bra{i}\hat{G}_0(E)\ket{i}$. If
+$\hat{H}_0$ is written in $\bm{k}$-representation that
+$\hat{H}_0=\sum_{\bm{k}}\hat{c}_{\bm{k}}^\dagger\hat{c}_{\bm{k}}$,
+then we have
+\begin{equation}
+  F(E)=\frac{1}{N}\sum_{\bm{k}}(E-\varepsilon_{\bm{k}})^{-1}.
+\end{equation}
+Since the value of $V_i$ can only be $V_A$ and $V_B$, thus the mean
+value of $\bra{i}\hat{t}_i\ket{i}$ is just
+\begin{equation}
+  \overline{\bra{i}\hat{t}_i\ket{i}}=xt_A+(1-x)t_B,
+\end{equation}
+where
+\begin{equation}
+  t_A=\frac{V_A}{1-FV_A},\quad t_B=\frac{V_B}{1-FV_B}.
+\end{equation}
+According to \eqref{eq:average-sigma-t}, the self-energy is a diagonal
+matrix and its diagonal elements are all equal to 
+\begin{equation}
+  \label{eq:average-sigma}
+  \Sigma=\frac{[xt_A+(1-x)t_B]}{1+F(E)[xt_A+(1-x)t_B]}.
+\end{equation}
+Let $\hat{I}$ be the identity matrix, then we can write the
+self-energy matrix as
+\begin{equation}
+  \hat{\Sigma}=\Sigma\hat{I}.
+\end{equation}
+
+\subsection*{Defect of the Average $T$-Matrix Approximation}
+Using the single site approximation we can obtain the average
+self-energy and accordingly the average Green's function. However,
+there is a defect in this method that the calculation results depend
+on the reference crystal.
+
+To see this, let us first choose atom $B$ as reference crystal, thus
+the unperturbed Hamiltonian may be written
+\begin{equation}
+  \hat{H}_0=\sum_{\bm{k}}(\varepsilon_{\bm{k}}+V_B)\hat{c}_{\bm{k}}^\dagger\hat{c}_{\bm{k}},
+\end{equation}
+while the perturbation operator is
+\begin{equation}
+  \hat{H}_1=\sum_{i\in A}(V_A-V_B)\hat{c}_{\bm{k}}^\dagger\hat{c}_{\bm{k}},
+\end{equation}
+where the summation is over the sites occupied by atom $A$. In this
+case the scatterings occur at sites occupied by atom $A$, thus we have
+\begin{equation}
+  t_A=\frac{(V_A-V_B)}{1-F(E-V_B)(V_A-V_B)},\quad t_B=0,
+\end{equation}
+where the average Green's function $F$ is
+\begin{equation}
+  F(E-V_B)=\frac{1}{N}\sum_{\bm{k}}[(E-V_B)-\varepsilon_{\bm{k}}]^{-1}.
+\end{equation}
+Then according to \eqref{eq:average-sigma} the self-energy with atom
+$B$ as reference crystal is
+\begin{equation}
+  \Sigma_B=\frac{x(V_A-V_B)}{1-(1-x)F(E-V_B)(V_A-V_B)}.
+\end{equation}
+Similarly, if we choose atom $A$ as reference crystal, the unperturbed
+Hamiltonian would become
+\begin{equation}
+  \hat{H}_0=\sum_{\bm{k}}(\varepsilon_{\bm{k}}+V_A)\hat{c}_{\bm{k}}^\dagger\hat{c}_{\bm{k}},
+\end{equation}
+and accordingly
+\begin{equation}
+  t_A=0,\quad t_B=\frac{V_B-V_A}{1-F(E-V_A)(V_B-V_A)}.
+\end{equation}
+Hence the expression for the self-energy with atom $A$ as reference
+crystal is
+\begin{equation}
+  \Sigma_A=\frac{(1-x)(V_B-V_A)}{1-xF(E-V_A)(V_B-V_A)}.
+\end{equation}
+
+From the expression for $\Sigma_B$ and $\Sigma_A$ it is easy to see
+that they contradict each other, and
+\begin{equation}
+  \Sigma_A\sim 1-x,\quad \Sigma_B\sim x.
+\end{equation}
+Therefore $\Sigma_B\sim x$ only applicable to small $x$ region
+($x\ll1$) while $\Sigma_A\sim 1-x$ is only applicable for $x\to1$
+region and neither of these two reference crystal alone can describe
+the properties of the system for all $0\le x\le1$. In practice, we
+need to choose a proper reference crystal first to apply the average
+$T$-matrix approximation.
+
+\subsection*{Virtual Crystal Approximation}
+Sometimes we can choose a virtual crystal as the reference crystal,
+which means that we define a new potential as
+\begin{equation}
+  \overline{V}=\average{V_i}=xV_A+(1-x)V_B,
+\end{equation}
+and choose a virtual lattice with this potential as the reference
+crystal. This is called the \textit{Virtual Crystal
+  Approximation}. Hence the unperturbed Hamiltonian become
+\begin{equation}
+  \hat{H}_0=\sum_{\bm{k}}(\varepsilon_{\bm{k}}+\overline{V})
+  \hat{c}_{\bm{k}}^\dagger\hat{c}_{\bm{k}},
+\end{equation}
+and accordingly we have
+\begin{equation}
+  t_A=\frac{V_A-\overline{V}}{1-F(E-\overline{V})(V_A-\overline{V})},\quad
+  t_B=\frac{V_B-\overline{V}}{1-F(E-\overline{V})(V_B-\overline{V})}.
+\end{equation}
+According to the above expressions we can write
+\begin{equation}
+  \begin{array}{rcl}
+    xt_A+(1-x)t_B&=&\displaystyle x(1-x)(V_A-V_B)\left[\frac{1}{1-F(E-\overline{V})(V_A-V_B)}
+      -\frac{1}{1+F(E+\overline{V})(V_A-V_B)}\right]\\\vbox to 18pt{}
+    &\approx&x(1-x)F(E-\overline{V})(V_A-V_B)^2,
+  \end{array}
+\end{equation}
+and retaining the self-energy with virtual crystal approximation
+$\Sigma_{\rm VCA}$ up to second order of powers of $V_A-V_B$ gives
+\begin{equation}
+  \Sigma_{\rm VCA}(E)\approx x(1-x)(V_A-V_B)^2F(E-\overline{V}).
+\end{equation}
+Since the Green's function defined in average $T$-matrix approximation
+is the retarded Green's function, we need to add an imaginary
+infinitesimal $i0$ to the energy $E$, so that
+\begin{equation}
+  \Sigma_{\rm VCA}(E+i0)\approx x(1-x)(V_A-V_B)^2 F(E+i0-\overline{V}),
+\end{equation}
+and imaginary part of the self-energy is
+\begin{equation}
+  \Im\,\Sigma_{\rm VCA}(E+i0)\approx x(1-x)(V_A-V_B)^2\Im\, F(E+i0-\overline{V}).
+\end{equation}
+The imaginary part of the retarded Green's function $F$ is
+proportional to the density of states and is negative, thus
+\begin{equation}
+  \Im\,\Sigma_{\rm VCA}(E+i0)\sim -x(1-x)(V_A-V_B)^2.
+\end{equation}
+As we know from Drude theory, 
+\begin{equation}
+  \Im\,\Sigma_{\rm VCA}(E+i0)=-\frac{\hbar}{2\tau(E)},
+\end{equation}
+where $\tau$ is the relaxation time. Since the electrical conductivity
+$\sigma$ is proportional to the relaxation time so that
+\begin{equation}
+  \sigma\propto -\frac{1}{\Im\,\Sigma_{\rm VCA}},
+\end{equation}
+or
+\begin{equation}
+  \sigma\propto \frac{1}{x(1-x)}.
+\end{equation}
+Therefore the resistivity $1/\sigma$ is proportional to $x(1-x)$, and
+this is just the \textit{Nordheim's rule}. 
+
+\section{Coherent Potential Approximation}
+
+According to the discussion in last section we find that the
+calculation of the average $T$-matrix approximation is heavily
+dependent on the choice of reference crystal, this makes it hard to
+control the results. The \textit{coherent potential approximation}
+avoids such problems by using self consistent procedures to produce an
+effective lattice. The basic ideas of the coherent potential
+approximation was proposed by Paul Soven and David Taylor in
+1967. However, the essential idea can be even dated back to James
+Maxwell in his effective medium approximation.
+
+Note that although the Green's function $\hat{G}$ is disordered, the
+average Green's function $\average{\hat{G}}$ is ordered and
+transitional invariant. Thus we try to use an uniform effective medium
+to replace all the scattering effects caused by disorders. Let
+$\Sigma(E)$ denote the uniform potential of the effective medium. It
+should be noted that this uniform potential of the virtual effective
+medium is energy dependent. Thus the effective Hamiltonian may be
+written as
+\begin{equation}
+  \hat{H}_e=\sum_{\bm{k}}[\varepsilon_{\bm{k}}+\Sigma(E)]
+  \hat{c}^\dagger_{\bm{k}}\hat{c}_{\bm{k}},
+\end{equation}
+and accordingly the average effective Green's function is
+\begin{equation}
+  \label{eq:effective-Green-function}
+  G_e(E)\equiv\frac{1}{N}\sum_{\bm{k}}[E-\varepsilon_{\bm{k}}-\Sigma(E)]^{-1}.
+\end{equation}
+It is seen that the effective potential $\Sigma(E)$ acts as an energy
+dependent self-energy. Such a self-energy neglects all $\bm{k}$
+dependence and thus is a local self-energy. This is the approximation
+made in this method.
+
+Now the question becomes how to choose the effective medium so that
+the effective Green's function $G_e$ can represent the average
+Green's function 
+\begin{equation}
+  \average{G}=\frac{1}{N}\Tr\,\hat{G}.
+\end{equation}
+According to \eqref{eq:T-matrix-average} the $T$-matrix for the
+effective Hamiltonian can be written as
+\begin{equation}
+  \average{\hat{T}}=\sum_i\average{\hat{T}_i}=
+  (1+\average{\hat{T}}\hat{G}_e)\sum_i\average{\hat{t}_i}
+  (1+\hat{G}_e\average{\hat{t}_i})^{-1}.
+\end{equation}
+In principle, when this average $T$-matrix equal to zero, all the
+scattering effects are absorbed into the effective self-energy
+$\Sigma(E)$. In this case we can use the average effective Green's
+function $G_e$ to replace $\average{G}$. To make $\average{T}=0$ it is
+sufficient to require the average $t$-matrix equal to zero that
+\begin{equation}
+  \label{eq:CPA-condition}
+  \average{t_i}=\left\langle\frac{V_i-\Sigma}{1-(V_i-\Sigma)G_e}\right\rangle=0.
+\end{equation}
+This condition can be expressed in a more useful form. Let us write it as
+\begin{equation}
+  \left\langle\frac{1}{G_e}\left[1-\frac{1}{1-(V_i-\Sigma)G_e}\right]\right\rangle=0,
+\end{equation}
+which means 
+\begin{equation}
+  \label{eq:CPA-condition-1}
+  \left\langle\frac{1}{1-(V_i-\Sigma)G_e}\right\rangle=1.
+\end{equation}
+From \eqref{eq:CPA-condition-1} it can be seen that the condition
+\eqref{eq:CPA-condition} can be rewritten as
+\begin{equation}
+  \left\langle\frac{V_i}{1-(V_i-\Sigma)G_e}\right\rangle=
+  \left\langle\frac{\Sigma}{1-(V_i-\Sigma)G_e}\right\rangle,
+\end{equation}
+and since $\Sigma$ is a constant for specific $E$, we finally have
+\begin{equation}
+  \label{eq:CPA-condition-2}
+  \left\langle\frac{V_i}{1-(V_i-\Sigma)G_e}\right\rangle=\Sigma.
+\end{equation}
+This expression is just the self consistent condition which is needed
+when determining the effective potential (self-energy for effective
+Green's function) $\Sigma$.
+
+Here we list the basic procedures of the coherent potential
+approximation:
+\begin{enumerate}[1.]\setlength{\itemsep}{0pt}
+\item choose an initial self-energy $\Sigma(E)$ for specific $E$;
+\item use \eqref{eq:effective-Green-function} to calculate the
+  average effective Green's function $G_e$;
+
+  It should be noted here that \eqref{eq:effective-Green-function} is
+  not practical in real calculation, and usually another form of this
+  formula is used that
+  \begin{equation}
+    \label{eq:effective-Green-function-DOS}
+    G_e=\int\frac{\rho_0(\varepsilon)}{E-\varepsilon-\Sigma}d\varepsilon,
+  \end{equation}
+  where $\rho_0(\varepsilon)$ is the density of states of unperturbed
+  Hamiltonian. The above formula is essentially equivalent to
+  \eqref{eq:effective-Green-function} but it is more practical since
+  the density of states can be calculated via other methods, for
+  instance, for the cubic lattice there is analytic formulas for its
+  density of states.
+\item use \eqref{eq:CPA-condition-2} to calculate a new self-energy
+  $\Sigma(E)$;
+\item compare the new self-energy with the old self-energy, if they
+  are close enough then finish the self consistent procedures,
+  otherwise go to step 2 again.
+\end{enumerate}
+
+The self-energy is determined self consistently, thus the difficulty
+of choosing a proper reference lattice in the average $T$-matrix
+approximation is avoided. The self-energy $\Sigma(E)$ obtained in this
+way is usually a complex number, and according the discussion in Drude
+theory its imaginary part is related to the relaxation time. Therefore
+we can use Drude formula to calculate the conductivity. We can also
+use this self-energy to apply Kubo-Greenwood formula with the Green's
+function in $\bm{k}$-representation
+\begin{equation}
+  G_e(E,\bm{k})=\frac{1}{E-\varepsilon_{\bm{k}}-\Sigma(E)}.
+\end{equation}
+
+\subsection*{Coherent Potential Approximation for Binary Alloy}
+Here we shall use a cubic binary alloy $A_xB_{1-x}$ as an example. The
+Hamiltonian is 
+\begin{equation}
+  \hat{H}=W\!\!\sum_{\average{ij}}\hat{c}_i^\dagger\hat{c}_j+\sum_iV_i\hat{c}_i^\dagger\hat{c}_i,
+\end{equation}
+where the symbol $\average{}$ indicates that summation is over the
+nearest neighbors and $W$ is the hopping energy among nearest
+neighbors. And for potential $V_i$ we have
+\begin{equation}
+  V_i=\left\{\begin{array}{ll}
+      V_A & i\in A;\\
+      V_B & i\in B,\\
+    \end{array}\right.
+\end{equation}
+where $i\in A$ means that site $i$ is occupied by atom $A$ and similar
+rule is for atom $B$.
+
+In a binary alloy $A_xB_{1-x}$ the self consistent condition
+\eqref{eq:CPA-condition-2} becomes simply
+\begin{equation}
+  \Sigma=\frac{xV_A}{1-(V_A-\Sigma)G_e}+\frac{(1-x)V_B}{1-(V_B-\Sigma)G_e}.
+\end{equation}
+To apply formula \eqref{eq:effective-Green-function-DOS} we need the
+density of states of cubic lattice. 
+
+{\Huge \textcolor{red}{here should be numerical results}}
+
+
+\section{Anderson Localization}
+A lattice with perfect periodicity is transitional invariant, and the
+wave function of an electron in it can be represented by Bloch
+functions in $\bm{k}$-representation that
+\begin{equation}
+  \psi_{\bm{k}}(\bm{r})=u_{\bm{k}}(\bm{r})e^{i\bm{k}\cdot\bm{r}},
+\end{equation}
+where $u_{\bm{k}}$ is a periodic function. Such a wave function is
+like the plane wave and extended in the whole space, thus the states
+represented by Bloch waves are called \textit{extended states}. On the
+contrary, there also exist some states that the electron is not
+extended, i.e., localized in some regions. For example, the wave
+function of an electron in high barrier is exponential decay like
+\begin{equation}
+  \psi(\bm{r})=\sim e^{-|\bm{r}|/l_0},
+\end{equation}
+where $l_0$ is a positive constant. Clearly that the electron states
+represented by such kind of wave functions are not extended. And these
+states, which are different from extended states, are called
+\textit{localized states}. The electrons in localized states have
+little contributions to electrical conductivity.
+
+The classical theories, such as Boltzmann equation, treat the
+disorders in the lattice as scattering sources and formulate the
+impurity scattering theory. The $T$-matrix formalism and coherent
+potential approximation basically do the same thing. In such
+theoretical frame, the disorders scatter Bloch electron and decrease
+the relaxation time, and thus decrease the electrical
+conductivity. The conductivity in this frame can never reach zero
+unless the scattering strength is infinite large. However, Philip
+Anderson pointed out that even the scattering strength is finite, the
+randomness of the system may also cause localization states in 1957.
+
+\subsection*{Anderson Disorder Model}
+Anderson use the tight-binding Hamiltonian with disorders to describe
+a diagonal disordered system, which is now called \textit{Anderson
+  disorder model}. The Hamiltonian for Anderson disordered model has
+the same form with \eqref{eq:disordered-hamiltonian} that
+\begin{equation}
+  \hat{H}=\sum_{ij}W_{ij}\hat{c}^\dag_i\hat{c}_j
+  +\sum_{i}V_i\hat{c}^\dagger_i\hat{c}_i.
+\end{equation}
+Note that the off diagonal elements $W_{ij}$ of the Hamiltonian is
+ordered, the disorders only exist in diagonal elements. If only the
+nearest neighbors hopping are under consideration, the Hamiltonian
+reduces to
+\begin{equation}
+  \hat{H}=W\!\!\sum_{\average{ij}}\hat{c}^\dag_i\hat{c}_j
+  +\sum_{i}V_i\hat{c}^\dagger_i\hat{c}_i,
+\end{equation}
+where $W$ is some constant and the symbol $\average{}$ indicates that
+the summation is over the nearest neighbors.
+
+And the disordered potential $V_i$ is assumed to be distributed
+uniformly in an energy range with width $\Gamma$, that the
+distribution probability density is given by
+\begin{equation}
+  \label{eq:anderson-distribution}
+  P(V_i)=\left\{\begin{array}{ll}
+      \displaystyle\frac{1}{\Gamma}, & 
+      \displaystyle|V_i|\le\Gamma/2;\\\vbox to 18pt{}
+      0, & \displaystyle|V_i|\ge\Gamma/2.\\
+    \end{array}\right.
+\end{equation}
+The disorders formulated in this way is short ranged and is
+characterized by an important parameter $\Gamma$ which represents the
+degree of randomness.
+
+\subsection*{Anderson Localization}
+To investigate localization phenomena in the Anderson disordered model
+we need first find the criteria of localized states. Recall that the
+Green's function $G_{ij}(t)$ gives the amplitude of finding the
+electron at site $i$ at time $t$ with the initial position at site $j$
+at time $0$, and its square modulus $|G_{ij}(t)|^2$ gives the
+corresponding probability of finding the electron at site $i$ at time
+$t$. Therefore $|G_{ii}(t)|^2$ gives the probability that an electron
+returns to its original site $i$ after time $t$. If $t$ is sufficient
+long and $G_{ii}(t)$ is zero, then the electron would not return to
+the origin after a long time, which means that the electron leaves the
+origin and propagates in the whole system, thus it is in extended
+states. On the other hand, the probability of electron that not return
+to original site in future counting from an arbitrary time $t_0>0$ is
+\begin{equation}
+  \prod_{t_i=t_0}^\infty[1-|G_{ii}(t_i)|^2],
+\end{equation}
+where this product is understand to take the limit over all the
+infinitesimal intervals $\delta t$ between $t_0$ and $t\to\infty$.  It
+is clear that this quantity tends to zero if $G_{ii}(t)$ is not zero
+for large $t$, which means that electron would certainly return to the
+origin at some time in the distant future. And thus the electron is in
+localized states.
+
+The equation of motion for the Green's function in energy
+representation is same as \eqref{eq:equation-motion} that
+\begin{equation}
+  \label{eq:equation-motion-anderson}
+  EG_{ij}(E)=V_{i}G_{ij}(E)+\sum_kW_{ik}G_{kj}+\delta_{ij},
+\end{equation}
+or
+\begin{equation}
+  (E-V_i)G_{ij}(E)=\sum_kW_{ik}G_{kj}+\delta_{ij}.
+\end{equation}
+Now define a quantity
+\begin{equation}
+  g_i=\frac{1}{E-V_i},
+\end{equation}
+then \eqref{eq:equation-motion-anderson} becomes
+\begin{equation}
+  \begin{array}{rcl}
+    G_{ij}(E)&=&\displaystyle g_i\delta_{ij}+\sum_kg_iW_{ik}G_{kj}\\\vbox to 14pt{}
+    &=&\displaystyle g_i\delta_{ij}+\sum_{kl}g_i\delta_{ik}W_{kl}G_{lj}.
+  \end{array}
+\end{equation}
+This expression is in Dyson equation form and it is clear that
+$g_i\delta_{ij}$ acts the unperturbed Green's function. And the
+equation for diagonal elements of the Green's function $G_{ii}$ is
+then
+\begin{equation}
+  G_{ii}(E)=\displaystyle g_i+\sum_{k}g_iW_{ik}G_{ki}.
+\end{equation}
+The right side of this equation contains off diagonal elements of the
+Green's function, now pick the diagonal elements out and do
+iteratively substitution that (note that the diagonal terms $W_{ii}=0$
+according to definition)
+\begin{equation}
+  \begin{array}{rcl}
+    G_{ii}&=&\displaystyle g_i+g_iW_{ii}G_{ii}+\sum_{k\ne i}g_iW_{ik}G_{ki}\\\vbox to 14pt{}
+    &=&\displaystyle g_i+\sum_{k\ne i}g_iW_{ik}g_kW_{ki}G_{ii}+
+    \sum_{k\ne i}\sum_{l\ne k,i}g_iW_{ik}g_kW_{kl}G_{li}+\cdots.\\\vbox to 14pt{}
+  \end{array}
+\end{equation}
+Then we obtain the Dyson equation for diagonal Green's function
+$G_{ii}$ in term of self-energy that
+\begin{equation}
+  G_{ii}=g_i+g_i\Sigma_iG_{ii},
+\end{equation}
+where
+\begin{equation}
+  \label{eq:anderson-self-energy}
+  \Sigma_i(E)=\sum_{k\ne i}W_{ik}g_kW_{ki}+\sum_{k\ne i}\sum_{l\ne k,i}W_{ik}g_kW_{kl}g_lW_{li}+\cdots.
+\end{equation}
+According to the definition of $g_i$, the formal solution for $G_{ii}(E)$ can be written as
+\begin{equation}
+  G_{ii}(E)=\frac{1}{E-V_i-\Sigma_i(E)},
+\end{equation}
+or, since the Green's function is essentially retarded Green's function,
+\begin{equation}
+  G_{ii}(E)=\frac{1}{E+i0-V_i-\Sigma_i(E)}.
+\end{equation}
+Clearly the value of the self-energy determines the Green's function,
+and the Green's function in time representation with energy $E$ is
+given by the inverse Fourier transform that
+\begin{equation}
+  G_{ii}(t)=\int_{-\infty}^\infty G_{ii}(E)e^{-\frac{i}{\hbar}Et}\frac{dE}{2\pi\hbar}=
+  \frac{1}{2\pi\hbar}\int_{-\infty}^\infty\frac{e^{-\frac{i}{\hbar}Et}}{E+i0-V_i-\Sigma_i(E)}dE.
+\end{equation}
+The inverse Fourier transform is an integration along a contour just
+above the real axis in the $E$-plane. If the self-energy $\Sigma_i(E)$
+has a non-zero imaginary part, then $G_{ii}(t)$ acquires a
+exponentially decay factor $e^{\frac{1}{\hbar}\Im,\Sigma_it}$ and
+$G_{ii}(t)$ would tend to zero for large $t$. In another words, a
+necessary condition for localized states with energy $E$ is that the
+imaginary part of corresponding self-energy $\Sigma_i(E)$ vanishes.
+The infinite series expression for self-energy $\Sigma_i$ is just
+\eqref{eq:anderson-self-energy}. When $E$ is real, this infinite
+series must also be real if it has a limit. In other words, a
+sufficient condition that the state with energy $E$ should be
+localized is that the infinite series \eqref{eq:anderson-self-energy}
+converges.
+
+Now we rewrite the expression of self-energy
+\eqref{eq:anderson-self-energy}, by writing $W_{ik}$ as a constant
+since it is essentially an ordered quantity, as
+\begin{equation}
+  \label{eq:self-energy-series}
+  \begin{array}{rcl}
+    \Sigma_i(E)&=&\displaystyle\sum_{k\ne i}Wg_kW+
+    \sum_{k\ne i}\sum_{l\ne k,i}Wg_kWg_lW+\cdots\\\vbox to 14pt{}
+    &=&\displaystyle W\sum_{L=1}^\infty\sum_{j}T_j^{(L)},\\
+\end{array}
+\end{equation}
+where 
+\begin{equation}
+  T^{(L)}_j=\frac{W^L}{(E-V_{j_1})\cdots(E-V_{j_L})}=\prod_{i=1}^LWg_{j_i}.
+\end{equation}
+It should be emphasized that after replacing the matrix $W_{ik}$ by
+constant $W$ the summation must be understood that it is over the
+``connected'' sites, and the connection between site $i$ and $k$ means
+that the original matrix element $W_{ik}$ is not zero. Therefore
+$T^{(L)}_j$ represents a path that starts from site $i$, passes $L$
+different sites $j_1,j_2,\cdots,j_L$ and then returns to site
+$i$. Note that sites $j_1,j_2,\cdots,j_L$ are all different, and such
+a path is generally called \textit{self-avoiding walk}. Suppose each
+site has $Z$ neighbors, then in the summation for $\Sigma_i$ there are
+roughly $Z^L$ terms $T^{(L)}_j$ for each $L$. Now we introduce a
+simple method given by John Ziman to estimate this summation.
+
+Now define a quantity $Q$ as the logarithm of $|T^{(L)}_j|$:
+\begin{equation}
+  Q=\ln|T^{(L)}_j|=\ln\prod_{i=1}^L|Wg_{j_i}|=\sum_{i=1}^L\ln |Wg_{j_i}|.
+\end{equation}
+Since $g_{j_i}$ are random variables, we use the average value
+\begin{equation}
+  \average{\ln|Wg_{j_i}|}=\int dV_iP(V_i)\ln\left|\frac{W}{E-V_i}\right|
+\end{equation}
+to replace $\ln|Wg_{j_i}|$. It is clear that the average value
+$\average{\ln|Wg_{j_i}|}$ is statistically site independent, thus we
+omit the subscript and write it simply as
+$\average{\ln|Wg|}$. Therefore after the average we write
+\begin{equation}
+  Q= \sum_{i=1}^L\ln|Wg_{j_i}|\approx L\average{\ln|Wg|},
+\end{equation}
+and
+\begin{equation}
+  |T^{(L)}_j|=e^Q\approx\exp\left[L\average{\ln|Wg|}\right].
+\end{equation}
+Because in the summation for a specific $L$ there are $Z^L$ terms
+which have the same form with $T^{(L)}_j$, then we have
+\begin{equation}
+  \sum_j|T^{(L)}_j|\approx\left[Z\exp(\average{\ln|Wg|})\right]^L.
+\end{equation}
+There is always an inequality for the series that
+\begin{equation}
+  \sum_jT^{(L)}_j\le \sum_j|T^{(L)}_j|,
+\end{equation}
+so if the geometric series 
+\begin{equation}
+  W\sum_{L=1}^\infty\left[Z\exp(\average{\ln|Wg|})\right]^L
+\end{equation}
+converges then the original series \eqref{eq:self-energy-series}
+converges.
+
+The convergence condition for geometric series is 
+\begin{equation}
+  Z\exp(\average{\ln|Wg|})<1,
+\end{equation}
+and this condition can also be used as the localization condition.
+Substituting the distribution function
+\eqref{eq:anderson-distribution} we find
+\begin{equation}
+  \begin{array}{rcl}
+    \average{\ln|Wg|}&=&\displaystyle\frac{1}{\Gamma}\int_{-\Gamma/2}^{\Gamma/2}\ln
+    \left|\frac{W}{E-V}\right|dV\\\vbox to 18pt{}
+    &=&\displaystyle 1-\frac{1}{2}\left[\left(1+2\frac{E}{\Gamma}\right)\ln
+      \left|\frac{\Gamma}{2W}+\frac{E}{W}\right|+
+      \left(1-2\frac{E}{\Gamma}\right)\ln
+      \left|\frac{\Gamma}{2W}-\frac{E}{W}\right|
+    \right].
+\end{array}
+\end{equation}
+For $E=0$, we have
+\begin{equation}
+  \average{\ln|Wg|}=1-\ln\left|\frac{\Gamma}{2W}\right|,
+\end{equation}
+and the localization condition for $E=0$ is correspondingly
+\begin{equation}
+  \label{eq:anderson-localization-condition}
+  \frac{\Gamma}{2Z|W|}>e.
+\end{equation}
+Note that the average value $\average{\ln|Wg|}$ reaches its maximum
+when $E=0$. Therefore if the localization condition is satisfied for
+$E=0$ then all other states with $|E|>0$ also satisfy the convergence
+condition $Z\exp(\average{\ln|Wg|})<1$, which means that all states
+are localized states. The expression
+\eqref{eq:anderson-localization-condition} is also called the
+\textit{Anderson localization condition}.
+
+
+
 \chapter{Small Polaron}
 \section{Holstein Model}
 The Hamiltonian of Holstein Model is

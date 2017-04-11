@@ -918,16 +918,16 @@ integration
 \section{Kubo Greenwood Formula}
 Now write the perturbing operator as
 \begin{equation}
-  V=-\int\vec{j}\cdot\vec{A}dx,
+  V=-\int\vec{j}\cdot\vec{A}d^3r,
 \end{equation}
 let $\alpha(\omega)$ denotes the corresponding generalized
-susceptibility then the mean energy dissipated per unit time and per
-unit volume is
+susceptibility then the mean energy dissipated per unit time is
 \begin{equation}
-  Q=\frac{1}{2}\omega\Im\,\alpha(\omega)|\vec{A}|^2.
+  Q=\frac{1}{2}{\cal V}\omega\Im\,\alpha(\omega)|\vec{A}|^2,
 \end{equation}
-However, this generalized susceptibility is not the conductivity, to
-get the conductivity, recall that
+where ${\cal V}$ is the volume.  However, this generalized
+susceptibility is not the conductivity, to get the conductivity,
+recall that
 \begin{equation}
   \vec{E}(t)=-\frac{\partial\vec{A}}{\partial t},
 \end{equation}
@@ -946,23 +946,23 @@ or
 
 Thus the dissipated term written in conductivity is just
 \begin{equation}
-  Q=\frac{1}{2}\omega\Im\,\alpha(\omega)|A|^2=\frac{1}{2}\Re\,\sigma(\omega)\;|E|^2,
+  Q=\frac{1}{2}{\cal V}\omega\Im\,\alpha(\omega)|A|^2=
+  \frac{1}{2}{\cal V}\Re\,\sigma(\omega)\;|E|^2,
 \end{equation}
-and
+and applying ``independent particle approximation'' yields
 \begin{equation}
-  \Re\,\sigma=\frac{\Im\,\alpha}{\omega}=
-  \frac{\pi}{\hbar\omega}\sum_{mn}(\rho_n-\rho_m)
-  |j_{mn}|^2\delta(\omega+\omega_{nm}).
+  \begin{array}{rcl}
+    Q&=&\displaystyle\frac{\pi e^2}{2\hbar}\sum_{nm}\omega(f_n-f_m)|v_{nm}|^2|A|^2
+    \delta(\omega+\omega_{nm})\\
+    &=&\displaystyle\frac{\pi e^2}{2\hbar\omega}\sum_{nm}(f_n-f_m)|v_{nm}|^2|E|^2
+    \delta(\omega+\omega_{nm}).
+  \end{array}
 \end{equation}
-
-Now there comes an assumption which is called ``independent particle
-approximation'': we replace $\rho$ by single electron distribution
-function $f$ and recall that $j=-ev$ then
+Therefore we have
 \begin{equation}
-  \Re\,\sigma=\frac{\hbar\pi e^2}{V}\sum_{mn}
+  \Re\,\sigma=\frac{\hbar\pi e^2}{{\cal V}}\sum_{mn}
   \frac{f_n-f_m}{\hbar\omega_{mn}}|v_{mn}|^2\delta(E_n+\hbar\omega-E_m),
 \end{equation}
-where $V$ is the volume which acts as normalized factor.
 Notice that 
 \begin{equation}
   \frac{f_n-f_m}{\hbar\omega_{mn}}\delta(E_n+\hbar\omega-E_m)=

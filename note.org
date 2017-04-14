@@ -1,0 +1,239 @@
+#+TITLE: My Miscellaneous Notes
+#+AUTHOR: CRF
+
+#+LATEX_HEADER: \usepackage{xeCJK}
+#+LATEX_HEADER: \setCJKmainfont{WenQuanYi Micro Hei}
+#+LATEX_HEADER: \usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+#+LATEX_HEADER: \usepackage[colorlinks=true]{hyperref}
+
+* Programming
+** Emacs
+*** Miscellaneous
+**** No backup files.
+    #+BEGIN_SRC emacs-lisp
+      (setq make-backup-files nil)
+    #+END_SRC
+    
+**** Switch window by ~M+arrow~.
+     #+BEGIN_SRC emacs-lisp
+     (windmove-default-keybindings 'meta)
+     #+END_SRC
+
+**** Type ~y~ or ~n~ instead of ~yes~ or ~no~.
+     #+BEGIN_SRC emacs-lisp
+       (defalias 'yes-or-no-p 'y-or-n-p)
+     #+END_SRC
+     
+**** Bind ~C-o~ and ~C-O~ to ~open-newline~ and ~open-previous-line~, like in VIM.
+    #+BEGIN_SRC emacs-lisp
+      (defun open-newline ()
+        (interactive)
+        (move-end-of-line 1)
+        (newline))
+
+      (defun open-previous-line ()
+        (interactive)
+        (move-beginning-of-line 1)
+        (newline)
+        (previous-line))
+
+      (global-set-key (kbd "C-o") 'open-newline)
+      (global-set-key (kbd "C-S-O") 'open-previous-line)
+    #+END_SRC
+
+**** Associate some major modes.
+     #+BEGIN_SRC emacs-lisp
+       (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+       (add-to-list 'auto-mode-alist '("\\.cl$" . lisp-mode))
+       (add-to-list 'auto-mode-alist '("\\.cu$" . c++-mode))
+     #+END_SRC
+
+*** MELPA
+    Homepage [[https://melpa.org/#/][Milkypostman’s Emacs Lisp Package Archive]].
+    
+    Enable installation of packages from MELPA by adding an entry to
+    package-archives after (require 'package) and before the call to
+    package-initialize in your init.el or .emacs file:
+    #+BEGIN_SRC emacs-lisp
+      (require 'package) ;; You might already have this line
+      (add-to-list 'package-archives
+                   '("melpa" . "https://melpa.org/packages/"))
+      (when (< emacs-major-version 24)
+        ;; For important compatibility libraries like cl-lib
+        (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+      (package-initialize) ;; You might already have this line
+    #+END_SRC
+
+    To install a package, type ~M-x package-list-packages~.
+    
+*** AUCTeX
+    AUCTEX is an extensible package for writing and formatting TEX
+    files in GNU Emacs and XEmacs. Homepage
+    https://www.gnu.org/software/auctex/
+
+**** Installation 
+     It can be installed by ~apt-get~:
+     #+BEGIN_SRC bash 
+       sudo apt-get install auctex 
+     #+END_SRC
+     or using MELPA.
+
+**** Enable spell check on the fly
+     #+BEGIN_SRC emacs-lisp
+       (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+     #+END_SRC
+
+**** Enable outline minor mode and fold the code when opening the file
+     #+BEGIN_SRC emacs-lisp
+       (add-hook 'LaTeX-mode-hook 'outline-minor-mode)
+       (add-hook 'outline-minor-mode-hook 'hide-body)
+     #+END_SRC
+
+**** Use ~pdflatex~ instead of ~latex~.
+     #+BEGIN_SRC emacs-lisp
+       (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+     #+END_SRC
+
+**** Enable ~LaTeX-math-mode~.
+     This is a minor mode rebinding the key LaTeX-math-abbrev-prefix
+     to allow easy typing of mathematical symbols.
+     #+BEGIN_SRC emacs-lisp
+     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+     #+END_SRC
+     The default list of ~LaTeX~ math symbols is
+     #+BEGIN_SRC emacs-lisp
+     LaTeX-math-default
+     #+END_SRC
+     The customized list of ~LaTeX~ math symbols is
+     #+BEGIN_SRC emacs-lisp
+     LaTeX-math-list
+     #+END_SRC
+
+**** Add some hot key into ~LaTeX-mode-hook~.
+     #+BEGIN_SRC emacs-lisp
+       ;; C-( insert \left(
+       (add-hook 'LaTeX-mode-hook 
+                 (lambda () 
+                   (local-set-key (kbd "C-(") 
+                                  (lambda () (interactive) (insert "\\left(")))))
+
+       ;; C-) insert \right)
+       (add-hook 'LaTeX-mode-hook 
+                 (lambda () 
+                   (local-set-key (kbd "C-)") 
+                                  (lambda () (interactive) (insert "\\right)")))))
+
+       ;; C-{ insert \left[
+       (add-hook 'LaTeX-mode-hook 
+                 (lambda () 
+                   (local-set-key (kbd "C-{") 
+                                  (lambda () (interactive) (insert "\\left[")))))
+
+       ;; C-} insert \right]
+       (add-hook 'LaTeX-mode-hook 
+                 (lambda () 
+                   (local-set-key (kbd "C-}") 
+                                  (lambda () (interactive) (insert "\\right]")))))
+
+       ;; `\ insert \partial
+       ;; `/ insert \frac
+       ;; `B insert \hbar
+       ;; `$ insert \dagger
+       (setq LaTeX-math-list 
+             '((?\\ "partial" "Misc Symbol" 8706)
+               (?/ "frac" "Constructs")
+               (?B "hbar" "Misc Symbol" 8463)
+               (?$ "dagger" "Binary Op" 8224)))
+
+     #+END_SRC
+
+*** Org-mode
+**** Add ~org-mode~ package archive into MELPA
+     #+BEGIN_SRC emacs-lisp
+     (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+     #+END_SRC
+
+**** Syntax highlight on the fly.
+     #+BEGIN_SRC emacs-lisp
+     (setq org-src-fontify-natively t)
+     #+END_SRC
+
+**** Syntax highlight for exported ~html~.
+     Just install package ~htmlize~ by MELPA.
+
+**** Syntax highlight for exported ~pdf~.
+     Install a ~python~ package ~Phygments~:
+     #+BEGIN_SRC bash
+     easy_install Pygments
+     #+END_SRC
+     Add the following code into ~.emacs~:
+     #+BEGIN_SRC emacs-lisp
+       (require 'ox-latex)
+       (add-to-list 'org-latex-packages-alist '("" "minted"))
+       (setq org-latex-listings 'minted)
+       (setq org-latex-pdf-process
+             '("xelatex -shell-escape -8bit -interaction nonstopmode %f"
+               "xelatex -shell-escape -8bit -interaction nonstopmode %f"
+               "xelatex -shell-escape -8bit -interaction nonstopmode %f"))
+     #+END_SRC
+
+     ~-shell-escape~ is to use ~minted~ package.
+     
+     ~-8bit~ is to suppress the appearance of ~tab~ symbol in ~pdf~.
+     
+     Call ~xelatex~ three times is to make sure the references are right.
+
+**** Chinese support
+     
+     put the following code at the head of ~org~ file:
+     #+BEGIN_SRC lisp
+       ,#+LATEX_HEADER: \usepackage{xeCJK}
+       ,#+LATEX_HEADER: \setCJKmainfont{WenQuanYi Micro Hei}    
+     #+END_SRC
+     
+**** Export as ~html5~.
+     #+BEGIN_SRC emacs-lisp
+     (setq org-html-doctype "html5")
+     #+END_SRC
+
+**** No ~XML~ header information in ~html~.
+     #+BEGIN_SRC emacs-lisp
+     (setq org-html-xml-declaration nil)
+     #+END_SRC
+
+**** No postamble like authors, data and version of ~org~.
+     #+BEGIN_SRC emacs-lisp
+     (setq org-html-postamble nil)
+     #+END_SRC
+
+**** Enable spell check on the fly
+     #+BEGIN_SRC emacs-lisp
+       (add-hook 'org-mode-hook 'flyspell-mode)
+       (add-hook 'org-mode-hook 'flyspell-buffer)
+     #+END_SRC
+**** Enable CDLaTeX
+     ~CDLaTeX~ is “is a minor mode that is normally used in combination
+     with a major LaTeX mode like AUCTeX in order to speed-up
+     insertion of environments and math templates” and the [[https://www.gnu.org/software/emacs/manual/html_node/org/CDLaTeX-mode.html][Org manual
+     gives a very easy way to enable it]]:
+     #+BEGIN_SRC emacs-lisp
+       (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
+     #+END_SRC
+
+     Details about ~CDLaTeX~ can be found in
+     http://orgmode.org/manual/CDLaTeX-mode.html
+*** Slime
+**** Installation
+     
+     Use ~apt-get~:
+     #+BEGIN_SRC bash
+     sudo apt-get install slime
+     #+END_SRC
+     Or use MELPA, see https://common-lisp.net/project/slime/doc/html/Installation.html
+
+**** Use ~C-tab~ to complete.
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'lisp-mode-hook
+                (lambda ()
+                  (local-set-key (kbd "<C-tab>") 'slime-complete-symbol)))
+    #+END_SRC

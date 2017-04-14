@@ -4,9 +4,16 @@
 #+LATEX_HEADER: \usepackage{xeCJK}
 #+LATEX_HEADER: \setCJKmainfont{WenQuanYi Micro Hei}
 #+LATEX_HEADER: \usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
-#+LATEX_HEADER: \usepackage[colorlinks=true]{hyperref}
 
 * Programming
+** Linux
+*** Install fcitx method
+    
+    Sometimes need to install the front end:
+    #+BEGIN_SRC sh
+      sudo apt-get install fcitx-fronted-qt4 fcitx-ui-classic
+    #+END_SRC
+
 ** Emacs
 *** Miscellaneous
 **** No backup files.
@@ -48,6 +55,21 @@
        (add-to-list 'auto-mode-alist '("\\.cu$" . c++-mode))
      #+END_SRC
 
+**** Personal dictionary for ~aspell~.
+     
+     The personal dictionary file is =~/.aspell.en.pws=.
+*** Problem fixing
+**** Highlighting a region in emacs is invisible because region color equals window color
+     
+     See https://bugs.launchpad.net/ubuntu/+source/emacs24/+bug/1628707
+     
+     To fix it, type ~M-x list-faces-display~, find ~region~ and set
+     Background to ~light gray~ or other color.
+     
+     The color can also be set by
+     #+BEGIN_SRC emacs-lisp
+       (set-face-attribute 'region nil :background "light gray")
+     #+END_SRC
 *** MELPA
     Homepage [[https://melpa.org/#/][Milkypostman’s Emacs Lisp Package Archive]].
     
@@ -134,16 +156,12 @@
                  (lambda () 
                    (local-set-key (kbd "C-}") 
                                   (lambda () (interactive) (insert "\\right]")))))
-
-       ;; `\ insert \partial
-       ;; `/ insert \frac
-       ;; `B insert \hbar
-       ;; `$ insert \dagger
+       
        (setq LaTeX-math-list 
-             '((?\\ "partial" "Misc Symbol" 8706)
-               (?/ "frac" "Constructs")
-               (?B "hbar" "Misc Symbol" 8463)
-               (?$ "dagger" "Binary Op" 8224)))
+             '((?\\ "partial" "Misc Symbol" 8706) ;; `\ insert \partial
+               (?/ "frac" "Constructs")           ;; `/ insert \frac
+               (?B "hbar" "Misc Symbol" 8463)     ;; `B insert \hbar
+               (?$ "dagger" "Binary Op" 8224)))   ;; `$ insert \dagger
 
      #+END_SRC
 
@@ -219,15 +237,24 @@
      #+BEGIN_SRC emacs-lisp
        (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
      #+END_SRC
-
-     Details about ~CDLaTeX~ can be found in
+     
+     Use MELPA to install it.  Details about ~CDLaTeX~ can be found in
      http://orgmode.org/manual/CDLaTeX-mode.html
+**** Change style of hyperlinks within PDF
+
+     See https://emacs.stackexchange.com/questions/12878/how-to-change-style-of-hyperlinks-within-pdf-published-from-org-mode-document
+     
+     Customize interface using ~C-H v
+     org-latex-default-packages-alist~ and adding option ~colorlinks=true~.
+**** Insert vertical bar
+
+     To insert vertical bar, use ~\vert~ instead type \vert directly.
 *** Slime
 **** Installation
      
      Use ~apt-get~:
      #+BEGIN_SRC bash
-     sudo apt-get install slime
+     sudo apt-get install slime cl-swank
      #+END_SRC
      Or use MELPA, see https://common-lisp.net/project/slime/doc/html/Installation.html
 
@@ -237,3 +264,664 @@
                 (lambda ()
                   (local-set-key (kbd "<C-tab>") 'slime-complete-symbol)))
     #+END_SRC
+*** My .emacs
+    #+BEGIN_SRC emacs-lisp
+      ;; Miscellaneous
+      (setq make-backup-files nil)
+      (windmove-default-keybindings 'meta)
+      (defalias 'yes-or-no-p 'y-or-n-p)
+
+      (defun open-newline ()
+        (interactive)
+        (move-end-of-line 1)
+        (newline))
+
+      (defun open-previous-line ()
+        (interactive)
+        (move-beginning-of-line 1)
+        (newline)
+        (previous-line))
+
+      (global-set-key (kbd "C-o") 'open-newline)
+      (global-set-key (kbd "C-S-O") 'open-previous-line)
+
+      (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+      (add-to-list 'auto-mode-alist '("\\.cl$" . lisp-mode))
+      (add-to-list 'auto-mode-alist '("\\.cu$" . c++-mode))
+
+      ;; MELPA (package management)
+      (require 'package) ;; You might already have this line
+      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+      (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+      (package-initialize) ;; Initialize 
+
+      ;; AUCTeX mode
+      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+      (add-hook 'LaTeX-mode-hook 'outline-minor-mode)
+      (add-hook 'outline-minor-mode-hook 'hide-body)
+      (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+      (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+      (add-hook 'LaTeX-mode-hook 
+                (lambda () 
+                  (local-set-key (kbd "C-(") 
+                                 (lambda () (interactive) (insert "\\left(")))))
+      (add-hook 'LaTeX-mode-hook 
+                (lambda () 
+                  (local-set-key (kbd "C-)") 
+                                 (lambda () (interactive) (insert "\\right)")))))
+      (add-hook 'LaTeX-mode-hook 
+                (lambda () 
+                  (local-set-key (kbd "C-{") 
+                                 (lambda () (interactive) (insert "\\left[")))))
+      (add-hook 'LaTeX-mode-hook 
+                (lambda () 
+                  (local-set-key (kbd "C-}") 
+                                 (lambda () (interactive) (insert "\\right]")))))
+      (setq LaTeX-math-list 
+            '((?\\ "partial" "Misc Symbol" 8706)
+              (?/ "frac" "Constructs")
+              (?B "hbar" "Misc Symbol" 8463)
+              (?$ "dagger" "Binary Op" 8224)))
+
+
+      ;; Org-mode
+      (setq org-src-fontify-natively t)
+      (add-hook 'org-mode-hook 'flyspell-mode)
+
+      (require 'ox-latex)
+      (add-to-list 'org-latex-packages-alist '("" "minted"))
+      (setq org-latex-listings 'minted)
+      (setq org-latex-pdf-process
+            '("xelatex -shell-escape -8bit -interaction nonstopmode %f"
+              "xelatex -shell-escape -8bit -interaction nonstopmode %f"))
+
+      ;; Slime
+      (add-hook 'lisp-mode-hook
+                (lambda ()
+                  (local-set-key (kbd "<C-tab>") 'slime-complete-symbol)))
+
+    #+END_SRC
+** Perl regular expression 
+*** Perl regular expression variable 
+    + ~$&~ is the part of the string that matched the regular expression;
+    + ~$`~ is the part of the string before the part that matched;
+    + ~$~' is the part of the string after the part that matched.
+*** Matching floating point numbers
+    #+BEGIN_SRC perl
+      [-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?
+    #+END_SRC
+* Mathematics 
+** Useful formulas
+*** Gaussian Integrals
+    
+    + For a positive number \(a\),
+    \[
+    \int_{-\infty}^\infty dx e^{-ax^2}=\sqrt{\frac{\pi}{a}},\quad
+    \int\frac{dz^*dz}{2\pi i}e^{-z^*az}=\frac{1}{a}\quad.
+    \]
+    
+    + For real multi-dimensional integrals,
+    \[
+    \int\frac{dx_1\cdots dx_n}{(2\pi)^{\frac{n}{2}}}
+    e^{-\frac{1}{2}\sum_{ij}x_iA_{ij}x_j+\sum_ix_iJ_i}=
+    [\det A]^{-\frac{1}{2}}e^{\frac{1}{2}\sum_{ij}J_iA^{-1}_{ij}J_j}\quad.
+    \]
+
+    + For Grassmann variables integrals
+    \[
+    \int\left(\prod_{i=1}^n\frac{dz_i^*dz_i}{2\pi i}\right)
+    e^{-\sum_{ij}z_i^*H_{ij}z_j+\sum_i(J^*_iz_i+z_i^*J_i)}=
+    [\det H]^{-1}e^{\sum_{ij}J_i^*H_{ij}J_j}\quad.
+    \]
+*** Gaussian Distribution
+ 
+    + Gaussian Distribution
+      \[
+      w(x)=Ae^{-\frac{1}{2}\beta x^2}\quad.
+      \]
+    
+    + The normalization constant \(A\) is given by condition
+      \(\int w(x)dx=1\), thus
+      \[
+      w(x)=\sqrt{\frac{\beta}{2\pi}}e^{-\frac{1}{2}\beta x^2}\quad.
+      \]
+
+    + The mean square fluctuations is
+      \[
+      \langle x^2\rangle=\int_{-\infty}^\infty x^2w(x)dx=\frac{1}{\beta}\quad.
+      \]
+
+    + With mean square fluctuations the distribution can be written as
+      \[
+      w(x)=\frac{1}{\sqrt{2\pi\langle{x^2}\rangle}}\exp
+      \left(-\frac{x^2}{2\langle{x^2}\rangle}\right)\quad.
+      \]
+*** Gaussian Distribution for More Than One Variable
+
+    + The Gaussian distribution is
+      \[
+      w(x_1,\cdots,x_n)=Ae^{-\frac{1}{2}\beta_{ik}x_ix_k},
+      \]
+      where \(\beta_{ik}=\beta_{ki}\) and the normalization condition is
+      \[
+      \int w\;dx_1\cdots dx_n=1\quad.
+      \]
+      
+    + After linear transformation, see L. D. Landau and
+      E. M. Lifshitz, Statistical Physics, Chapter XII, section 111.
+      \[
+      w=\frac{\sqrt{\beta}}{(2\pi)^{\frac{n}{2}}}\exp
+      \left(-\frac{1}{2}\beta_{ik}x_ix_k\right)
+      \]
+      
+    + Let \(S=-\frac{1}{2}\beta_{ik}x_ix_k\) and define a conjugate to
+      \(x_i\) as
+      \[
+      X_i=-\frac{\partial S}{\partial x_i}=\beta_{ik}x_k,
+      \]
+      then we have
+      \[
+      \langle x_i X_k \rangle=\delta_{ik},\quad
+      \langle x_i x_k \rangle=\beta^{-1}_{ik},\quad
+      \langle X_i X_k \rangle=\beta_{ik}\quad.
+      \]
+      
+*** Delta Function
+    
+    + The \(\delta\) function is defined as
+      \[
+      \int\delta(x-a)f(x)=f(a)\quad.
+      \]
+      
+    + It is an even function:
+      \[
+      \delta(-x) = \delta(x)\quad.
+      \]
+
+    + For a non-zero \(\alpha\)
+      \[
+      \delta(\alpha x)=\frac{\delta(x)}{|\alpha|}\quad.
+      \]
+
+    + It can be expressed using Fourier transform as
+      \[
+      \delta(x-\alpha)=\frac{1}{2\pi}\int_{-\infty}^\infty e^{ip(x-\alpha)}dp=
+      \frac{1}{2\pi}\int_{-\infty}^\infty e^{-ip(x-\alpha)}dp\quad.
+      \]
+    
+*** Euler Integral
+**** Euler Integral of the First Kind: Beta Function
+     
+     Beta function:
+     \[
+     B(a,b)=\int_0^1x^{a-1}(1-x)^{b-1}dx\quad.
+     \]
+     
+     It has the following properties:
+     + Substituting \(x\) with \(x=1-t\) yields
+       \[
+       B(a,b)=B(b,a)\quad.
+       \]
+     + When \(b>1\), integrating by parts yields
+       \[
+       B(a,b)=\frac{b-1}{a}B(a,b-1)-\frac{b-1}{a}B(a,b),
+       \]
+       thus
+       \[
+       B(a,b)=\frac{b-1}{a+b-1}B(a,b-1)\quad.
+       \]
+     + When \(a>1\), similarly
+       \[
+       B(a,b)=\frac{a-1}{a+b-1}B(a-1,b)\quad.
+       \]
+     + Let \(n\) be a positive integer,
+       \[
+       B(n,a)=B(a,n)=\frac{1\cdot2\cdot3\cdots(n-1)}
+       {a\cdot(a+1)\cdot(a+2)\cdots(a+n-1)}\quad.
+       \]
+     + Let \(m,n\) be two positive integers,
+       \[
+       B(m,n)=\frac{(n-1)!(m-1)!}{(m+n-1)!}\quad.
+       \]
+     + Substitute \(x\) with \(x=\frac{y}{1+y}\), here \(y\) is a new 
+       variable runs from 0 to \(\infty\), then
+       \[
+       B(a,b)=\int_0^\infty\frac{y^{a-1}}{(1+y)^{a+b}}dy\quad.
+       \]
+     + If \(b=1-a\) and \(0< a < 1\) then
+       \[
+       B(a,1-a)=\int_0^\infty\frac{y^{a-1}}{1+y}dy=B(a,1-a)
+       =\frac{\pi}{\sin a\pi}\quad,
+       \]
+       especially 
+       \[
+       B(\frac{1}{2},\frac{1}{2})=\pi\quad.
+       \]
+
+**** Euler Integral of the Second Kind: Gamma Function
+    
+     Gamma Function is defined as
+     \[
+     \Gamma(a)=\int_0^\infty x^{a-1}e^{-x}dx\quad.
+     \]
+     
+     The Euler-Gauss formula:
+     \[
+     \Gamma(a)=\lim_{n\to\infty}n^a\frac{1\cdot2\cdot3\cdots(n-1)}
+     {a\cdot(a+1)\cdot(a+2)\cdots(a+n-1)}\quad.
+     \]
+     
+     It has the following properties:
+     + For \(a>0\), \(\Gamma\) is smooth.
+     + Integrating by parts yields
+       \[
+       \Gamma(a+1)=a\Gamma(a),
+       \]
+       and repeating this formula gives
+       \[
+       \Gamma(a+n)=(a+n-1)(a+n-1)\cdots(a+1)\Gamma(a)\quad.
+       \]
+       Especially, let \(n\) be a positive integer then
+       \[
+       \Gamma(n+1)=n!\quad.
+       \]
+     + If \(a\to+0\) then
+       \[
+       \Gamma(a)=\frac{\Gamma(a+1)}{a}\to+\infty\quad.
+       \]
+     + If \(a>n+1\) then
+       \[
+       \Gamma(a)>n!\quad.
+       \]
+     + Relation to Beta function:
+       \[
+       B(a,b)=\frac{\Gamma(a)\cdot\Gamma(b)}{\Gamma(a+b)}\quad.
+       \]
+     + If \(0< a<1\) then
+       \[
+       \Gamma(a)\Gamma(1-a)=\frac{\pi}{\sin a\pi},
+       \]
+       and
+       \[
+       \Gamma(\frac{1}{2})=\sqrt{\pi}\quad.
+       \]
+     + A product formula:
+       \[
+       \prod_{\nu=1}^{n-1}\Gamma(\frac{\nu}{n})=
+       \frac{(2\pi)^{\frac{n-1}{2}}}{\sqrt{n}}\quad.
+       \]
+     + Raabe's formula:
+       \[
+       \int_a^{a+1}\ln\Gamma(t)dt=\frac{1}{2}\ln2\pi+a\ln a-a,\quad a > 0,
+       \]
+       in particular, if \(a=0\) then
+       \[
+       \int_0^1\ln\Gamma(t)dt=\frac{1}{2}\ln2\pi\quad.
+       \]
+     + Legendre formula:
+       \[
+       \Gamma(a)\Gamma(a+\frac{1}{2})=\frac{\sqrt{\pi}}{2^{2a-1}}\Gamma(2a)\quad.
+       \]
+       
+*** Baker-Campbell-Hausdorff Formula
+    
+    Baker-Campbell-Hausdorff Formula:
+    \[
+    e^ABe^{-A}=\sum_{n=0}^\infty\frac{1}{n!}[A,B]_n=
+    B+[A,B]+\frac{1}{2}[A,[A,B]]+\frac{1}{6}[A,[A,[A,B]]]+\cdots\quad,
+    \]
+    this formula can be proved by defining \(B(\tau)=e^{\tau A}Be^{-\tau A}\)
+    and formally integrating its equation of motion \(dB/d\tau=[A,B(\tau)]\).
+*** Feynman Result
+    
+    Feynman Result:
+    \[
+    e^{A+B}=e^Ae^Be^{-\frac{1}{2}[A,B]},
+    \]
+    which is true only if \([A,B]\) commutes with both \(A\) and \(B\).
+
+    To prove it, recall that 
+    \[ e^{\tau(A+B)}=e^{\tau
+    A}T_\tau\exp\left[ \int_0^\tau d\tau'e^{-\tau'A}Be^{\tau'A}\right]
+    \] 
+    and evaluate the integral for \(\tau=1\). Check G. D. Mahan,
+    Many-Particle Physics, Chapter 4, section 4.3.2.
+*** Kubo Identity
+    
+    It states
+    \[
+    [e^{-\beta H},A]=e^{-\beta H}\int_0^\beta 
+    e^{\lambda H}[A,H]e^{-\lambda H}d\lambda\quad.
+    \]
+
+    To derive this relation, let us consider a quantity 
+    \[
+    S=e^{\lambda H}[A,e^{-\lambda H}]=e^{\lambda H}Ae^{-\lambda H}-A,
+    \]
+    differentiating it with respect to $\lambda$ yields
+    \[
+    \frac{dS}{d\lambda}=e^{\lambda H}[H,A]e^{-\lambda}\quad.
+    \]
+    Therefore
+    \[
+    S(\beta)=S(0)+\int_0^\beta\frac{dS}{d\lambda}d\lambda=
+    \int_0^\beta e^{\lambda H}[H,A]e^{-\lambda H}d\lambda,
+    \]
+    and accordingly
+    \[
+    [e^{-\beta H},A]=-e^{-\beta H}S(\beta)=e^{-\beta H}\int_0^\beta 
+    e^{\lambda H}[A,H]e^{-\lambda H}d\lambda\quad.
+    \]
+*** Laguerre Polynomials
+    
+    The Laguerre polynomials are solution of Laguerre's equation:
+    \[
+    xy''+(1-x)y'+ny=0,
+    \]
+    where \(n\) is non-negative integer. The Laguerre polynomials is
+    \[
+    L_n(x)=\frac{e^x}{n!}\frac{d^n}{dx^n}(e^{-x}x^n)=
+    \sum_{k=0}^n\frac{(-x)^k}{k!}\frac{n!}{k!(n-k)!}\quad
+    \]
+    The generating function is
+    \[
+    \frac{e^{-xt/(1-t)}}{1-t}=\sum_{n=0}^\infty L_n(x)t^n\quad.
+    \]
+*** Cramer's Rule
+
+    Consider a system of \(n\) linear equations of \(n\) unknowns,
+    represented in matrix multiplication form:
+    \[
+    Ax=b,
+    \]
+    where the \(n\times n\) matrix \(A\) has a nonzero determinant, and the
+    vector \(x=(x_1,\cdots,x_n)^T\) is the column vector of the variables.
+    Then Cramer's rule states that the system has a unique solution, whose
+    individual values are given by:
+    \[
+    x_i=\frac{\det A_i}{\det A},
+    \]
+    where \(A_i\) is the matrix formed by replacing the \(i\)-th column of \(A\)
+    by the column vector \(b\).
+*** Sherman-Morrison Formula
+    
+    Suppose \(A\) is an invertible square matrix and \(u,v\) are
+    column vectors. Suppose that \(1+v^TA^{-1}u\ne0\), then the
+    Sherman-Morrison formula states that
+    \[
+    (A+uv^T)^{-1}=A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}.
+    \]
+    Here \(uv^T\) is the outer product of two vectors \(u\) and \(v\).
+* Physics
+** Physical Constant
+   + The speed of light in vaccum
+     \[
+     c=299,792,458\;{\rm m/s}\approx3\times10^8\;{\rm m/s}
+     \]
+   + Electric charge 
+     \[
+     e=-1.602\times10^{-19}\;{\rm C}
+     \]
+
+   + Energy in SI unit, joule 
+     \[
+     \rm J=kg\cdot(m/s)^2=N\cdot m=C\cdot V
+     \]
+   + Plank constant 
+     \[
+     h=6.62607004\times10^{-34}\;\rm{J\cdot s}=
+     4.135667662\times10^{-15}\;{\rm eV\cdot s}
+     \]
+   + Reduced Plank constant 
+     \[
+     \hbar=1.0545718\times10^{-34}\;{\rm
+     J\cdot s}=6.582119514\times10^{-16}\;{\rm eV\cdot s}
+     \]
+   + Boltzmann constant 
+     \[
+     k_B=1.38064852\times10^{-23}\;{\rm J\cdot K^{-1}}
+     =8.6173324\times10^{-5}\;{\rm eV\cdot K^{-1}}
+     \]
+   + Bohr magneton 
+     \[
+     \mu_B=9.27400968\times10^{-24}\;{\rm J\cdot T^{-1}}
+     =5.7883818066\times10^{-5}\;{\rm eV\cdot T^{-1}}
+     \]
+   + Bohr radius 
+     \[
+     a_0=5.29\times10^{-11}\;\rm m
+     \]
+   + Electron mass 
+     \[
+     m_e=9.10938215\times10^{-31}\;{\rm kg}=
+     8.18710438\times10^{-14}\;{\rm J/c^2}=0.51099891\;{\rm MeV/c^2}
+     \]
+   + Ohm 
+     \[
+     \Omega\rm=\frac{V}{A}=\frac{V\cdot s}{C}=\frac{J\cdot s}{C^2}
+     =\frac{J}{s\cdot A^2}
+     \]
+** Coherent States
+   Coherent states is defined as the eigenstates of annihilation operator:
+   \[
+   a_\alpha\vert\phi\rangle=\phi_\alpha\vert\phi\rangle\quad.
+   \]
+*** Boson Coherent States
+
+    Boson coherent states:
+    \[
+    \vert\phi\rangle=e^{\sum_\alpha\phi_\alpha a_\alpha^\dagger}\vert0\rangle,\quad
+    \langle\phi\vert=\langle0\vert e^{\sum_\alpha\phi_\alpha^* a_\alpha},
+    \]
+    where $\phi_\alpha$ is complex number.
+
+    + The overlap of two coherent states:
+      \[
+      \langle\vert\phi\vert\phi'\rangle=
+      e^{\sum_\alpha\phi_\alpha^*\phi'_\alpha}\quad.
+      \]
+    + The overcompleteness in the Fock space:
+      \[
+      \int\left(\prod_\alpha\frac{d\phi_\alpha^*d\phi_\alpha}{2\pi i}\right)
+       e^{-\sum\phi_\alpha^*\phi_\alpha}
+       \vert\phi\rangle\langle\phi\vert=1,
+      \]
+      where
+      \[
+      \frac{d\phi_\alpha^*d\phi_\alpha}{2\pi i}=
+      \frac{d({\rm Re}\phi_\alpha)d({\rm Im}\phi_\alpha)}{\pi}\quad.
+      \]
+    + The trace of an operator $A$ in Fock space can be written in terms
+      of coherent states as
+      \[
+      {\rm Tr}A=
+      \int\left(\prod_\alpha\frac{d\phi_\alpha^*d\phi_\alpha}{2\pi i}\right)
+      e^{-\sum\phi_\alpha^*\phi_\alpha}\langle\phi\vert A\vert\phi\rangle\quad.
+      \]
+    + The average particle number of a coherent state is
+      \[
+      \bar{N}=\frac{\langle\phi\vert N\vert\phi\rangle}
+      {\langle\phi\vert\phi\rangle}
+      =\frac{\langle\phi\vert\sum_\alpha a_\alpha^\dagger a_\alpha\vert\phi\rangle}
+      {\langle\phi\vert\phi\rangle}
+      =\sum_\alpha\phi_\alpha^*\phi_\alpha,
+      \]
+      and the variance is
+      \[
+      \sigma^2=\frac{\langle\phi\vert N^2\vert\phi\rangle}
+      {\langle\phi\vert\phi\rangle}-\bar{N}^2
+      =\bar{N}\quad.
+      \]
+*** Grassmann Algebra
+    The Grassmann numbers is defined to be anticommuting numbers:
+    \[
+    \xi_\alpha\xi_\beta+\xi_\beta\xi_\alpha=0,\quad \xi_\alpha^2=0\quad.
+    \]
+    + The conjugation of a Grassmann number is defined as
+      \[
+      (\xi_\alpha)^*=\xi_\alpha^*,\quad(\xi_\alpha^*)^*=\xi_\alpha\quad.
+      \]
+    + If $\lambda$ is a complex number,
+      \[
+      (\lambda\xi_\alpha)^*=\lambda^*\xi_\alpha\quad.
+      \]
+    + For any product of Grassmann numbers,
+      \[
+      (\xi_1\cdots\xi_n)^*=\xi_n^*\xi_{n-1}^*\cdots\xi_1^*\quad.
+      \]
+    + For combinations of Grassmann variables and creation and
+      annihilation operators
+      \[
+      \xi a+a\xi=0,\quad(\xi a)^\dagger=a^\dagger\xi^*\quad.
+      \]
+    + Linearity of Grassmann number:
+      \[
+      f(\xi)=f_0+f_1\xi,\quad 
+      A(\xi^*,\xi)=a_0+a_1\xi+\bar{a}_1\xi^*+a_{12}\xi^*\xi,
+      \]
+      in particular,
+      \[
+      e^{-\lambda\xi}=1-\lambda\xi\quad.
+      \]
+    + A derivative can be defined for Grassmann variable function as
+      \[
+      \frac{\partial}{\partial\xi}(\xi^*\xi)=
+      \frac{\partial}{\partial\xi}(-\xi\xi^*)=-\xi^*\quad.
+      \]
+    + An integral can be defined as
+      \[
+      \int d\xi\,1=0,\quad\int d\xi\,\xi=1,\quad
+      \int d\xi^*\,1=0,\quad\int d\xi^*\,\xi^*=1,
+      \]
+      to remember,
+      \[
+      \int d\xi=\frac{\partial}{\partial\xi},\quad
+      \int d\xi^*=\frac{\partial}{\partial\xi^*}\quad.
+      \]
+*** Fermion Coherent States
+    
+    Fermion Coherent States is defined as
+    \[
+    \vert\xi\rangle=e^{-\sum_\alpha\xi_\alpha a_\alpha^\dagger}\vert 0\rangle
+    =\prod_\alpha(1-\xi_\alpha a_\alpha^\dagger)\vert 0\rangle,
+    \]
+    we can verify that $a_\alpha\vert\xi\rangle=\xi_\alpha\vert\xi\rangle$ 
+    by using
+    \[
+    \xi_\alpha\vert0\rangle=\xi_\alpha(1-\xi_\alpha a^\dagger)
+    \vert{0}\rangle\quad.
+    \]
+    Similarly, the adjoint of the coherent states is
+    \[
+    \langle\xi\vert=\langle0\vert e^{-\sum_\alpha a_\alpha\xi_\alpha^*}
+    =\langle0\vert e^{\sum_\alpha\xi_\alpha^*a_\alpha}\quad.
+    \]
+
+    + The overlap of two coherent states is 
+      \[
+      \langle\xi\vert\xi'\rangle=\prod_\alpha(1+\xi_\alpha^*\xi'_{\alpha})
+       =e^{\sum_\alpha\xi_\alpha^*\xi'_\alpha}\quad.
+      \]
+    + The closure relation can be written as
+      \[
+      \int\left(\prod_\alpha d\xi_\alpha^*d\xi_\alpha\right)
+      e^{-\sum_\alpha\xi_\alpha^*\xi_\alpha}
+      \vert\xi\rangle\langle\xi\vert=1\quad.
+      \]
+    + The trace of an operator $A$ in Fock space can be written as
+      \[
+      {\rm Tr}A=\int\left(\prod_\alpha d\xi_\alpha^*d\xi_\alpha\right)
+      e^{-\sum_\alpha\xi_\alpha^*\xi_\alpha}\
+      \langle{-\xi}\vert A\vert\xi\rangle,
+      \]
+      note the anti-periodic condition here.
+
+** Linear Response
+*** Transport Coefficients
+    
+    The electricity current $-ej$ and the heat current $q-\mu j$ are
+    \[
+    -ej = \sigma[E-S\nabla T],\quad
+    q-\mu j=\sigma ST E-k\nabla T,
+    \]
+    where $\sigma$ is the electrical conductivity, $S$ is the Seebeck 
+    coefficients and $k$ is the thermal conductivity.
+    
+    + Seebeck coefficients
+      \[
+      S=-\frac{\nabla V}{\nabla T}\quad.
+      \]
+    + Figure of merit
+      \[
+      ZT=\frac{\sigma TS^2}{k-\sigma TS^2}
+      \]
+*** Fermi's Golden Rule
+
+    The probability of $dw_{fi}$ of the transition rate per unit time
+    under a periodic perturbation is
+    \[
+    dw_{fi}=\frac{2\pi}{\hbar}\vert V_{fi}\vert^2\delta(E_f-E_i-\hbar\omega)\quad.
+    \]
+*** The Generalized Susceptibility 
+    
+    When there exists an external perturbation $V=-xf(t)$, the quantum
+    mean value $\bar{x}(t)$ is given by a convolution
+    \[
+    \bar{x}(t)=\int_0^\infty\alpha(\tau)f(t-\tau)d\tau.
+    \]
+    Applying Fourier transform on it yields
+    \[
+    \bar{x}(\omega)=\alpha(\omega)f(\omega),
+    \]
+    and $\alpha(\omega)$ is called the generalized susceptibility.
+
+    + For real $\omega$
+      \[
+      \alpha(-\omega)=\alpha^*(\omega),
+      \]
+      i.e.,
+      \[
+      {\rm Re}\,\alpha(-\omega)={\rm Re}\,\alpha(\omega),\quad
+      {\rm Im}\,\alpha(-\omega)=-{\rm Im}\,\alpha(\omega)\quad.
+      \]
+    + Kramers-Kronig relations:
+      \[
+      {\rm Re}\,\alpha(\omega)=-\frac{1}{\pi}P\int_{-\infty}^\infty
+      \frac{{\rm Im}\,\alpha(\varepsilon)}{\omega-\varepsilon}d\varepsilon,\quad
+      {\rm Im}\,\alpha(\omega)=\frac{1}{\pi}P\int_{-\infty}^\infty
+      \frac{{\rm Re}\,\alpha(\varepsilon)}{\omega-\varepsilon}d\varepsilon\quad.
+      \]
+    + The energy dissipated per unit time with
+      $f(t)=\frac{1}{2}(f_0e^{-i\omega t}+f^*_0e^{i\omega t})$ is
+      \[
+      Q=\frac{dE}{dt}=-\bar{x}\frac{df}{dt}=
+      \frac{1}{2}\omega{\rm Im}\,\alpha(\omega)\vert f_0\vert^2\quad.
+      \]
+
+    
+*** Kubo-Greenwood Formula
+
+    Let $\sigma(\omega)$ be the conductivity, then
+    \[
+    {\rm Re}\,\sigma(\omega)=\frac{\pi e^2\hbar}{V}
+    \sum_{mn}\frac{f_n-f_m}{\hbar\omega}\vert v_{mn}\vert^2
+    \delta(\varepsilon_n-\varepsilon_m+\hbar\omega),
+    \]
+    where $V$ is the volume. Write it in terms of Green's function, 
+    then
+    \[
+    {\rm Re}\,\sigma(\omega)=\frac{\pi e^2\hbar}{V}
+    \sum_{mn}\frac{f_n-f_m}{\hbar\omega}
+    {\rm Tr}\,[v{\rm Im}G^R(\varepsilon)vG^R(\varepsilon+\hbar\omega)]
+    d\varepsilon\quad.
+    \]
+    
+*** Green-Kubo Formula
+    
+    The formula for generalized susceptibility $\alpha(\omega)$ is
+    \[
+    \alpha(\omega)=\frac{i}{\hbar}\int_0^\infty
+    \langle x(t)x(0)-x(0)x(t) \rangle
+    e^{i\omega t}dt\quad.
+    \]
+    It is just $\alpha(\omega)=-G^R(\omega)$.

@@ -350,6 +350,55 @@
     #+BEGIN_SRC perl
       [-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?
     #+END_SRC
+** Common Lisp
+*** Miscellaneous
+    
+    + Read columns from a file:
+      #+BEGIN_SRC lisp
+        (let ((x-list nil)
+              (y-list nil))
+          (with-open-file (stream filename :direction :input)
+            (loop for line = (read-line stream nil nil)
+               while line
+               unless (eql (aref line 0) #\#)
+               do (with-input-from-string (stream-1 line)
+                    (let ((list 
+                           (loop for data = (read stream-1 nil nil)
+                              while data
+                              collect data)))
+                      (push (first list) x-list)
+                      (push (second list) y-list))))))
+
+      #+END_SRC
+*** Quicklisp
+    
+    [[www.quicklisp.org/beta/][Quicklisp]] is the de-facto package manager for Common Lisp.
+    To install Quicklisp, download [[https://beta.quicklisp.org/quicklisp.lisp][quicklisp.lisp]] and load it.
+    Then type in SBCL
+    #+BEGIN_SRC lisp
+      (quicklisp-quickstart:install :path "~/.sbcl-quicklisp")
+      (ql:add-to-init-file)
+    #+END_SRC
+    
+*** LLA: Lisp Linear Algebra
+
+    [[https://github.com/tpapp/lla][LLA]] is a high-level Common Lisp library built on on BLAS and
+    LAPACK, but providing a much more abstract interface with the
+    purpose of freeing the user from low-level concerns and reducing
+    the number of bugs in numerical code.
+
+    + Use ~quicklisp~ to load it:
+      #+BEGIN_SRC lisp
+        (ql:quickload :lla)
+      #+END_SRC
+*** CL-PPCRE
+
+    [[http://weitz.de/cl-ppcre/][CL-PPCRE]] is a portable regular expression library for Common Lisp.
+
+    + Use ~quicklisp~ to install it:
+      #+BEGIN_SRC lisp
+        (ql:quickload :cl-ppcre)
+      #+END_SRC
 * Mathematics 
 ** Useful formulas
 *** Gaussian Integrals
@@ -898,24 +947,58 @@
       \frac{1}{2}\omega{\rm Im}\,\alpha(\omega)\vert f_0\vert^2\quad.
       \]
 
-    
+      
 *** Kubo-Greenwood Formula
 
-    Let $\sigma(\omega)$ be the conductivity, then
-    \[
-    {\rm Re}\,\sigma(\omega)=\frac{\pi e^2\hbar}{V}
-    \sum_{mn}\frac{f_n-f_m}{\hbar\omega}\vert v_{mn}\vert^2
-    \delta(\varepsilon_n-\varepsilon_m+\hbar\omega),
-    \]
-    where $V$ is the volume. Write it in terms of Green's function, 
-    then
-    \[
-    {\rm Re}\,\sigma(\omega)=\frac{\pi e^2\hbar}{V}
-    \sum_{mn}\frac{f_n-f_m}{\hbar\omega}
-    {\rm Tr}\,[v{\rm Im}G^R(\varepsilon)vG^R(\varepsilon+\hbar\omega)]
-    d\varepsilon\quad.
-    \]
-    
+    + Let $\sigma(\omega)$ be the conductivity, then
+      \[
+      {\rm Re}\,\sigma(\omega)=\frac{\pi e^2\hbar}{V}
+      \sum_{mn}\frac{f_n-f_m}{\hbar\omega}\vert v_{mn}\vert^2
+      \delta(\varepsilon_n-\varepsilon_m+\hbar\omega),
+      \]
+      where $V$ is the volume. Write it in terms of Green's function, 
+      then
+      \[
+      {\rm Re}\,\sigma(\omega)=\frac{e^2\hbar}{\pi V}
+      \sum_{mn}\frac{f_n-f_m}{\hbar\omega}
+      {\rm Tr}\,[v{\rm Im}G^R(\varepsilon)vG^R(\varepsilon+\hbar\omega)]
+      d\varepsilon,
+      \]
+      and the static formula is
+      \[
+      \sigma=\frac{e^2\hbar}{\pi V}
+      \int\left(-\frac{\partial f}{\partial\varepsilon}\right)
+      {\rm Tr}\,[v{\rm Im}G^R(\varepsilon)vG^R(\varepsilon)]
+      d\varepsilon\quad.
+      \]
+    + The Kubo-Greenwood formula for Seebeck coefficient:
+      \[
+      \mathrm{Re}\,(\sigma S)(\omega)=-\frac{e\hbar}{\pi V T}
+      \int\frac{f(\varepsilon)-f(\varepsilon+\hbar\omega)}{\hbar\omega}
+      \mathrm{Tr}[(\varepsilon-\mu)v\mathrm{Im}G^R(\varepsilon)
+      v\mathrm{Im}G^R(\varepsilon+\hbar\omega)]d\varepsilon,
+      \]
+      and the static formula is 
+      \[
+      \sigma S=-\frac{e\hbar}{\pi V T}
+      \int\left(-\frac{\partial f}{\partial\varepsilon}\right)
+      \mathrm{Tr}[(\varepsilon-\mu)v\mathrm{Im}G^R(\varepsilon)
+      v\mathrm{Im}G^R(\varepsilon)]d\varepsilon\quad.
+      \]
+    + The Kubo-Greenwood formula for heat conductivity
+      \[
+      k(\omega)=\frac{\hbar}{\pi V T}\int
+      \frac{f(\varepsilon)-f(\varepsilon+\hbar\omega)}{\hbar\omega}
+      \mathrm{Tr}[(\varepsilon-\mu)v\mathrm{Im}G^R(\varepsilon)
+      (\varepsilon-\mu)v\mathrm{Im}G^R(\varepsilon+\hbar\omega)]d\varepsilon,
+      \]
+      and the static formula is
+      \[
+      k=\frac{\hbar}{\pi V T}\int
+      \left(-\frac{\partial f}{\partial\varepsilon}\right)
+      \mathrm{Tr}[(\varepsilon-\mu)v\mathrm{Im}G^R(\varepsilon)
+      (\varepsilon-\mu)v\mathrm{Im}G^R(\varepsilon+\hbar\omega)]d\varepsilon,
+      \]
 *** Green-Kubo Formula
     
     The formula for generalized susceptibility $\alpha(\omega)$ is
@@ -925,3 +1008,53 @@
     e^{i\omega t}dt\quad.
     \]
     It is just $\alpha(\omega)=-G^R(\omega)$.
+    
+
+** =TRIQS=
+   
+   [[https://triqs.ipht.cnrs.fr/1.x/index.html][TRIQS]] (Toolbox for Research on Interacting Quantum Systems) is a
+   scientific project providing a set of C++ and Python libraries to
+   develop new tools for the study of interacting quantum systems.
+
+   + ~TRIQS~ Base [[https://triqs.ipht.cnrs.fr/1.x/install.html][Installation]]
+
+     TRIQS and its applications are provided a la carte: after you
+     have installed the TRIQS library, you will be able to easily
+     install various TRIQS-based applications: impurity solvers, tools
+     for DFT+DMFT calculations, etc.
+     
+     + Install the required libraries,
+       https://triqs.ipht.cnrs.fr/1.x/installation/ubuntu.html
+       #+BEGIN_SRC sh
+         sudo apt-get install libboost-all-dev cmake git g++ libgfortran3\
+              gfortran openmpi-bin openmpi-common  libopenmpi-dev libblas-dev\
+              liblapack-dev libfftw3-dev libgmp-dev  hdf5-tools\
+              libhdf5-serial-dev python-h5py python-dev python-numpy\
+              python-scipy python-jinja2  python-virtualenv python-matplotlib\
+              python-tornado python-zmq python-mpi4py python-mako 
+       #+END_SRC
+
+     + Installation steps, https://triqs.ipht.cnrs.fr/1.x/install.html
+       #+BEGIN_SRC sh
+       git clone https://github.com/TRIQS/triqs.git triqs.src
+       mkdir triqs.build && cd triqs.build
+       cmake -DCMAKE_INSTALL_PREFIX=path_to_install_directory ../triqs.src
+       make
+       make test
+       make install
+       #+END_SRC
+       
+   + ~TRIQS~ Application ~CTHYB~ [[https://triqs.ipht.cnrs.fr/1.4/applications/cthyb/install.html][Installation]]
+   
+     The TRIQS-based hybridization-expansion solver allows to solve
+     the generic problem of a quantum impurity embedded in a
+     conduction bath for an arbitrary local interaction vertex.
+     
+     #+BEGIN_SRC sh
+       git clone https://github.com/TRIQS/cthyb.git cthyb.src
+       mkdir cthyb.build && cd cthyb.build
+       cmake -DTRIQS_PATH=path_to_triqs ../cthyb.src
+       make
+       make test
+       make install
+     #+END_SRC

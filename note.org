@@ -14,6 +14,36 @@
       sudo apt-get install fcitx-fronted-qt4 fcitx-ui-classic
     #+END_SRC
 
+** LaTeX
+*** beamer
+    
+    + Use normal math font:
+      #+BEGIN_SRC latex
+        \documentclass[mathserif]{beamer}
+      #+END_SRC
+    + Suppress caption label such as ``Figure 1'':
+      #+BEGIN_SRC latex
+        \setbeamertemplate{caption}{\insertcaption}
+      #+END_SRC
+    + Insert page number in foot line:
+      #+BEGIN_SRC latex
+        \setbeamertemplate{footline}[page number]
+      #+END_SRC
+    + Cancel the navigation symbol:
+      #+BEGIN_SRC latex
+        \setbeamertemplate{navigation symbols}{}
+      #+END_SRC
+    + Put the caption on the right:
+      #+BEGIN_SRC latex
+        \begin{figure}
+          \begin{columns}
+            \column{0.6\textwidth}
+            \includegraphics[scale=0.8]{fig.pdf}
+            \column{0.3\textwidth}
+            \caption{Something}
+          \end{columns}
+        \end{figure}
+      #+END_SRC
 ** Emacs
 *** Miscellaneous
 **** No backup files.
@@ -997,7 +1027,7 @@
       k=\frac{\hbar}{\pi V T}\int
       \left(-\frac{\partial f}{\partial\varepsilon}\right)
       \mathrm{Tr}[(\varepsilon-\mu)v\mathrm{Im}G^R(\varepsilon)
-      (\varepsilon-\mu)v\mathrm{Im}G^R(\varepsilon+\hbar\omega)]d\varepsilon,
+      (\varepsilon-\mu)v\mathrm{Im}G^R(\varepsilon)]d\varepsilon,
       \]
 *** Green-Kubo Formula
     
@@ -1009,7 +1039,6 @@
     \]
     It is just $\alpha(\omega)=-G^R(\omega)$.
     
-
 ** =TRIQS=
    
    [[https://triqs.ipht.cnrs.fr/1.x/index.html][TRIQS]] (Toolbox for Research on Interacting Quantum Systems) is a
@@ -1058,3 +1087,60 @@
        make test
        make install
      #+END_SRC
+** Statistical Physics
+*** Thermodynamic quantities
+    + Volume and temperature:
+      \[
+      V=\partial E/\partial S,\quad 
+      \frac{\partial S}{\partial T}=\frac{1}{T}\quad.
+      \]
+    + Thermodynamic identity:
+      \[
+      dE=TdS-PdV,\quad
+      dS=\frac{1}{T}dE+\frac{P}{T}dV\quad.
+      \]
+    + Enthalpy or heat content
+      \[
+      W=E+PV,\quad
+      dW=TdS+VdP\quad.
+      \]
+    + Helmholtz free energy
+      \[
+      F=E-TS,\quad
+      dF=-SdT-PdV\quad.
+      \]
+    + Thermodynamic potential, or Gibbs free energy:
+      \[
+      \Phi=E-TS+PV=F+PV=W-TS,\quad
+      d\Phi=-SdT+VdP\quad.
+      \]
+*** Boltzmann distribution
+    
+    Check L. D. Landau and E. M. Lifshitz, Statistical Physics,
+    Chapter IV, section 40.
+
+    The entropy can be written as
+    \[
+    S=\sum_jG_j\bar{n}_j\ln(e/\bar{n}_j),
+    \]
+    where $G_j$ is the number of states of group $j$. The constraints are
+    \[
+    \sum_jN_j=\sum_jG_j\bar{n}_j=N,\quad
+    \sum_j\varepsilon_jN_j=\sum_j\varepsilon_j\bar{n}_j=E\quad.
+    \]
+    Applying the method of Lagrange's multipliers yields
+    \[
+    \partial(S+\alpha N+\beta E)/\partial\bar{n}_j=0,
+    \]
+    i.e.,
+    \[
+    G_j(-\ln\bar{n}_j+\alpha+\beta\varepsilon_j)=0.
+    \]
+    Finally,
+    \[
+    \bar{n}_j=e^{\alpha+\beta\varepsilon_j},
+    \]
+    where $\alpha=\mu/T$ and $\beta=-1/T$ (see footnote in page 120).
+    
+
+    

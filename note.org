@@ -1143,4 +1143,52 @@
     where $\alpha=\mu/T$ and $\beta=-1/T$ (see footnote in page 120).
     
 
-    
+** Many Particle Wave Function
+*** Boson
+
+    + A system of two particles in different states $(p_1\ne p_2)$:
+      \[
+      \psi(\xi_1,\xi_2)=[\psi_{p_1}(\xi_1)\psi_{p_2}(\xi_2)+
+      \psi_{p_1}(\xi_2)\psi_{p_2}(\xi_1)]/\sqrt{2}\quad.
+      \]
+    + In general
+      \[
+      \psi_{N_1N_2\cdots}=\left(\frac{N_1!N_2!\cdots}{N!}\right)
+      \sum_{p}\psi_{p_1}(\xi_1)\psi_{p_2}\cdots\psi_{p_N}(\xi_N)\quad.
+      \]
+*** Fermion
+
+    + A system of two particles:
+      \[
+      \psi(\xi_1,\xi_2)=[\psi_{p_1}(\xi_1)\psi_{p_2}(\xi_2)-
+      \psi_{p_1}(\xi_2)\psi_{p_2}(\xi_1)]/\sqrt{2}\quad.
+      \]
+    + In general it is [[https://en.wikipedia.org/wiki/Slater_determinant][slater determinant]]. Check L. D. Landau and
+      E. M. Lifshitz, Quantum Mechanics, Chapter IX, section 61.
+** Matsubara Green's function
+   + Definition 
+     \[
+     G(\tau,\tau')=-\langle T_{\tau}\hat{c}(\tau)\hat{\bar{c}}(\tau')\rangle,
+     \]
+   + Free particle Matsubara Green's function for $\tau>\tau'$:
+     \[
+     G(\tau,\tau')=-e^{-(\varepsilon_\alpha-\mu)(\tau-\tau')}(1\pm n_\alpha),\quad
+     n_\alpha=\frac{1}{e^{\beta(\varepsilon_\alpha-\mu)}\mp1},
+     \]
+     where upper sign for Boson and lower sign for Fermion. 
+     For $\tau<=\tau'$:
+     \[
+     G(\tau,\tau')=\mp e^{-(\varepsilon_\alpha-\mu)(\tau-\tau')}n_\alpha\quad.
+     \]
+   + Matsubara Frequency:
+     + For Boson:
+       \[
+       G(i\omega_n)=\frac{1}{i\omega_n-(\varepsilon_\alpha-\mu)},\quad
+       \omega_n=\frac{2n\pi}{\beta}\quad.
+       \]
+     + For Fermion:
+       \[
+       G(i\omega_n)=\frac{1}{i\omega_n-(\varepsilon_\alpha-\mu)},\quad
+       \omega_n=\frac{(2n+1)\pi}{\beta}\quad.
+       \]
+

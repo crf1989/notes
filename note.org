@@ -429,6 +429,25 @@
       #+BEGIN_SRC lisp
         (ql:quickload :cl-ppcre)
       #+END_SRC
+*** [[https://github.com/cbaggers/rtg-math][RTG-MATH]]
+    
+    This system provides a selection of the math routines most
+    commonly needed for making realtime graphics in lisp.
+** Gnu AWK
+*** [[https://www.gnu.org/software/gawk/manual/html_node/Numeric-Functions.html][Numeric Functions]]
+    + ~atan2(y,x)~ 
+      
+      Return the arctangent of ~y/x~ in radians. You can
+      use ~pi = atan2(0, -1)~ to retrieve the value of ~pi~.
+** Gnuplot
+*** Dash type in ~Gnuplot~ 5
+    
+    commands like ~lt 2~ are not used anymore, see
+    https://tex.stackexchange.com/questions/253993/line-type-not-working
+
+    #+BEGIN_SRC gnuplot
+      plot sin(x) w l dashtype '--'
+    #+END_SRC
 * Mathematics 
 ** Useful formulas
 *** Gaussian Integrals

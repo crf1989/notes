@@ -448,6 +448,19 @@
     #+BEGIN_SRC gnuplot
       plot sin(x) w l dashtype '--'
     #+END_SRC
+** [[http://www.a4papersize.org/][A4paper size]]
+   + Metric A4 size: 21x29.7 
+   + A4 paper size in pixels:
+
+     | paper size type | paper width | paper height |
+     | A4 @ 72 DPI     |         595 |          842 |
+     | A4 @ 200 DPI    |        1654 |         2339 |
+     | A4 @ 300 DPI    |        2480 |         3508 |
+     | A4 @ 400 DPI    |        3307 |         4677 |
+     | A4 @ 600 DPI    |        4961 |         7016 |
+     | A4 @ 1200 DPI   |        9921 |        14031 |
+     
+   
 * Mathematics 
 ** Useful formulas
 *** Gaussian Integrals

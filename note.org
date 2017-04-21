@@ -1,8 +1,6 @@
 #+TITLE: My Miscellaneous Notes
 #+AUTHOR: CRF
 
-#+LATEX_HEADER: \usepackage{xeCJK}
-#+LATEX_HEADER: \setCJKmainfont{WenQuanYi Micro Hei}
 #+LATEX_HEADER: \usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
 
 * Programming
@@ -433,6 +431,22 @@
     
     This system provides a selection of the math routines most
     commonly needed for making realtime graphics in lisp.
+*** CL-PDF
+    
+    + The page sizes are store in ~config.lisp~:
+      #+BEGIN_SRC lisp
+        (defvar *a4-portrait-page-bounds* #(0 0 595 841))
+        (defvar *letter-portrait-page-bounds* #(0 0 612 792))
+        (defvar *a4-landscape-page-bounds* #(0 0 841 595))
+        (defvar *letter-landscape-page-bounds* #(0 0 792 612))
+        (defvar *default-page-bounds* *a4-portrait-page-bounds*)
+      #+END_SRC
+      
+      To set the page size, use the code like
+      #+BEGIN_SRC lisp
+        (pdf:with-page (:bounds #(0 0 595 841))
+          ...)
+      #+END_SRC
 ** Gnu AWK
 *** [[https://www.gnu.org/software/gawk/manual/html_node/Numeric-Functions.html][Numeric Functions]]
     + ~atan2(y,x)~ 
@@ -440,7 +454,7 @@
       Return the arctangent of ~y/x~ in radians. You can
       use ~pi = atan2(0, -1)~ to retrieve the value of ~pi~.
 ** Gnuplot
-*** Dash type in ~Gnuplot~ 5
+*** Dash type in Gnuplot 5
     
     commands like ~lt 2~ are not used anymore, see
     https://tex.stackexchange.com/questions/253993/line-type-not-working
@@ -460,7 +474,6 @@
      | A4 @ 600 DPI    |        4961 |         7016 |
      | A4 @ 1200 DPI   |        9921 |        14031 |
      
-   
 * Mathematics 
 ** Useful formulas
 *** Gaussian Integrals

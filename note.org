@@ -448,8 +448,24 @@
           ...)
       #+END_SRC
     + APS column width 8.5cm, the golden ratio height is 5.26cm
+    + Dashed line
       
-      Height 
+      http://www.verypdf.com/document/pdf-format-reference/pg_0218.htm
+
+      For example, the code below set a dashed line with 3 pixels.
+      #+BEGIN_SRC lisp
+      (pdf:set-dash-pattern '(3) 0)
+      #+END_SRC
+    + Filled Circle
+      #+BEGIN_SRC lisp
+        (pdf:circle 10 10 5)
+        (pdf:set-rgb-fill 0.8 0.8 0.8)
+        (pdf:close-and-fill)
+      #+END_SRC
+    + Arrows 
+
+      Need to write a function by hand, see
+      https://www.pdflib.com/pdflib-cookbook/graphics/arrows/
 ** Gnu AWK
 *** [[https://www.gnu.org/software/gawk/manual/html_node/Numeric-Functions.html][Numeric Functions]]
     + ~atan2(y,x)~ 

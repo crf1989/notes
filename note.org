@@ -42,6 +42,18 @@
           \end{columns}
         \end{figure}
       #+END_SRC
+*** Angstrom
+    
+    \AA
+*** Celsius
+    
+    $^{\circ}$C
+*** Caption width
+
+    #+BEGIN_SRC latex
+      \usepackage{caption}
+      \captionsetup{width=0.8\textwidth}
+    #+END_SRC
 ** Emacs
 *** Miscellaneous
 **** No backup files.
@@ -1207,7 +1219,6 @@
     \]
     where $\alpha=\mu/T$ and $\beta=-1/T$ (see footnote in page 120).
     
-
 ** Many Particle Wave Function
 *** Boson
 
